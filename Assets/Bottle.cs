@@ -13,7 +13,7 @@ public class Bottle : MonoBehaviour
     private float _distanceToPlayer;
     private bool _pickedUp = false;
     private Vector3 _throwVector;
-    private float _throwPower = 5;
+    private float _throwPower = 200;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +28,9 @@ public class Bottle : MonoBehaviour
     {
         _playerTransform = _player.transform;
         _distanceToPlayer = Vector3.Distance(_playerTransform.position, transform.position);
-        if (Input.GetButtonDown("rBumper"))
+        if (Input.GetAxis("RightHorizontal") != 0)
         {
-            Debug.Log("rBumper pressed");
+            Debug.Log("right stick");
         }
 
 
@@ -45,7 +45,7 @@ public class Bottle : MonoBehaviour
             _rb.bodyType = RigidbodyType2D.Dynamic;
         }
 
-        if (onTable && Input.GetButtonDown("Interact") && _distanceToPlayer < 1)
+        if (onTable && Input.GetButtonDown("Interact") && _distanceToPlayer < 2)
         {
             PickUp();
 
@@ -91,8 +91,8 @@ public class Bottle : MonoBehaviour
     private void SetTrajectory()
     {
         _lr.positionCount = 2;
-        _lr.SetPosition(0, Vector3.zero);
-        _lr.SetPosition(1, _throwVector.normalized/2);
+        _lr.SetPosition(0, transform.position);
+        _lr.SetPosition(1, _throwVector.normalized);
         _lr.enabled = true;
     }
 
@@ -103,8 +103,9 @@ public class Bottle : MonoBehaviour
 
     private void CalculateThrowVec()
     {
-        Vector2 joystickDir = new Vector2(Input.GetAxis("RightHorizontal"), Input.GetAxis("RightVertical"));
-        _throwVector = joystickDir.normalized/_throwPower;
+        Vector2 joystickDir = new Vector2(Input.GetAxis("RightHorizontal"), -1*Input.GetAxis("RightVertical"));
+        //Vector2 testDir = new Vector2(1, 1);
+        _throwVector = joystickDir.normalized*_throwPower;
 
 
     }
@@ -112,8 +113,10 @@ public class Bottle : MonoBehaviour
 
     private void Throw()
     {
+        _pickedUp = false;
+        //transform.parent = null;
         _rb.AddForce(_throwVector);
     }
 
-    
+
 }

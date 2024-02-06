@@ -9,16 +9,14 @@ public class Player : MonoBehaviour
     public float movementSpeedHorizontal = 4f;
 
 
-
     // Update is called once per frame
     void Update()
     {
-        var dirX = Input.GetAxisRaw("Horizontal");
-        var dirY = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-
-
-
-        
+        if (gameObject.tag != "Dummy")
+        {
+            var dirX = Input.GetAxisRaw("Horizontal");
+            var dirY = Input.GetAxisRaw("Vertical");
+            rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+        }
     }
 }

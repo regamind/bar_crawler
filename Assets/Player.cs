@@ -24,8 +24,27 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var dirX = Input.GetAxisRaw("Horizontal");
-        var dirY = Input.GetAxisRaw("Vertical");
+        var dirX = 0f;
+        var dirY = 0f;
+
+        if (gameObject.tag == "Player1")
+        {
+            dirX = Input.GetAxisRaw("Horizontal");
+            dirY = Input.GetAxisRaw("Vertical");
+        }
+        else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
+        {
+            if (Input.GetKey("l"))
+                dirX += 1f;
+            if (Input.GetKey("j"))
+                dirX -= 1f;
+
+            if (Input.GetKey("i"))
+                dirY += 1f;
+            if (Input.GetKey("k"))
+                dirY -= 1f;
+        }
+
         rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
 
         // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds

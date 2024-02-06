@@ -33,6 +33,11 @@ public class Bottle : MonoBehaviour
             Debug.Log("rBumper pressed");
         }
 
+        if (Input.GetButtonDown("Interact"))
+        {
+            Debug.Log("Interact pressed");
+        }
+
 
         if (onTable)
         {

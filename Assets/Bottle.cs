@@ -13,7 +13,8 @@ public class Bottle : MonoBehaviour
     private float _distanceToPlayer;
     private bool _pickedUp = false;
     private Vector3 _throwVector;
-    private float _throwPower = 5;
+    private float _throwPower = 5f;
+    private float _bottleDamage = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -120,5 +121,13 @@ public class Bottle : MonoBehaviour
         _rb.AddForce(_throwVector);
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((collision.collider.name == "Player"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bottle : MonoBehaviour
 {
 
+    [SerializeField] GameObject newBottle;
+
     public bool onTable;
     private Rigidbody2D _rb;
     private LineRenderer _lr;
@@ -13,7 +15,8 @@ public class Bottle : MonoBehaviour
     private float _distanceToPlayer;
     private bool _pickedUp = false;
     private Vector3 _throwVector;
-    private float _throwPower = 200;
+    private float _throwPower = 350;
+    private Vector3 _startPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,7 @@ public class Bottle : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
         _player = FindObjectOfType<Player>();
+        _startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -28,9 +32,9 @@ public class Bottle : MonoBehaviour
     {
         _playerTransform = _player.transform;
         _distanceToPlayer = Vector3.Distance(_playerTransform.position, transform.position);
-        if (Input.GetAxis("RightHorizontal") != 0)
+        if (Input.GetButtonDown("rBumper"))
         {
-            Debug.Log("right stick");
+            Debug.Log("right bumper");
         }
 
 
@@ -86,13 +90,14 @@ public class Bottle : MonoBehaviour
         transform.position = _player.transform.right;
         _pickedUp = true;
         onTable = false;
+        Instantiate(newBottle, _startPos, Quaternion.identity);
     }
 
     private void SetTrajectory()
     {
         _lr.positionCount = 2;
         _lr.SetPosition(0, transform.position);
-        _lr.SetPosition(1, _throwVector.normalized);
+        _lr.SetPosition(1, transform.position + _throwVector.normalized * _throwPower/100);
         _lr.enabled = true;
     }
 

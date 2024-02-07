@@ -154,6 +154,7 @@ public class Bottle : MonoBehaviour
     {
         if (collision.collider.name == "Player1" || collision.collider.name == "Player2")
         {
+            print("bottle collided in Bottle" );
             Destroy(this.gameObject);
         }
     }

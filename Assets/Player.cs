@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     {
         if ((collision.collider.name == "Bottle"))
         {
+            print("bottle collided in Player");
             TakeDamage(10f);
             //health -= 10f; //reducing health by 10 each time on bottle hit
             if (health <= 0)

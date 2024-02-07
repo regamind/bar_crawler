@@ -29,20 +29,13 @@ public class Player : MonoBehaviour
 
         if (gameObject.tag == "Player1")
         {
-            dirX = Input.GetAxisRaw("Horizontal");
-            dirY = Input.GetAxisRaw("Vertical");
+            dirX = Input.GetAxisRaw("Horizontal1");
+            dirY = Input.GetAxisRaw("Vertical1");
         }
         else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
         {
-            if (Input.GetKey("l"))
-                dirX += 1f;
-            if (Input.GetKey("j"))
-                dirX -= 1f;
-
-            if (Input.GetKey("i"))
-                dirY += 1f;
-            if (Input.GetKey("k"))
-                dirY -= 1f;
+            dirX = Input.GetAxisRaw("Horizontal2");
+            dirY = Input.GetAxisRaw("Vertical2");
         }
 
         rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);

@@ -51,17 +51,6 @@ public class Bottle : MonoBehaviour
         _player2Transform = _player2.transform;
         _distanceToPlayer2 = Vector3.Distance(_player2Transform.position, transform.position);
 
-        if (Input.GetAxis("RightHorizontal") != 0)
-        {
-            Debug.Log("right stick");
-        }
-
-        if (Input.GetButtonDown("Interact"))
-        {
-            Debug.Log("Interact pressed");
-        }
-
-
         if (onTable)
         {
             _rb.bodyType = RigidbodyType2D.Static;
@@ -71,9 +60,9 @@ public class Bottle : MonoBehaviour
             _rb.bodyType = RigidbodyType2D.Dynamic;
         }
 
-        if (onTable && Input.GetButtonDown("Interact") && _distanceToPlayer1 < 2)
+        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2)
             PickUp(_player1);
-        else if (onTable && Input.GetKey("m") && _distanceToPlayer2 < 2)
+        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2)
             PickUp(_player2);
 
         if (_pickedUp1)
@@ -83,14 +72,14 @@ public class Bottle : MonoBehaviour
 
 
         // right now only player 1 can throw
-        if (Input.GetButton("rBumper") && _pickedUp1)
+        if (Input.GetButton("rBumper1") && _pickedUp1)
         {
             CalculateThrowVec();
             SetTrajectory();
 
         }
 
-        if (Input.GetButtonUp("rBumper") && _pickedUp1)
+        if (Input.GetButtonUp("rBumper1") && _pickedUp1)
         {
             RemoveTrajectory();
             Throw();

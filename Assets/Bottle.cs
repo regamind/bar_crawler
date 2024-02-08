@@ -74,9 +74,14 @@ public class Bottle : MonoBehaviour
         // right now only player 1 can throw
         if (Input.GetButton("rBumper1") && _pickedUp1)
         {
-            CalculateThrowVec();
+            CalculateThrowVec("1");
             SetTrajectory();
 
+        }
+        else if (Input.GetButton("rBumper2") && _pickedUp2)
+        {
+            CalculateThrowVec("2");
+            SetTrajectory();
         }
 
         if (Input.GetButtonUp("rBumper1") && _pickedUp1)
@@ -84,8 +89,13 @@ public class Bottle : MonoBehaviour
             RemoveTrajectory();
             Throw();
         }
-        
-        
+        else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
+        {
+            RemoveTrajectory();
+            Throw();
+        }
+
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -123,9 +133,9 @@ public class Bottle : MonoBehaviour
         _lr.enabled = false;
     }
 
-    private void CalculateThrowVec()
+    private void CalculateThrowVec(string player_num)
     {
-        Vector2 joystickDir = new Vector2(Input.GetAxis("RightHorizontal"), -1*Input.GetAxis("RightVertical"));
+        Vector2 joystickDir = new Vector2(Input.GetAxis("RightHorizontal" + player_num), -1*Input.GetAxis("RightVertical" + player_num));
         //Vector2 testDir = new Vector2(1, 1);
         _throwVector = joystickDir.normalized*_throwPower;
     }

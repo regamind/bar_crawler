@@ -15,7 +15,7 @@ public class Bottle : MonoBehaviour
     private float _distanceToPlayer;
     private bool _pickedUp = false;
     private Vector3 _throwVector;
-    private float _throwPower = 350;
+    private float _throwPower = 450;
     private Vector3 _startPos;
     // Start is called before the first frame update
     void Start()

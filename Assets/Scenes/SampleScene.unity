@@ -478,7 +478,7 @@ MonoBehaviour:
   Maxhealth: 100
   health: 100
   alive: 1
-  healthBar: {fileID: 694917967}
+  healthBar: {fileID: 1368984070}
 --- !u!212 &580286152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   Maxhealth: 100
   health: 100
   alive: 1
-  healthBar: {fileID: 1368984070}
+  healthBar: {fileID: 694917967}
 --- !u!212 &1531861828
 SpriteRenderer:
   m_ObjectHideFlags: 0

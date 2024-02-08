@@ -62,8 +62,23 @@ public class Player : MonoBehaviour
                 alive = false; // where death occurs, likely wanna play death animation as well
             }
         }
-
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "bottle")
+        {
+            Debug.Log("bottle trigger Player");
+            TakeDamage(10f);
+            //health -= 10f; //reducing health by 10 each time on bottle hit
+            if (health <= 0)
+            {
+                alive = false; // where death occurs, likely wanna play death animation as well
+            }
+
+        }
+    }
+
     void TakeDamage(float damage)
     {
         health -= damage;

@@ -150,6 +150,16 @@ public class Bottle : MonoBehaviour
         _rb.AddForce(_throwVector);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player1" || collision.tag == "Player2") 
+        {
+            Debug.Log("trigger collision");
+            Destroy(this.gameObject);
+
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.name == "Player1" || collision.collider.name == "Player2")

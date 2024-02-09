@@ -453,7 +453,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -483,7 +483,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -630,12 +630,12 @@ Tilemap:
     m_Data: {fileID: 333282755, guid: 8412d94caa76244caa4af27f859d82e0, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -761970277, guid: 8412d94caa76244caa4af27f859d82e0, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -1187140060, guid: 8412d94caa76244caa4af27f859d82e0, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -2061232157, guid: 8412d94caa76244caa4af27f859d82e0, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 17
     m_Data:
@@ -741,7 +741,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 84
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

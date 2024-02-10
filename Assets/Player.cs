@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    public float movementSpeedVertical = 3f;
-    public float movementSpeedHorizontal = 4f;
+    public float movementSpeedVertical = 10f;
+    public float movementSpeedHorizontal = 13f;
     public float Maxhealth = 100f;
     public float health;
     public bool alive = true;

@@ -19,7 +19,7 @@ public class Bottle : MonoBehaviour
     private bool _pickedUp2 = false;
     private Vector3 _throwVector;
     private float _bottleDamage = 10f;
-    private float _throwPower = 200f;
+    private float _throwPower = 450f;
 
     // Start is called before the first frame update
     void Start()

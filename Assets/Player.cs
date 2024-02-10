@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    public float movementSpeedVertical = 3f;
-    public float movementSpeedHorizontal = 4f;
+    public float movementSpeedVertical = 10f;
+    public float movementSpeedHorizontal = 12f;
     public float Maxhealth = 100f;
     public float health;
     public bool alive = true;
@@ -52,9 +52,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.collider.name == "Bottle"))
+        if (collision.collider.gameObject.tag == "Bottle")
         {
             Debug.Log("bottle collided in Player");
+            Destroy(collision.collider.gameObject);
             TakeDamage(10f);
             //health -= 10f; //reducing health by 10 each time on bottle hit
             if (health <= 0)

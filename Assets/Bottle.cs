@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bottle : MonoBehaviour
 {
-
+    [SerializeField] GameObject _newBottle;
     public bool onTable;
     private Rigidbody2D _rb;
     private LineRenderer _lr;
@@ -19,7 +19,9 @@ public class Bottle : MonoBehaviour
     private bool _pickedUp2 = false;
     private Vector3 _throwVector;
     private float _bottleDamage = 10f;
-    private float _throwPower = 200f;
+    private float _throwPower = 450f;
+
+    private Vector3 _startPos;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class Bottle : MonoBehaviour
         onTable = true;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
+        _startPos = transform.position;
 
         _players = FindObjectsOfType<Player>();
         if (_players[0].tag == "Player1")
@@ -118,6 +121,7 @@ public class Bottle : MonoBehaviour
             _pickedUp2 = true;
 
         onTable = false;
+        Instantiate(_newBottle, _startPos, Quaternion.identity);
     }
 
     private void SetTrajectory()

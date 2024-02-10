@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float Maxhealth = 100f;
     public float health;
     public bool alive = true;
+    private SpriteRenderer _spriteRenderer;
 
     public HealthBar healthBar;
 
@@ -17,6 +18,13 @@ public class Player : MonoBehaviour
     {
         health = Maxhealth;
         healthBar.SetMaxHealth(Maxhealth);
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (gameObject.tag == "Player1")
+            _spriteRenderer.flipX = false;
+        else if (gameObject.tag == "Player2")
+            _spriteRenderer.flipX = true;
     }
 
 
@@ -39,6 +47,10 @@ public class Player : MonoBehaviour
         }
 
         rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+        if (dirX > 0)
+            _spriteRenderer.flipX = false;
+        else if (dirX < 0)
+            _spriteRenderer.flipX = true;
 
         // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds
     }

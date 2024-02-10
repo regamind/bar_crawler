@@ -66,12 +66,20 @@ public class Bottle : MonoBehaviour
             PickUp(_player2);
 
         if (_pickedUp1)
-            transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
+        {
+            if (_player1.GetComponent<SpriteRenderer>().flipX == false)
+                transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
+            else
+                transform.position = _player1.transform.position + _player1.transform.right * -1.1f;
+        }
         else if (_pickedUp2)
-            transform.position = _player2.transform.position + _player2.transform.right * 1.1f;
+        {
+            if (_player2.GetComponent<SpriteRenderer>().flipX == false)
+                transform.position = _player2.transform.position + _player2.transform.right * 1.1f;
+            else
+                transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
+        }
 
-
-        // right now only player 1 can throw
         if (Input.GetButton("rBumper1") && _pickedUp1)
         {
             CalculateThrowVec("1");

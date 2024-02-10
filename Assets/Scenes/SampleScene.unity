@@ -1353,8 +1353,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 694917966}
   - {fileID: 1368984069}
+  - {fileID: 694917966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1374,7 +1374,7 @@ GameObject:
   - component: {fileID: 694917968}
   - component: {fileID: 694917967}
   m_Layer: 5
-  m_Name: HealthBar1
+  m_Name: HealthBar2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1791,7 +1791,7 @@ GameObject:
   - component: {fileID: 1368984071}
   - component: {fileID: 1368984070}
   m_Layer: 5
-  m_Name: HealthBar2
+  m_Name: HealthBar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,15 +18,12 @@ public class Bottle : MonoBehaviour
     private bool _pickedUp1 = false;
     private bool _pickedUp2 = false;
     private Vector3 _throwVector;
-    private float _bottleDamage;
-    private float _throwPower;
-    private bool _empty = false;
+    private float _bottleDamage = 10f;
+    private float _throwPower = 450f;
 
     // Start is called before the first frame update
     void Start()
     {
-        _throwPower = 450f;
-        _bottleDamage = 10f;
         onTable = true;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
@@ -69,68 +66,42 @@ public class Bottle : MonoBehaviour
             PickUp(_player2);
 
         if (_pickedUp1)
-            transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
+        {
+            if (_player1.GetComponent<SpriteRenderer>().flipX == false)
+                transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
+            else
+                transform.position = _player1.transform.position + _player1.transform.right * -1.1f;
+        }
         else if (_pickedUp2)
-            transform.position = _player2.transform.position + _player2.transform.right * 1.1f;
-
-        if (_pickedUp1 && Input.GetButtonDown("Drink1"))
         {
-            Drink(_player1);
-        }
-        else if(_pickedUp2 && Input.GetButtonDown("Drink2"))
-        {
-            Drink(_player2);
+            if (_player2.GetComponent<SpriteRenderer>().flipX == false)
+                transform.position = _player2.transform.position + _player2.transform.right * 1.1f;
+            else
+                transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
         }
 
-        if (_empty)
+        if (Input.GetButton("rBumper1") && _pickedUp1)
         {
-            // right now only player 1 can throw
-            if (Input.GetButton("rBumper1") && _pickedUp1)
-            {
-                CalculateThrowVec("1");
-                SetTrajectory();
+            CalculateThrowVec("1");
+            SetTrajectory();
 
-            }
-            else if (Input.GetButton("rBumper2") && _pickedUp2)
-            {
-                CalculateThrowVec("2");
-                SetTrajectory();
-            }
-
-            if (Input.GetButtonUp("rBumper1") && _pickedUp1)
-            {
-                RemoveTrajectory();
-                Throw();
-            }
-            else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
-            {
-                RemoveTrajectory();
-                Throw();
-            }
         }
-        //// right now only player 1 can throw
-        //if (Input.GetButton("rBumper1") && _pickedUp1)
-        //{
-        //    CalculateThrowVec("1");
-        //    SetTrajectory();
+        else if (Input.GetButton("rBumper2") && _pickedUp2)
+        {
+            CalculateThrowVec("2");
+            SetTrajectory();
+        }
 
-        //}
-        //else if (Input.GetButton("rBumper2") && _pickedUp2)
-        //{
-        //    CalculateThrowVec("2");
-        //    SetTrajectory();
-        //}
-
-        //if (Input.GetButtonUp("rBumper1") && _pickedUp1)
-        //{
-        //    RemoveTrajectory();
-        //    Throw();
-        //}
-        //else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
-        //{
-        //    RemoveTrajectory();
-        //    Throw();
-        //}
+        if (Input.GetButtonUp("rBumper1") && _pickedUp1)
+        {
+            RemoveTrajectory();
+            Throw();
+        }
+        else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
+        {
+            RemoveTrajectory();
+            Throw();
+        }
 
 
     }
@@ -203,11 +174,5 @@ public class Bottle : MonoBehaviour
             Debug.Log("bottle collided in Bottle" );
             Destroy(this.gameObject);
         }
-    }
-
-    private void Drink(Player player)
-    {
-        _empty = true;
-
     }
 }

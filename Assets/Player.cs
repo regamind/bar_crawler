@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    public float movementSpeedVertical;
-    public float movementSpeedHorizontal;
+    public float movementSpeedVertical = 10f;
+    public float movementSpeedHorizontal = 13f;
     public float Maxhealth = 100f;
     public float health;
     public bool alive = true;
@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        movementSpeedHorizontal = 13f;
-        movementSpeedVertical = 10f;
         health = Maxhealth;
         healthBar.SetMaxHealth(Maxhealth);
 

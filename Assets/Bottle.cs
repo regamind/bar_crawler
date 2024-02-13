@@ -19,7 +19,6 @@ public class Bottle : MonoBehaviour
     private bool _pickedUp2 = false;
     private Vector3 _throwVector;
     private float _bottleDamage = 10f;
-    private float _throwPower = 450f;
     private Vector3 _spawnPoint;
     private float _throwPower;
 

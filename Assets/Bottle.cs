@@ -20,6 +20,7 @@ public class Bottle : MonoBehaviour
     private Vector3 _throwVector;
     private float _bottleDamage = 10f;
     private float _throwPower = 450f;
+    private Vector3 _spawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -175,4 +176,5 @@ public class Bottle : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 }

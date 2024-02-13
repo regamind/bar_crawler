@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class TableSpawnPoint : MonoBehaviour
 {
-    // public Transform spawnPoint;
     private bool _bottleOnTable;
+    public float positionThreshold = 1f;
+
 
     public bool BottleOnTable
     {
         get { return _bottleOnTable;}
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Update()
     {
-        // Check if the collider belongs to a bottle
-        if (other.CompareTag("Bottle"))
-        {
-            _bottleOnTable = true;
-            // Bottle is on the table, maybe want to adjust ranges later?
-        }
+        CheckBottleOnTable();
     }
 
-    private void OnTriggerExit(Collider other)
+
+    private void CheckBottleOnTable()
     {
-        // Check if the collider belongs to a bottle
-        if (other.CompareTag("Bottle"))
+        GameObject[] bottles = GameObject.FindGameObjectsWithTag("bottle");
+
+        foreach (GameObject bottle in bottles)
         {
-            _bottleOnTable = false;
-            // Bottle has left the table
+            float distance = Vector3.Distance(bottle.transform.position, transform.position);
+
+            if (distance < positionThreshold)
+            {
+                _bottleOnTable = true;
+                return;
+            }
+            _bottleOnTable = false; // reset if no bottle is found on the table
         }
     }
 
     public Vector3 GetSpawnPoint()
     {
-        // Return the position where the bottle should spawn on this table
         return transform.position;
     }
 }

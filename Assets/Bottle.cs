@@ -19,11 +19,12 @@ public class Bottle : MonoBehaviour
     private bool _pickedUp2 = false;
     private Vector3 _throwVector;
     private float _bottleDamage = 10f;
-    private float _throwPower = 450f;
+    private float _throwPower;
 
     // Start is called before the first frame update
     void Start()
     {
+        _throwPower = 450f;
         onTable = true;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();

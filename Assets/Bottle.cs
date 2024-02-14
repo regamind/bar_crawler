@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bottle : MonoBehaviour
@@ -15,10 +13,10 @@ public class Bottle : MonoBehaviour
     private Player _player2;
     private Transform _player2Transform;
     private float _distanceToPlayer2;
-    private bool _pickedUp1 = false;
-    private bool _pickedUp2 = false;
+    public  bool pickedUp1 = false;
+    public  bool pickedUp2 = false;
     private Vector3 _throwVector;
-    private float _bottleDamage = 10f;
+    public  float bottleDamage;
     private Vector3 _spawnPoint;
     private float _throwPower;
 
@@ -34,6 +32,7 @@ public class Bottle : MonoBehaviour
         _empty = false;
         _throwPower = 450f;
         onTable = true;
+        bottleDamage = 10f;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
 
@@ -48,8 +47,6 @@ public class Bottle : MonoBehaviour
             _player1 = _players[1];
             _player2 = _players[0];
         }
-
-        
     }
 
     // Update is called once per frame
@@ -74,14 +71,14 @@ public class Bottle : MonoBehaviour
         else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2)
             PickUp(_player2);
 
-        if (_pickedUp1)
+        if (pickedUp1)
         {
             if (_player1.GetComponent<SpriteRenderer>().flipX == false)
                 transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
             else
                 transform.position = _player1.transform.position + _player1.transform.right * -1.1f;
         }
-        else if (_pickedUp2)
+        else if (pickedUp2)
         {
             if (_player2.GetComponent<SpriteRenderer>().flipX == false)
                 transform.position = _player2.transform.position + _player2.transform.right * 1.1f;
@@ -89,43 +86,42 @@ public class Bottle : MonoBehaviour
                 transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
         }
 
-        if (_pickedUp1 && Input.GetButtonDown("Drink1"))
+        if (pickedUp1 && Input.GetButtonDown("Drink1"))
         {
+            Debug.Log("Player1 drank the bottle");
             Drink(_player1);
         }
 
-        if (_pickedUp2 && Input.GetButtonDown("Drink2"))
+        if (pickedUp2 && Input.GetButtonDown("Drink2"))
         {
+            Debug.Log("Player2 drank the bottle");
             Drink(_player2);
         }
 
         if (_empty)
         {
-            if (Input.GetButton("rBumper1") && _pickedUp1)
+            if (Input.GetButton("rBumper1") && pickedUp1)
             {
                 CalculateThrowVec("1");
                 SetTrajectory();
-
             }
-            else if (Input.GetButton("rBumper2") && _pickedUp2)
+            else if (Input.GetButton("rBumper2") && pickedUp2)
             {
                 CalculateThrowVec("2");
                 SetTrajectory();
             }
 
-            if (Input.GetButtonUp("rBumper1") && _pickedUp1)
+            if (Input.GetButtonUp("rBumper1") && pickedUp1)
             {
                 RemoveTrajectory();
                 Throw();
             }
-            else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
+            else if (Input.GetButtonUp("rBumper2") && pickedUp2)
             {
                 RemoveTrajectory();
                 Throw();
             }
         }
-
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -142,9 +138,9 @@ public class Bottle : MonoBehaviour
         transform.position = player.transform.right;
 
         if (player.tag == "Player1")
-            _pickedUp1 = true;
+            pickedUp1 = true;
         else if (player.tag == "Player2")
-            _pickedUp2 = true;
+            pickedUp2 = true;
 
         onTable = false;
     }
@@ -168,33 +164,37 @@ public class Bottle : MonoBehaviour
         Vector2 joystickDir = new Vector2(Input.GetAxis("RightHorizontal" + player_num), -1*Input.GetAxis("RightVertical" + player_num));
         //Vector2 testDir = new Vector2(1, 1);
         _throwVector = joystickDir.normalized*_throwPower;
-    }
-    
+    }   
 
     private void Throw()
     {
-        _pickedUp1 = false;
-        _pickedUp2 = false;
+        pickedUp1 = false;
+        pickedUp2 = false;
         //transform.parent = null;
         _rb.AddForce(_throwVector);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.tag == "Player1" || collision.tag == "Player2") 
+        if (!pickedUp1 && !pickedUp2)
         {
-            Debug.Log("trigger collision");
-            Destroy(this.gameObject);
-
+            if(collider.tag == "Player1" || collider.tag == "Player2") 
+            {
+                Debug.Log("trigger collision");
+                Destroy(this.gameObject);
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.name == "Player1" || collision.collider.name == "Player2")
+        if (!pickedUp1 && !pickedUp2)
         {
-            Debug.Log("bottle collided in Bottle" );
-            Destroy(this.gameObject);
+            if (collision.collider.name == "Player1" || collision.collider.name == "Player2")
+            {
+                Debug.Log("bottle collided in Bottle");
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -203,5 +203,4 @@ public class Bottle : MonoBehaviour
         _empty = true;
         spriteRenderer.sprite = emptyBottle;
     }
-
 }

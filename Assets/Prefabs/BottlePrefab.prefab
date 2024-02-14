@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6900219431761995688}
   - component: {fileID: 5709122880090256373}
   m_Layer: 0
-  m_Name: bottlePrefab
+  m_Name: BottlePrefab
   m_TagString: bottle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,6 +264,6 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1

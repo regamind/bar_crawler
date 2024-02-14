@@ -148,9 +148,9 @@ public class Bottle : MonoBehaviour
     private void SetTrajectory()
     {
         _lr.positionCount = 2;
-        _lr.SetPosition(0, transform.position);
+        _lr.SetPosition(0, _player1.transform.position + _player1.transform.up * 1.1f);
         //_lr.SetPosition(1, _throwVector.normalized);
-        _lr.SetPosition(1, transform.position + _throwVector/100);
+        _lr.SetPosition(1, _player1.transform.position + _player1.transform.up * 1.1f + _throwVector.normalized);
         _lr.enabled = true;
     }
 

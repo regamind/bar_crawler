@@ -22,9 +22,12 @@ public class Bottle : MonoBehaviour
     private Vector3 _spawnPoint;
     private float _throwPower;
 
+    private bool _empty;
+
     // Start is called before the first frame update
     void Start()
     {
+        _empty = false;
         _throwPower = 450f;
         onTable = true;
         _rb = GetComponent<Rigidbody2D>();
@@ -42,7 +45,7 @@ public class Bottle : MonoBehaviour
             _player2 = _players[0];
         }
 
-        Debug.Log(_player1.tag);
+        
     }
 
     // Update is called once per frame
@@ -82,27 +85,40 @@ public class Bottle : MonoBehaviour
                 transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
         }
 
-        if (Input.GetButton("rBumper1") && _pickedUp1)
+        if (_pickedUp1 && Input.GetButtonDown("Drink1"))
         {
-            CalculateThrowVec("1");
-            SetTrajectory();
-
-        }
-        else if (Input.GetButton("rBumper2") && _pickedUp2)
-        {
-            CalculateThrowVec("2");
-            SetTrajectory();
+            Drink(_player1);
         }
 
-        if (Input.GetButtonUp("rBumper1") && _pickedUp1)
+        if (_pickedUp2 && Input.GetButtonDown("Drink2"))
         {
-            RemoveTrajectory();
-            Throw();
+            Drink(_player2);
         }
-        else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
+
+        if (_empty)
         {
-            RemoveTrajectory();
-            Throw();
+            if (Input.GetButton("rBumper1") && _pickedUp1)
+            {
+                CalculateThrowVec("1");
+                SetTrajectory();
+
+            }
+            else if (Input.GetButton("rBumper2") && _pickedUp2)
+            {
+                CalculateThrowVec("2");
+                SetTrajectory();
+            }
+
+            if (Input.GetButtonUp("rBumper1") && _pickedUp1)
+            {
+                RemoveTrajectory();
+                Throw();
+            }
+            else if (Input.GetButtonUp("rBumper2") && _pickedUp2)
+            {
+                RemoveTrajectory();
+                Throw();
+            }
         }
 
 
@@ -176,6 +192,11 @@ public class Bottle : MonoBehaviour
             Debug.Log("bottle collided in Bottle" );
             Destroy(this.gameObject);
         }
+    }
+
+    private void Drink(Player player)
+    {
+        _empty = true;
     }
 
 }

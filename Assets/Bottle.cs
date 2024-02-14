@@ -22,11 +22,15 @@ public class Bottle : MonoBehaviour
     private Vector3 _spawnPoint;
     private float _throwPower;
 
+    [SerializeField] Sprite emptyBottle;
+    public SpriteRenderer spriteRenderer;
+
     private bool _empty;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         _empty = false;
         _throwPower = 450f;
         onTable = true;
@@ -197,6 +201,7 @@ public class Bottle : MonoBehaviour
     private void Drink(Player player)
     {
         _empty = true;
+        spriteRenderer.sprite = emptyBottle;
     }
 
 }

@@ -128,6 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTable: 0
+  pickedUp1: 0
+  pickedUp2: 0
+  bottleDamage: 10
 --- !u!70 &6900219431761995688
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

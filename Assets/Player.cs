@@ -22,11 +22,6 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(Maxhealth);
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        //if (gameObject.tag == "Player1")
-        //    _spriteRenderer.flipX = false;
-        //else if (gameObject.tag == "Player2")
-        //    _spriteRenderer.flipX = true;
     }
 
 
@@ -82,8 +77,6 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.name == "Bottle")
         {
-            
-
             //if ((gameObject.tag == "Player1" && !collision.collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
             //    (gameObject.tag == "Player2" && !collision.collider.gameObject.GetComponent<Bottle>().pickedUp2))
             if (!collision.collider.gameObject.GetComponent<Bottle>().pickedUp1 &&
@@ -104,6 +97,4 @@ public class Player : MonoBehaviour
         health -= damage;
         healthBar.setHealth(health);
     }
-
-
 }

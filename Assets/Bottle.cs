@@ -43,8 +43,6 @@ public class Bottle : MonoBehaviour
             _player1 = _players[1];
             _player2 = _players[0];
         }
-
-        
     }
 
     // Update is called once per frame
@@ -102,7 +100,6 @@ public class Bottle : MonoBehaviour
             {
                 CalculateThrowVec("1");
                 SetTrajectory();
-
             }
             else if (Input.GetButton("rBumper2") && pickedUp2)
             {
@@ -121,8 +118,6 @@ public class Bottle : MonoBehaviour
                 Throw();
             }
         }
-
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -165,8 +160,7 @@ public class Bottle : MonoBehaviour
         Vector2 joystickDir = new Vector2(Input.GetAxis("RightHorizontal" + player_num), -1*Input.GetAxis("RightVertical" + player_num));
         //Vector2 testDir = new Vector2(1, 1);
         _throwVector = joystickDir.normalized*_throwPower;
-    }
-    
+    }   
 
     private void Throw()
     {
@@ -181,10 +175,10 @@ public class Bottle : MonoBehaviour
         if (!pickedUp1 && !pickedUp2)
         {
             if(collider.tag == "Player1" || collider.tag == "Player2") 
-                {
-                    Debug.Log("trigger collision");
-                    Destroy(this.gameObject);
-                }
+            {
+                Debug.Log("trigger collision");
+                Destroy(this.gameObject);
+            }
         }
     }
 

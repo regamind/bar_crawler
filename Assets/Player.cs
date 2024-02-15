@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
     public float health;
     public bool alive = true;
     private SpriteRenderer _spriteRenderer;
+
+    [SerializeField] public GameObject fillA;
+    [SerializeField] public GameObject fillB;
 
     public HealthBar healthBar;
 
@@ -27,6 +31,21 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = false;
         else if (gameObject.tag == "Player2")
             _spriteRenderer.flipX = true;
+    }
+
+     void Awake()
+    {
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameState state)
+    {
+        //fillA.SetActive(state == GameState.StartGame);
     }
 
 
@@ -80,6 +99,21 @@ public class Player : MonoBehaviour
             //health -= 10f; //reducing health by 10 each time on bottle hit
             if (health <= 0)
             {
+
+                Debug.Log("health <= 0");
+
+                if (gameObject.tag == "Player1")
+                {
+                    GameManager.Instance.UpdateGameState(GameState.Player2WinsRound);
+                }
+                else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
+                {
+                    GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
+                }
+
+
+
+                health = Maxhealth; // reset the 
                 alive = false; // where death occurs, likely wanna play death animation as well
             }
 

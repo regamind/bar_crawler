@@ -18,10 +18,6 @@ public class GameManager : MonoBehaviour
     public HealthBar HealthBar1;
     public HealthBar HealthBar2;
 
-
-
-
-
     public static GameManager Instance;
 
     public GameState state;

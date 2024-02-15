@@ -86,6 +86,20 @@ public class Player : MonoBehaviour
                 TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
                 if (health <= 0)
                 {
+                    Debug.Log("health <= 0");
+
+                    if (gameObject.tag == "Player1")
+                    {
+                        GameManager.Instance.UpdateGameState(GameState.Player2WinsRound);
+                    }
+                    else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
+                    {
+                        GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
+                    }
+
+
+
+                    health = Maxhealth; // reset the health of the player
                     alive = false; // where death occurs, likely wanna play death animation as well
                 }
             }
@@ -103,6 +117,8 @@ public class Player : MonoBehaviour
             {
                 Debug.Log("bottle collided in Player");
                 TakeDamage(collision.collider.gameObject.GetComponent<Bottle>().bottleDamage);
+
+                /*
                 if (health <= 0)
                 {
                 Debug.Log("health <= 0");
@@ -118,9 +134,10 @@ public class Player : MonoBehaviour
 
 
 
-                health = Maxhealth; // reset the 
+                health = Maxhealth; // reset the health of the player
                 alive = false; // where death occurs, likely wanna play death animation as well
                 }
+                */
             }
         }
     }

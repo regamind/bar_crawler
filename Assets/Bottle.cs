@@ -23,13 +23,16 @@ public class Bottle : MonoBehaviour
     [SerializeField] Sprite emptyBottle;
     public SpriteRenderer spriteRenderer;
 
-    private bool _empty;
+    public bool empty1;
+    public bool empty2;
+
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        _empty = false;
+        empty1 = false;
+        empty2 = false;
         _throwPower = 450f;
         onTable = true;
         bottleDamage = 10f;
@@ -98,30 +101,29 @@ public class Bottle : MonoBehaviour
             Drink(_player2);
         }
 
-        if (_empty)
+        
+        if (Input.GetButton("rBumper1") && pickedUp1 && empty1)
         {
-            if (Input.GetButton("rBumper1") && pickedUp1)
-            {
-                CalculateThrowVec("1");
-                SetTrajectory();
-            }
-            else if (Input.GetButton("rBumper2") && pickedUp2)
-            {
-                CalculateThrowVec("2");
-                SetTrajectory();
-            }
-
-            if (Input.GetButtonUp("rBumper1") && pickedUp1)
-            {
-                RemoveTrajectory();
-                Throw();
-            }
-            else if (Input.GetButtonUp("rBumper2") && pickedUp2)
-            {
-                RemoveTrajectory();
-                Throw();
-            }
+            CalculateThrowVec("1");
+            SetTrajectory("1");
         }
+        else if (Input.GetButton("rBumper2") && pickedUp2 && empty2)
+        {
+            CalculateThrowVec("2");
+            SetTrajectory("2");
+        }
+
+        if (Input.GetButtonUp("rBumper1") && pickedUp1 && empty1)
+        {
+            RemoveTrajectory();
+            Throw();
+        }
+        else if (Input.GetButtonUp("rBumper2") && pickedUp2 && empty2)
+        {
+            RemoveTrajectory();
+            Throw();
+        }
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -145,13 +147,24 @@ public class Bottle : MonoBehaviour
         onTable = false;
     }
 
-    private void SetTrajectory()
+    private void SetTrajectory(string player_num)
     {
-        _lr.positionCount = 2;
-        _lr.SetPosition(0, _player1.transform.position + _player1.transform.up * 1.1f);
-        //_lr.SetPosition(1, _throwVector.normalized);
-        _lr.SetPosition(1, _player1.transform.position + _player1.transform.up * 1.1f + _throwVector.normalized);
-        _lr.enabled = true;
+        if (player_num == "1")
+        {
+            _lr.positionCount = 2;
+            _lr.SetPosition(0, _player1.transform.position + _player1.transform.up * 1.1f);
+            //_lr.SetPosition(1, _throwVector.normalized);
+            _lr.SetPosition(1, _player1.transform.position + _player1.transform.up * 1.1f + _throwVector.normalized);
+            _lr.enabled = true;
+        }
+        else
+        {
+            _lr.positionCount = 2;
+            _lr.SetPosition(0, _player2.transform.position + _player2.transform.up * 1.1f);
+            //_lr.SetPosition(1, _throwVector.normalized);
+            _lr.SetPosition(1, _player2.transform.position + _player2.transform.up * 1.1f + _throwVector.normalized);
+            _lr.enabled = true;
+        }
     }
 
     private void RemoveTrajectory()
@@ -200,7 +213,14 @@ public class Bottle : MonoBehaviour
 
     private void Drink(Player player)
     {
-        _empty = true;
+        if (player == _player1)
+        {
+            empty1 = true;
+        }
+        else
+        {
+            empty2 = true;
+        }
         spriteRenderer.sprite = emptyBottle;
     }
 }

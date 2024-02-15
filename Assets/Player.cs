@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class Player : MonoBehaviour
     public bool alive = true;
     private SpriteRenderer _spriteRenderer;
 
+    [SerializeField] public GameObject fillA;
+    [SerializeField] public GameObject fillB;
+
     public HealthBar healthBar;
 
     private void Start()
@@ -22,6 +26,21 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(Maxhealth);
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+     void Awake()
+    {
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameState state)
+    {
+        //fillA.SetActive(state == GameState.StartGame);
     }
 
 
@@ -86,7 +105,21 @@ public class Player : MonoBehaviour
                 TakeDamage(collision.collider.gameObject.GetComponent<Bottle>().bottleDamage);
                 if (health <= 0)
                 {
-                    alive = false; // where death occurs, likely wanna play death animation as well
+                Debug.Log("health <= 0");
+
+                if (gameObject.tag == "Player1")
+                {
+                    GameManager.Instance.UpdateGameState(GameState.Player2WinsRound);
+                }
+                else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
+                {
+                    GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
+                }
+
+
+
+                health = Maxhealth; // reset the 
+                alive = false; // where death occurs, likely wanna play death animation as well
                 }
             }
         }

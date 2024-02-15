@@ -10,7 +10,14 @@ public class Player : MonoBehaviour
     public float movementSpeedHorizontal;
     public float Maxhealth = 100f;
     public float health;
+
+    public float MinDrunk = 0f;
+    public float drunkness;
+    public float soberRate = .5f;
+
     public bool alive = true;
+    public bool freeze = false;
+
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] public GameObject fillA;
@@ -18,12 +25,19 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public DrunkMeter drunkMeter;
+
     private void Start()
     {
         movementSpeedHorizontal = 13f;
         movementSpeedVertical = 10f;
+
         health = Maxhealth;
         healthBar.SetMaxHealth(Maxhealth);
+
+        drunkness = MinDrunk;
+        drunkMeter.setMinDrunk(MinDrunk);
+
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -52,27 +66,79 @@ public class Player : MonoBehaviour
         var dirY = 0f;
         var rightDirX = 0f;
 
-        if (gameObject.tag == "Player1")
+        if (freeze == true)
         {
-            dirX = Input.GetAxisRaw("Horizontal1");
-            dirY = Input.GetAxisRaw("Vertical1");
-            rightDirX = Input.GetAxisRaw("RightHorizontal1");
-        }
-        else if (gameObject.tag == "Player2")
-        {
-            dirX = Input.GetAxisRaw("Horizontal2");
-            dirY = Input.GetAxisRaw("Vertical2");
-            rightDirX = Input.GetAxisRaw("RightHorizontal2");
+            StartCoroutine(freezePlayer());
         }
 
-        rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-        if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
-            _spriteRenderer.flipX = false;
-        else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
-            _spriteRenderer.flipX = true;
+        if (freeze == false)
+        {
+
+            if (gameObject.tag == "Player1")
+            {
+                dirX = Input.GetAxisRaw("Horizontal1");
+                dirY = Input.GetAxisRaw("Vertical1");
+                rightDirX = Input.GetAxisRaw("RightHorizontal1");
+            }
+            else if (gameObject.tag == "Player2")
+            {
+                dirX = Input.GetAxisRaw("Horizontal2");
+                dirY = Input.GetAxisRaw("Vertical2");
+                rightDirX = Input.GetAxisRaw("RightHorizontal2");
+            }
+
+            rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+            if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
+                _spriteRenderer.flipX = false;
+            else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
+                _spriteRenderer.flipX = true;
+
+        }
+
+
+        PlayerSoberUp();
+        checkSloshed();
+        drunkMeter.setDrunk(drunkness);
 
         // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds
     }
+
+    IEnumerator freezePlayer()
+    {
+        
+        rb.velocity = new Vector2(0,0);
+        yield return new WaitForSeconds(2);
+        freeze = false;
+    }
+
+    private void checkSloshed()
+    {
+        if (drunkness >= 99f)
+        {
+            freeze = true;
+            drunkness = MinDrunk;
+
+        }
+    }
+
+
+    private void PlayerSoberUp()
+    {
+        if (drunkness > 0f)
+        {
+            drunkness -= soberRate * Time.deltaTime;
+        }
+
+        /*
+        if (health <= 0)
+        {
+            drunkness = MinDrunk;
+            drunkMeter.setDrunk(drunkness);
+        }
+        */
+    }
+
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -98,7 +164,9 @@ public class Player : MonoBehaviour
                     }
 
 
-
+                   // drunkness = MinDrunk; // reset drunkness
+                   // Debug.Log("mindrunk in player");
+                   // Debug.Log(drunkness);
                     health = Maxhealth; // reset the health of the player
                     alive = false; // where death occurs, likely wanna play death animation as well
                 }
@@ -110,34 +178,14 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.name == "Bottle")
         {
-            //if ((gameObject.tag == "Player1" && !collision.collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
-            //    (gameObject.tag == "Player2" && !collision.collider.gameObject.GetComponent<Bottle>().pickedUp2))
+            
             if (!collision.collider.gameObject.GetComponent<Bottle>().pickedUp1 &&
                     !collision.collider.gameObject.GetComponent<Bottle>().pickedUp2)
             {
                 Debug.Log("bottle collided in Player");
                 TakeDamage(collision.collider.gameObject.GetComponent<Bottle>().bottleDamage);
 
-                /*
-                if (health <= 0)
-                {
-                Debug.Log("health <= 0");
-
-                if (gameObject.tag == "Player1")
-                {
-                    GameManager.Instance.UpdateGameState(GameState.Player2WinsRound);
-                }
-                else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
-                {
-                    GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
-                }
-
-
-
-                health = Maxhealth; // reset the health of the player
-                alive = false; // where death occurs, likely wanna play death animation as well
-                }
-                */
+                
             }
         }
     }

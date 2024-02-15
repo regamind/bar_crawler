@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
     public HealthBar HealthBar1;
     public HealthBar HealthBar2;
 
+    public DrunkMeter DrunkMeter1;
+    public DrunkMeter DrunkMeter2;
+
+    public Player player1;
+    public Player player2;
+
+
     public static GameManager Instance;
 
     public GameState state;
@@ -77,6 +84,15 @@ public class GameManager : MonoBehaviour
     {
         HealthBar1.setHealth(100f);
         HealthBar2.setHealth(100f);
+
+        DrunkMeter1.setDrunk(0f);
+        DrunkMeter2.setDrunk(0f);
+
+        player1.drunkness = player1.MinDrunk;
+        player2.drunkness = player2.MinDrunk;
+
+        Debug.Log("handle drunk reset");
+
 
         GameObject[] bottles = GameObject.FindGameObjectsWithTag("bottle");
 

@@ -1,4 +1,11 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
+using UnityEngine.UI;
+using System;
 
 public class Bottle : MonoBehaviour
 {
@@ -22,6 +29,9 @@ public class Bottle : MonoBehaviour
 
     [SerializeField] Sprite emptyBottle;
     public SpriteRenderer spriteRenderer;
+
+
+  //  public float fillTime;
 
     public bool empty1;
     public bool empty2;
@@ -123,8 +133,25 @@ public class Bottle : MonoBehaviour
             RemoveTrajectory();
             Throw();
         }
+
+      //  DepleteDrunk();
         
     }
+/*
+    void DepleteDrunk()
+    {
+
+        _player1.drunkness = Mathf.Lerp(_player1.MinDrunk, _player1.Maxhealth, fillTime) ;
+        _player1.drunkMeter.setDrunk(_player1.drunkness);
+
+        _player2.drunkness = Mathf.Lerp(_player2.MinDrunk, _player2.Maxhealth, fillTime);
+        _player2.drunkMeter.setDrunk(_player2.drunkness);
+
+
+        fillTime -= 0.375f * Time.deltaTime;
+
+    }
+*/
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -216,10 +243,14 @@ public class Bottle : MonoBehaviour
         if (player == _player1)
         {
             empty1 = true;
+            _player1.drunkMeter.setDrunk(_player1.drunkness + 20f);
+            _player1.drunkness += 20f;
         }
         else
         {
             empty2 = true;
+            _player2.drunkMeter.setDrunk(_player2.drunkness + 20f);
+            _player2.drunkness += 20f;
         }
         spriteRenderer.sprite = emptyBottle;
     }

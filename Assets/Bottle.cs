@@ -79,9 +79,9 @@ public class Bottle : MonoBehaviour
             _rb.bodyType = RigidbodyType2D.Dynamic;
         }
 
-        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2)
+        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2 && _player1.freeze == false)
             PickUp(_player1);
-        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2)
+        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2 && _player2.freeze == false)
             PickUp(_player2);
 
         if (pickedUp1)
@@ -112,23 +112,23 @@ public class Bottle : MonoBehaviour
         }
 
         
-        if (Input.GetButton("rBumper1") && pickedUp1 && empty1)
+        if (Input.GetButton("rBumper1") && pickedUp1 && empty1 && _player1.freeze == false)
         {
             CalculateThrowVec("1");
             SetTrajectory("1");
         }
-        else if (Input.GetButton("rBumper2") && pickedUp2 && empty2)
+        else if (Input.GetButton("rBumper2") && pickedUp2 && empty2 && _player2.freeze == false)
         {
             CalculateThrowVec("2");
             SetTrajectory("2");
         }
 
-        if (Input.GetButtonUp("rBumper1") && pickedUp1 && empty1)
+        if (Input.GetButtonUp("rBumper1") && pickedUp1 && empty1 && _player1.freeze == false)
         {
             RemoveTrajectory();
             Throw();
         }
-        else if (Input.GetButtonUp("rBumper2") && pickedUp2 && empty2)
+        else if (Input.GetButtonUp("rBumper2") && pickedUp2 && empty2 && _player2.freeze == false)
         {
             RemoveTrajectory();
             Throw();

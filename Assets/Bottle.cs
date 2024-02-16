@@ -99,13 +99,13 @@ public class Bottle : MonoBehaviour
                 transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
         }
 
-        if (pickedUp1 && Input.GetButtonDown("Drink1"))
+        if (pickedUp1 && Input.GetButtonDown("Drink1") && empty1 == false)
         {
             Debug.Log("Player1 drank the bottle");
             Drink(_player1);
         }
 
-        if (pickedUp2 && Input.GetButtonDown("Drink2"))
+        if (pickedUp2 && Input.GetButtonDown("Drink2") && empty2 == false)
         {
             Debug.Log("Player2 drank the bottle");
             Drink(_player2);

@@ -24,8 +24,6 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
@@ -61,7 +59,7 @@ public class Player : MonoBehaviour
         {
             //if ((gameObject.tag == "Player1" && !collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
             //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
-            if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp1)
+            if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp2)
             {
                 Debug.Log("bottle trigger Player");
                 TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class DrunkMeter : MonoBehaviour
 {
     public Slider slider;
-
   
     public void SetMaxHealth(float Health)
     {
@@ -29,13 +28,9 @@ public class DrunkMeter : MonoBehaviour
         slider.value = drunk;
     }
 
-
     public void setHealth(float Health)
     {
         Debug.Log("set Health called");
         slider.value = Health;
     }
-
-
-
 }

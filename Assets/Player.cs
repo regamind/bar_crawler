@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-     void Awake()
+    void Awake()
     {
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
     }

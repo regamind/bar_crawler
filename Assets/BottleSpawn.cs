@@ -15,12 +15,9 @@ public class BottleSpawn : MonoBehaviour
         TableSpawnPoint[] tableSpawnPoints = FindObjectsOfType<TableSpawnPoint>();
         tables.AddRange(tableSpawnPoints);
 
-
         // start the spawning routine
         StartCoroutine(SpawnBottlesRoutine());
     }
-
-
 
     IEnumerator SpawnBottlesRoutine()
     {
@@ -58,10 +55,4 @@ public class BottleSpawn : MonoBehaviour
             tables[n] = temp;
         }
     }
-
-
 }
-
-
-
-

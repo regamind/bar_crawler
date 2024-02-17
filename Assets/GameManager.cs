@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-  
-   
-
-
     [SerializeField] public GameObject fill1A;
     [SerializeField] public GameObject fill1B;
     [SerializeField] public GameObject fill2A;
@@ -24,7 +20,6 @@ public class GameManager : MonoBehaviour
     public Player player1;
     public Player player2;
 
-
     public static GameManager Instance;
 
     public GameState state;
@@ -33,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     public int P1Wins = 0;
     public int P2Wins = 0;
-
 
     private void Awake()
     {
@@ -45,7 +39,6 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.StartGame);
 
         //fill1A.gameObject.SetActive(false);
-
     }
 
     public void UpdateGameState(GameState newState)
@@ -93,19 +86,15 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("handle drunk reset");
 
-
         GameObject[] bottles = GameObject.FindGameObjectsWithTag("bottle");
 
         foreach (GameObject bottle in bottles)
         {
             Destroy(bottle);
         }
-
             //reset drunkeness meter when we have it
             //clear all bottles
-
-
-        }
+    }
 
 private void HandlePlayer2Victory()
     {
@@ -118,7 +107,6 @@ private void HandlePlayer2Victory()
     }
 
     private void HandlePlayer1WinsRound()
-
     {
         Debug.Log("handle 1 wins round");
 
@@ -159,8 +147,6 @@ private void HandlePlayer2Victory()
     {
       //  throw new NotImplementedException();
     }
-
-
 }
 
 public enum GameState

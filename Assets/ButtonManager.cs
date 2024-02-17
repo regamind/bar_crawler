@@ -9,7 +9,6 @@ public class ButtonManager : MonoBehaviour
     public void NextScene()
     {
         Debug.Log("nextScene called");
-        SceneManager.LoadScene(0);
-        
+        SceneManager.LoadScene(0);        
     }
 }

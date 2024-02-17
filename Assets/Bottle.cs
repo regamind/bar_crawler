@@ -102,23 +102,23 @@ public class Bottle : MonoBehaviour
         }
 
         
-        if (Input.GetButton("rBumper1") && pickedUp1 && empty1)
+        if (pickedUp1 && empty1)
         {
             CalculateThrowVec("1");
             SetTrajectory("1");
         }
-        else if (Input.GetButton("rBumper2") && pickedUp2 && empty2)
+        else if (pickedUp2 && empty2)
         {
             CalculateThrowVec("2");
             SetTrajectory("2");
         }
 
-        if (Input.GetButtonUp("rBumper1") && pickedUp1 && empty1)
+        if (Input.GetButtonDown("rBumper1") && pickedUp1 && empty1)
         {
             RemoveTrajectory();
             Throw();
         }
-        else if (Input.GetButtonUp("rBumper2") && pickedUp2 && empty2)
+        else if (Input.GetButtonDown("rBumper2") && pickedUp2 && empty2)
         {
             RemoveTrajectory();
             Throw();
@@ -222,5 +222,12 @@ public class Bottle : MonoBehaviour
             empty2 = true;
         }
         spriteRenderer.sprite = emptyBottle;
+    }
+
+    private void slowDown(Player player)
+    {
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        player.movementSpeedHorizontal = 8f;
+        player.movementSpeedVertical = 5f;
     }
 }

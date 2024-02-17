@@ -14,8 +14,11 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public bool readyToThrow;
+
     private void Start()
     {
+        readyToThrow = false;
         movementSpeedHorizontal = 13f;
         movementSpeedVertical = 10f;
         health = Maxhealth;
@@ -97,4 +100,6 @@ public class Player : MonoBehaviour
         health -= damage;
         healthBar.setHealth(health);
     }
+
+    
 }

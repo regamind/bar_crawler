@@ -33,7 +33,7 @@ public class Bottle : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         empty1 = false;
         empty2 = false;
-        _throwPower = 450f;
+        _throwPower = 500f;
         onTable = true;
         bottleDamage = 10f;
         _rb = GetComponent<Rigidbody2D>();
@@ -95,7 +95,7 @@ public class Bottle : MonoBehaviour
             Drink(_player1);
         }
 
-        if (pickedUp2 && Input.GetButtonDown("Drink2"))
+        else if (pickedUp2 && Input.GetButtonDown("Drink2"))
         {
             Debug.Log("Player2 drank the bottle");
             Drink(_player2);
@@ -217,7 +217,7 @@ public class Bottle : MonoBehaviour
         {
             empty1 = true;
         }
-        else
+        else if (player == _player2)
         {
             empty2 = true;
         }

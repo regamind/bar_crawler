@@ -133,6 +133,8 @@ MonoBehaviour:
   bottleDamage: 10
   emptyBottle: {fileID: 21300000, guid: 7f707ddb3d1ee40debd987fa33f6ce4f, type: 3}
   spriteRenderer: {fileID: 0}
+  empty1: 0
+  empty2: 0
 --- !u!70 &6900219431761995688
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

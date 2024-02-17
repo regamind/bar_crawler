@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
         drunkness = MinDrunk;
         drunkMeter.setMinDrunk(MinDrunk);
 
-
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -57,8 +56,6 @@ public class Player : MonoBehaviour
         //fillA.SetActive(state == GameState.StartGame);
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
@@ -73,7 +70,6 @@ public class Player : MonoBehaviour
 
         if (freeze == false)
         {
-
             if (gameObject.tag == "Player1")
             {
                 dirX = Input.GetAxisRaw("Horizontal1");
@@ -92,9 +88,7 @@ public class Player : MonoBehaviour
                 _spriteRenderer.flipX = false;
             else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
                 _spriteRenderer.flipX = true;
-
         }
-
 
         PlayerSoberUp();
         checkSloshed();
@@ -104,8 +98,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator freezePlayer()
-    {
-        
+    {       
         rb.velocity = new Vector2(0,0);
         yield return new WaitForSeconds(2);
         freeze = false;
@@ -117,10 +110,8 @@ public class Player : MonoBehaviour
         {
             freeze = true;
             drunkness = MinDrunk;
-
         }
     }
-
 
     private void PlayerSoberUp()
     {
@@ -138,15 +129,13 @@ public class Player : MonoBehaviour
         */
     }
 
-
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "bottle")
         {
             //if ((gameObject.tag == "Player1" && !collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
             //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
-            if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp1)
+            if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp2)
             {
                 Debug.Log("bottle trigger Player");
                 TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
@@ -163,7 +152,6 @@ public class Player : MonoBehaviour
                         GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
                     }
 
-
                    // drunkness = MinDrunk; // reset drunkness
                    // Debug.Log("mindrunk in player");
                    // Debug.Log(drunkness);
@@ -177,15 +165,12 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.name == "Bottle")
-        {
-            
+        {           
             if (!collision.collider.gameObject.GetComponent<Bottle>().pickedUp1 &&
                     !collision.collider.gameObject.GetComponent<Bottle>().pickedUp2)
             {
                 Debug.Log("bottle collided in Player");
-                TakeDamage(collision.collider.gameObject.GetComponent<Bottle>().bottleDamage);
-
-                
+                TakeDamage(collision.collider.gameObject.GetComponent<Bottle>().bottleDamage); 
             }
         }
     }

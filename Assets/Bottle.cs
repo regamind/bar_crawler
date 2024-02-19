@@ -79,9 +79,9 @@ public class Bottle : MonoBehaviour
             _rb.bodyType = RigidbodyType2D.Dynamic;
         }
 
-        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2 && _player1.freeze == false)
+        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2 && !_player1.freeze)
             PickUp(_player1);
-        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2 && _player2.freeze == false)
+        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2 && !_player2.freeze)
             PickUp(_player2);
 
         if (pickedUp1)
@@ -101,36 +101,36 @@ public class Bottle : MonoBehaviour
                 transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
         }
 
-        if (pickedUp1 && Input.GetButtonDown("Drink1") && empty1 == false)
+        if (pickedUp1 && Input.GetButtonDown("Drink1") && !empty1)
         {
             Debug.Log("Player1 drank the bottle");
             Drink(_player1);
         }
 
-        if (pickedUp2 && Input.GetButtonDown("Drink2") && empty2 == false)
+        if (pickedUp2 && Input.GetButtonDown("Drink2") && !empty2)
         {
             Debug.Log("Player2 drank the bottle");
             Drink(_player2);
         }
 
         
-        if (Input.GetButton("rBumper1") && pickedUp1 && empty1 && _player1.freeze == false)
+        if (pickedUp1 && empty1 && !_player1.freeze)
         {
             CalculateThrowVec("1");
             SetTrajectory("1");
         }
-        else if (Input.GetButton("rBumper2") && pickedUp2 && empty2 && _player2.freeze == false)
+        else if (pickedUp2 && empty2 && !_player2.freeze)
         {
             CalculateThrowVec("2");
             SetTrajectory("2");
         }
 
-        if (Input.GetButtonUp("rBumper1") && pickedUp1 && empty1 && _player1.freeze == false)
+        if (Input.GetButtonDown("rBumper1") && pickedUp1 && empty1 && !_player1.freeze)
         {
             RemoveTrajectory();
             Throw();
         }
-        else if (Input.GetButtonUp("rBumper2") && pickedUp2 && empty2 && _player2.freeze == false)
+        else if (Input.GetButtonDown("rBumper2") && pickedUp2 && empty2 && !_player2.freeze)
         {
             RemoveTrajectory();
             Throw();

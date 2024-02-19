@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
     public bool alive = true;
     public bool freeze = false;
 
+    [SerializeField]
+    private int playerIndex = 0;
+    private Vector2 inputVector = Vector2.zero;
+
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] public GameObject fillA;
@@ -41,6 +45,11 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    public int GetPlayerIndex()
+    {
+        return playerIndex;
+    }
+
     void Awake()
     {
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
@@ -57,44 +66,55 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        var dirX = 0f;
-        var dirY = 0f;
+        //var dirX = 0f;
+        //var dirY = 0f;
         var rightDirX = 0f;
 
-        if (freeze == true)
-        {
-            StartCoroutine(freezePlayer());
-        }
+        rb.velocity = new Vector2(inputVector.x * movementSpeedHorizontal, inputVector.y * movementSpeedVertical);
 
-        if (freeze == false)
-        {
-            if (gameObject.tag == "Player1")
-            {
-                dirX = Input.GetAxisRaw("Horizontal1");
-                dirY = Input.GetAxisRaw("Vertical1");
-                rightDirX = Input.GetAxisRaw("RightHorizontal1");
-            }
-            else if (gameObject.tag == "Player2")
-            {
-                dirX = Input.GetAxisRaw("Horizontal2");
-                dirY = Input.GetAxisRaw("Vertical2");
-                rightDirX = Input.GetAxisRaw("RightHorizontal2");
-            }
+        //if (freeze)
+        //{
+        //    StartCoroutine(freezePlayer());
+        //}
+        //else
+        //{
+        //    //if (gameObject.tag == "Player1")
+        //    //{
+        //    //    dirX = Input.GetAxisRaw("Horizontal1");
+        //    //    dirY = Input.GetAxisRaw("Vertical1");
+        //    //    rightDirX = Input.GetAxisRaw("RightHorizontal1");
+        //    //}
+        //    //else if (gameObject.tag == "Player2")
+        //    //{
+        //    //    dirX = Input.GetAxisRaw("Horizontal2");
+        //    //    dirY = Input.GetAxisRaw("Vertical2");
+        //    //    rightDirX = Input.GetAxisRaw("RightHorizontal2");
+        //    //}
 
-            rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-            if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
-                _spriteRenderer.flipX = false;
-            else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
-                _spriteRenderer.flipX = true;
-        }
+        //    //rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+
+        //    //rb.velocity = new Vector2(inputVector.x * movementSpeedHorizontal, inputVector.y * movementSpeedVertical);
+        //    //var moveDirection = new Vector2(inputVector.x * movementSpeedHorizontal, inputVector.y * movementSpeedVertical);
+        //    //rb.velocity = moveDirection;
+
+        //    if (rightDirX > 0 || (rightDirX == 0 && inputVector.x > 0))
+        //        _spriteRenderer.flipX = false;
+        //    else if (rightDirX < 0 || (rightDirX == 0 && inputVector.x < 0))
+        //        _spriteRenderer.flipX = true;
+        //}
 
         PlayerSoberUp();
         checkSloshed();
         drunkMeter.setDrunk(drunkness);
 
         // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds
+    }
+
+    public void SetInputVector(Vector2 direction)
+    {
+        inputVector = direction;
     }
 
     IEnumerator freezePlayer()

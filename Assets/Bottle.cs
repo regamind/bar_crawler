@@ -9,7 +9,6 @@ using System;
 
 public class Bottle : MonoBehaviour
 {
-
     public bool onTable;
     private Rigidbody2D _rb;
     private LineRenderer _lr;

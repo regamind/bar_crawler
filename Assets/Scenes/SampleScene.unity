@@ -2698,6 +2698,7 @@ MonoBehaviour:
   soberRate: 2
   alive: 1
   freeze: 0
+  playerIndex: 0
   fillA: {fileID: 774718756}
   fillB: {fileID: 971458857}
   healthBar: {fileID: 1368984070}
@@ -2840,22 +2841,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.2603496, y: -0.25992784}
-      - {x: 0.38236457, y: -0.2526544}
-      - {x: 0.3798888, y: 0.0065923184}
-      - {x: 0.2522834, y: -0.003083944}
-      - {x: 0.25438884, y: 0.45716077}
-      - {x: -0.13443886, y: 0.43145722}
-      - {x: -0.14251834, y: 0.32169363}
-      - {x: -0.24541916, y: 0.3173284}
-      - {x: -0.26386005, y: 0.19025885}
-      - {x: -0.18471718, y: 0.18191798}
-      - {x: -0.1841246, y: 0.013529543}
-      - {x: -0.31244087, y: 0.0120105}
-      - {x: -0.31960043, y: -0.24879286}
-      - {x: -0.19285393, y: -0.24909571}
-      - {x: -0.19726947, y: -0.5}
-      - {x: 0.2601007, y: -0.50856787}
+    - - {x: -0.25, y: 0.44}
+      - {x: -0.25, y: 0}
+      - {x: -0.375, y: 0}
+      - {x: -0.375, y: -0.25}
+      - {x: -0.25, y: -0.25}
+      - {x: -0.25, y: -0.5}
+      - {x: 0.19, y: -0.5}
+      - {x: 0.19, y: -0.25}
+      - {x: 0.315, y: -0.25}
+      - {x: 0.315, y: 0}
+      - {x: 0.19, y: 0}
+      - {x: 0.19, y: 0.185}
+      - {x: 0.25, y: 0.185}
+      - {x: 0.25, y: 0.315}
+      - {x: 0.125, y: 0.315}
+      - {x: 0.125, y: 0.44}
   m_UseDelaunayMesh: 0
 --- !u!4 &608586471 stripped
 Transform:
@@ -4603,6 +4604,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 913780752060609754, guid: 1f9f34ae4e7ef48e88406491ec830d4f, type: 3}
   m_PrefabInstance: {fileID: 1389616559}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1465948050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465948052}
+  - component: {fileID: 1465948051}
+  m_Layer: 0
+  m_Name: PlayerInputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1465948051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465948050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: 2
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 2002a405-1331-484e-a1a3-e878a889f905
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 2266521400130181558, guid: 9c623a5ae68f44499a3cd602bf2fd56c, type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!4 &1465948052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465948050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473908035
 GameObject:
   m_ObjectHideFlags: 0
@@ -4885,23 +4962,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.37997848, y: -0.25931287}
-      - {x: 0.36565715, y: 0.0029447672}
-      - {x: 0.36565715, y: 0.00294476}
-      - {x: 0.2570187, y: 0.009140562}
-      - {x: 0.26236948, y: 0.45083505}
-      - {x: -0.14774989, y: 0.4553234}
-      - {x: -0.1394574, y: 0.31563166}
-      - {x: -0.251509, y: 0.3113889}
-      - {x: -0.25375205, y: 0.1883524}
-      - {x: -0.18997605, y: 0.1898365}
-      - {x: -0.18889937, y: 0.008105241}
-      - {x: -0.3192806, y: 0.004374344}
-      - {x: -0.3185145, y: -0.25520843}
-      - {x: -0.1969512, y: -0.25808582}
-      - {x: -0.1804282, y: -0.50819415}
-      - {x: 0.2625243, y: -0.5050474}
-      - {x: 0.26236984, y: -0.25827265}
+    - - {x: -0.127, y: 0.44}
+      - {x: -0.127, y: 0.315}
+      - {x: -0.25, y: 0.315}
+      - {x: -0.25, y: 0.185}
+      - {x: -0.19, y: 0.185}
+      - {x: -0.19, y: 0}
+      - {x: -0.315, y: 0}
+      - {x: -0.315, y: -0.25}
+      - {x: -0.19, y: -0.25}
+      - {x: -0.19, y: -0.5}
+      - {x: 0.25, y: -0.5}
+      - {x: 0.25, y: -0.25}
+      - {x: 0.375, y: -0.25}
+      - {x: 0.375, y: 0}
+      - {x: 0.25, y: 0}
+      - {x: 0.25, y: 0.44}
   m_UseDelaunayMesh: 0
 --- !u!50 &1531861826
 Rigidbody2D:
@@ -4952,6 +5028,7 @@ MonoBehaviour:
   soberRate: 2
   alive: 1
   freeze: 0
+  playerIndex: 1
   fillA: {fileID: 1207149754}
   fillB: {fileID: 386697836}
   healthBar: {fileID: 694917967}
@@ -17157,3 +17234,4 @@ SceneRoots:
   - {fileID: 641252999}
   - {fileID: 855520084}
   - {fileID: 904877407}
+  - {fileID: 1465948052}

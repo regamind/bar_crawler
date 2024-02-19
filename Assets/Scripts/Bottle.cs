@@ -89,15 +89,15 @@ public class Bottle : MonoBehaviour
                 transform.position = _player2.transform.position + _player2.transform.right * -1.1f;
         }
 
-        if (pickedUp1 && Input.GetButtonDown("Drink1"))
+        if (pickedUp1 && Input.GetButtonDown("Drink1") && !empty2)
         {
-            Debug.Log("Player1 drank the bottle");
+            
             Drink(_player1);
         }
 
-        else if (pickedUp2 && Input.GetButtonDown("Drink2"))
+        else if (pickedUp2 && Input.GetButtonDown("Drink2") && !empty1)
         {
-            Debug.Log("Player2 drank the bottle");
+            
             Drink(_player2);
         }
 
@@ -113,12 +113,12 @@ public class Bottle : MonoBehaviour
             SetTrajectory("2");
         }
 
-        if (Input.GetButtonDown("rBumper1") && pickedUp1 && empty1)
+        if (Input.GetButtonDown("rBumper1") && pickedUp1 && empty1 && !empty2)
         {
             RemoveTrajectory();
             Throw();
         }
-        else if (Input.GetButtonDown("rBumper2") && pickedUp2 && empty2)
+        else if (Input.GetButtonDown("rBumper2") && pickedUp2 && empty2 && !empty1)
         {
             RemoveTrajectory();
             Throw();
@@ -183,6 +183,8 @@ public class Bottle : MonoBehaviour
     {
         pickedUp1 = false;
         pickedUp2 = false;
+        empty1 = false;
+        empty2 = false;
         //transform.parent = null;
         _rb.AddForce(_throwVector);
     }
@@ -213,12 +215,14 @@ public class Bottle : MonoBehaviour
 
     private void Drink(Player player)
     {
-        if (player == _player1)
+        if (player.tag == "Player1")
         {
+            Debug.Log("player1's bottle is now empty");
             empty1 = true;
         }
-        else if (player == _player2)
+        else if (player.tag == "Player2")
         {
+            Debug.Log("player2's bottle is now empty");
             empty2 = true;
         }
         spriteRenderer.sprite = emptyBottle;

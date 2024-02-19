@@ -86,14 +86,16 @@ public class Bottle : MonoBehaviour
 
         if (pickedUp1)
         {
-            if (_player1.GetComponent<SpriteRenderer>().flipX == false)
+            Debug.Log("Bottle picked up by player1");
+            Debug.Log($"Float of InputX: {_player1.GetComponent<Animator>().GetFloat("XInput")}");
+            if (_player1.GetComponent<Animator>().GetFloat("XInput") >= 0f)
                 transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
             else
                 transform.position = _player1.transform.position + _player1.transform.right * -1.1f;
         }
         else if (pickedUp2)
         {
-            if (_player2.GetComponent<SpriteRenderer>().flipX == false)
+            if (_player2.GetComponent<Animator>().GetFloat("XInput") >= 0f)
                 transform.position = _player2.transform.position + _player2.transform.right * 1.1f;
             else
                 transform.position = _player2.transform.position + _player2.transform.right * -1.1f;

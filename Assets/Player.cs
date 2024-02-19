@@ -90,12 +90,8 @@ public class Player : MonoBehaviour
 
 
             rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-            //    if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
-            //        _spriteRenderer.flipX = false;
-            //    else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
-            //        _spriteRenderer.flipX = true;
-            //}
-        }
+        
+    }
         if (!((dirX == 0f) && (dirY == 0f)))
         {
             _animator.SetFloat("XInput", dirX);

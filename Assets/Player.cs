@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
 
     public DrunkMeter drunkMeter;
 
+    private Animator _animator;
+
     private void Start()
     {
         movementSpeedHorizontal = 13f;
@@ -39,6 +41,9 @@ public class Player : MonoBehaviour
         drunkMeter.setMinDrunk(MinDrunk);
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _animator = GetComponent<Animator>();
+
     }
 
      void Awake()
@@ -83,18 +88,32 @@ public class Player : MonoBehaviour
                 rightDirX = Input.GetAxisRaw("RightHorizontal2");
             }
 
+
             rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-            if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
-                _spriteRenderer.flipX = false;
-            else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
-                _spriteRenderer.flipX = true;
+            //    if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
+            //        _spriteRenderer.flipX = false;
+            //    else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
+            //        _spriteRenderer.flipX = true;
+            //}
+        }
+        if (!((dirX == 0f) && (dirY == 0f)))
+        {
+            _animator.SetFloat("XInput", dirX);
+            _animator.SetFloat("YInput", dirY);
+        }
+
+        if (rb.velocity != Vector2.zero)
+        {
+            _animator.SetBool("Walk", true);
+        }
+        else
+        {
+            _animator.SetBool("Walk", false);
         }
 
         PlayerSoberUp();
         checkSloshed();
         drunkMeter.setDrunk(drunkness);
-
-        // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds
     }
 
     IEnumerator freezePlayer()

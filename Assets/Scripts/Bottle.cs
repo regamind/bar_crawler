@@ -13,15 +13,16 @@ public class Bottle : MonoBehaviour
     private Player _player2;
     private Transform _player2Transform;
     private float _distanceToPlayer2;
-    public  bool pickedUp1 = false;
-    public  bool pickedUp2 = false;
+    public bool pickedUp1 = false;
+    public bool pickedUp2 = false;
     private Vector3 _throwVector;
-    public  float bottleDamage;
+    public float bottleDamage;
     private Vector3 _spawnPoint;
     private float _throwPower;
 
     [SerializeField] Sprite emptyBottle;
     public SpriteRenderer spriteRenderer;
+    public DamageBuff damageBuff;
 
     public bool empty1;
     public bool empty2;
@@ -225,6 +226,7 @@ public class Bottle : MonoBehaviour
             Debug.Log("player2's bottle is now empty");
             empty2 = true;
         }
+        damageBuff.Effect(gameObject);
         spriteRenderer.sprite = emptyBottle;
     }
 

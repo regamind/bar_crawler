@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
 
     public bool readyToThrow;
+    public Bottle myBottle;
 
     private void Start()
     {

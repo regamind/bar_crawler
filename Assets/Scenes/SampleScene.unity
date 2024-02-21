@@ -2331,6 +2331,7 @@ MonoBehaviour:
   alive: 1
   healthBar: {fileID: 1368984070}
   readyToThrow: 0
+  myBottle: {fileID: 0}
 --- !u!212 &580286152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3871,6 +3872,7 @@ MonoBehaviour:
   alive: 1
   healthBar: {fileID: 694917967}
   readyToThrow: 0
+  myBottle: {fileID: 0}
 --- !u!212 &1531861828
 SpriteRenderer:
   m_ObjectHideFlags: 0

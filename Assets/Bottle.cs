@@ -43,7 +43,7 @@ public class Bottle : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         empty1 = false;
         empty2 = false;
-        _throwPower = 450f;
+        _throwPower = 1000f;
         onTable = true;
         bottleDamage = 10f;
         _rb = GetComponent<Rigidbody2D>();

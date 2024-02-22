@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     private Animator _animator;
 
+    private DamageFlash _damageFlash;
+
     private void Start()
     {
         movementSpeedHorizontal = 13f;
@@ -43,6 +45,8 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
         _animator = GetComponent<Animator>();
+
+        _damageFlash = GetComponent<DamageFlash>();
 
     }
 
@@ -193,6 +197,7 @@ public class Player : MonoBehaviour
     void TakeDamage(float damage)
     {
         health -= damage;
+        _damageFlash.CallDamagefLash();
         healthBar.setHealth(health);
     }
 }

@@ -111,9 +111,19 @@ public class Player : MonoBehaviour
             _animator.SetBool("Walk", false);
         }
 
+        if (drunkness > 50f)
+        {
+            _animator.SetBool("Drunk", true);
+        }
+        else
+        {
+            _animator.SetBool("Drunk", false);
+        }
+
         PlayerSoberUp();
         checkSloshed();
         drunkMeter.setDrunk(drunkness);
+
     }
 
     IEnumerator freezePlayer()

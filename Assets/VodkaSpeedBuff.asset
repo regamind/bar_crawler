@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b7ad55318954b26a0e32a933ff0acc, type: 3}
-  m_Name: VodkaDamage
+  m_Script: {fileID: 11500000, guid: 6eeb7969dadd24a4f8fbd9cbbd45b6d8, type: 3}
+  m_Name: VodkaSpeedBuff
   m_EditorClassIdentifier: 
-  damageBuff: 1.5
+  speedBuff: 0

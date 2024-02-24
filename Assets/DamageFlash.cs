@@ -23,7 +23,7 @@ public class DamageFlash : MonoBehaviour
         _material = _spriteRenderer.material;
     }
 
-    public void CallDamagefLash()
+    public void CallDamageFlash()
     {
         _damageFlashCoroutine = StartCoroutine(DamageFLasher());
     }

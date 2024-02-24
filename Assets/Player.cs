@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
 
     public bool alive = true;
     public bool freeze = false;
+    public bool slip = false;
+
+    public float prevDirX = 0f;
+    public float prevDirY = 0f;
 
     private SpriteRenderer _spriteRenderer;
 
@@ -72,12 +76,15 @@ public class Player : MonoBehaviour
         var dirY = 0f;
         var rightDirX = 0f;
 
+        //Debug.Log($"Previous dirX {prevDirX}");
+        //Debug.Log($"Previous dirY {prevDirY}");
+
         if (freeze == true)
         {
             StartCoroutine(freezePlayer());
         }
 
-        if (freeze == false)
+        if (freeze == false && slip == false)
         {
             if (gameObject.tag == "Player1")
             {
@@ -95,7 +102,14 @@ public class Player : MonoBehaviour
 
             rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
         
-    }
+        }
+
+        if (freeze == false && slip == true)
+        {
+            HandleSpill(prevDirX, prevDirY, 10f);
+        }
+
+
         if (!((dirX == 0f) && (dirY == 0f)))
         {
             _animator.SetFloat("XInput", dirX);
@@ -123,6 +137,12 @@ public class Player : MonoBehaviour
         PlayerSoberUp();
         checkSloshed();
         drunkMeter.setDrunk(drunkness);
+
+        if (slip == false)
+        {
+            prevDirX = dirX;
+            prevDirY = dirY;
+        }
 
     }
 
@@ -207,7 +227,37 @@ public class Player : MonoBehaviour
     void TakeDamage(float damage)
     {
         health -= damage;
-        _damageFlash.CallDamagefLash();
+        _damageFlash.CallDamageFlash();
         healthBar.setHealth(health);
+    }
+
+    // makes it so that 
+    void HandleSpill(float initialDirX, float initialDirY, float speedBoost)
+    {
+        Debug.Log("Handling Spill");
+        // make faster, and freeze directional vector
+        var dirX = 0f;
+        var dirY = 0f;
+        
+
+        if (gameObject.tag == "Player1")
+        {
+            dirX = Input.GetAxisRaw("Horizontal1");
+            dirY = Input.GetAxisRaw("Vertical1");
+        }
+        else if (gameObject.tag == "Player2")
+        {
+            dirX = Input.GetAxisRaw("Horizontal2");
+            dirY = Input.GetAxisRaw("Vertical2");
+        }
+
+        prevDirX = ((initialDirX * 0.99f) + (dirX * 0.01f));
+        prevDirY = ((initialDirY * 0.99f) + (dirY * 0.01f));
+
+        rb.velocity = new Vector2((movementSpeedHorizontal + speedBoost) * prevDirX, (movementSpeedVertical + speedBoost) * prevDirY);
+
+
+
+
     }
 }

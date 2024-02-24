@@ -240,6 +240,8 @@ public class Bottle : MonoBehaviour
         }
     }
 
+
+
     private void Drink(Player player)
     {
         if (player == _player1)

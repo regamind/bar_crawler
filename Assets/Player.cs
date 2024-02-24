@@ -182,8 +182,6 @@ public class Player : MonoBehaviour
     {
         if (collider.tag == "bottle")
         {
-            //if ((gameObject.tag == "Player1" && !collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
-            //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
             if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp2)
             {
                 Debug.Log("bottle trigger Player");
@@ -201,9 +199,6 @@ public class Player : MonoBehaviour
                         GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
                     }
 
-                   // drunkness = MinDrunk; // reset drunkness
-                   // Debug.Log("mindrunk in player");
-                   // Debug.Log(drunkness);
                     health = Maxhealth; // reset the health of the player
                     alive = false; // where death occurs, likely wanna play death animation as well
                 }

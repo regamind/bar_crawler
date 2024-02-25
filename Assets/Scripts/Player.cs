@@ -21,9 +21,10 @@ public class Player : MonoBehaviour
 
     public bool readyToThrow;
     public Bottle myBottle;
-    public GameObject myDrink;
+    public GameObject myDrinkObject;
 
-    public GameObject nearestBottle;
+    public GameObject nearestBottleObject;
+    public Bottle nearestBottle;
     private string _Rhorizontal;
     private string _Rvertical;
     private string _Lhorizontal;
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
             _Lvertical = "Vertical1";
             _interact = "Interact1";
             _drink = "Drink1";
-            _throw = "rBumper2";
+            _throw = "rBumper1";
 
         }
         else if (gameObject.tag == "Player2")
@@ -91,17 +92,18 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = true;
 
         // PICKUP LOGIC
-        if (nearestBottle != null && Input.GetButton(_interact))
+        if (nearestBottleObject != null && Input.GetButton(_interact))
         {
-            myBottle = nearestBottle.GetComponent<Bottle>();
-            if (myBottle != null && !myBottle.pickedUp)
+            nearestBottle = nearestBottleObject.GetComponent<Bottle>();
+            if (nearestBottle != null && !nearestBottle.pickedUp)
             {
-                myBottle.PickUp(this);
-                myDrink = nearestBottle;
-                string myDrinkType = myDrink.name;
+                nearestBottle.PickUp(this);
+                myBottle = nearestBottle;
+                myDrinkObject = nearestBottleObject;
+                string myDrinkType = myDrinkObject.name;
                 if (myDrinkType == "Vodka")
                 {
-                    var myType = myDrink.GetComponent<Vodka>();
+                    Vodka myType = myDrinkObject.GetComponent<Vodka>();
 
                 }
                 /// MORE DRINK TYPES HERE
@@ -109,21 +111,25 @@ public class Player : MonoBehaviour
         }
 
         // DRINK LOGIC
-        if (myDrink != null & Input.GetButton(_drink))
+        if (myDrinkObject != null & Input.GetButton(_drink))
         {
             Drink(myBottle);
         }
 
-        if (myBottle.pickedUp && myBottle.empty)
+        if (myBottle != null)
         {
-            CalculateThrowVec(myBottle);
-            SetTrajectory(myBottle);
-            if (Input.GetButtonDown(_throw))
+            if (myBottle.pickedUp && myBottle.empty)
             {
-                myBottle.Throw();
-                RemoveTrajectory(myBottle);
+                CalculateThrowVec(myBottle);
+                SetTrajectory(myBottle);
+                if (Input.GetButtonDown(_throw))
+                {
+                    myBottle.Throw();
+                    RemoveTrajectory(myBottle);
+                }
             }
         }
+        
 
         // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds
     }
@@ -132,17 +138,30 @@ public class Player : MonoBehaviour
     {
         if (collider.tag == "bottle")
         {
-            //if ((gameObject.tag == "Player1" && !collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
-            //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
-            if (!collider.gameObject.GetComponent<Bottle>().pickedUp)
+            Debug.Log(collider.GetType());
+            if (collider.GetType() == typeof(CircleCollider2D))
             {
-                Debug.Log("bottle trigger Player");
-                TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
-                if (health <= 0)
+                // then deal with pickup
+                Debug.Log("collided with circle: pickup logic");
+                nearestBottle = collider.gameObject;
+            }
+            else
+            {
+                //if ((gameObject.tag == "Player1" && !collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
+                //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
+                //deal with damage
+                if (!collider.gameObject.GetComponent<Bottle>().pickedUp)
                 {
-                    alive = false; // where death occurs, likely wanna play death animation as well
+                    Debug.Log("bottle trigger Player");
+                    TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
+                    if (health <= 0)
+                    {
+                        alive = false; // where death occurs, likely wanna play death animation as well
+                    }
                 }
             }
+            
+            
         }
     }
 
@@ -168,7 +187,6 @@ public class Player : MonoBehaviour
     public void Drink(Bottle bottle)
     {
         bottle.empty = true;
-        myType.Drink(this);
         bottle.spriteRenderer.sprite = bottle.emptyBottle;
     }
 

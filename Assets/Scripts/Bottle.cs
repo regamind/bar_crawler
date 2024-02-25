@@ -76,6 +76,11 @@ public class Bottle : MonoBehaviour
         //else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2)
         //    PickUp(_player2);
 
+        if (pickedUp)
+        {
+            transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
+        }
+
         //if (pickedUp1)
         //{
         //    if (_player1.GetComponent<SpriteRenderer>().flipX == false)
@@ -148,6 +153,7 @@ public class Bottle : MonoBehaviour
         pickedUp = true;
         onTable = false;
         holdingPlayer = player;
+        Debug.Log(holdingPlayer.name);
         
     }
 
@@ -192,7 +198,7 @@ public class Bottle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!pickedUp)
+        if (!pickedUp && !onTable)
         {
             if(collider.tag == "Player1" || collider.tag == "Player2") 
             {
@@ -204,7 +210,7 @@ public class Bottle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!pickedUp)
+        if (!pickedUp && !onTable)
         {
             if (collision.collider.name == "Player1" || collision.collider.name == "Player2")
             {

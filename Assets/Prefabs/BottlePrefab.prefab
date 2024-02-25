@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2282976247604022581}
   - component: {fileID: 6900219431761995688}
   - component: {fileID: 5709122880090256373}
+  - component: {fileID: 7138066283294822580}
   m_Layer: 0
   m_Name: BottlePrefab
   m_TagString: bottle
@@ -128,14 +129,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onTable: 0
-  pickedUp1: 0
-  pickedUp2: 0
+  _lr: {fileID: 0}
+  _throwVector: {x: 0, y: 0, z: 0}
   bottleDamage: 10
+  _throwPower: 0
   emptyBottle: {fileID: 21300000, guid: 7f707ddb3d1ee40debd987fa33f6ce4f, type: 3}
   spriteRenderer: {fileID: 0}
   damageBuff: {fileID: 11400000, guid: c1aae661360d54d3b8664ed861bfa47e, type: 2}
-  empty1: 0
-  empty2: 0
+  empty: 0
+  pickedUp: 0
+  holdingPlayer: {fileID: 0}
 --- !u!70 &6900219431761995688
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -275,3 +278,38 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!58 &7138066283294822580
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899218564291933678}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2

@@ -11,7 +11,7 @@ public class DamageBuff : Drink_Effects
 
     public override void Effect(GameObject target)
     {
-        Bottle _bottle = target.GetComponent<Bottle>();
+        Bottle _bottle = target.myBottle;
         _bottle.bottleDamage *= damageBuff;
 
 

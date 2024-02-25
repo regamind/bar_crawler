@@ -11,8 +11,9 @@ public class SpeedBuff : Drink_Effects
 
     public override void Effect(GameObject target)
     {
-        Bottle _bottle = target.GetComponent<Bottle>();
-        _bottle.bottleDamage *= speedBuff;
+        Player player = target.GetComponent<Player>();
+        player.movementSpeedHorizontal *= speedBuff;
+        player.movementSpeedVertical *= speedBuff;
 
 
     }

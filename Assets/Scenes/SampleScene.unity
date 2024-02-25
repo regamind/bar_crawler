@@ -2607,6 +2607,7 @@ GameObject:
   - component: {fileID: 580286155}
   - component: {fileID: 580286156}
   - component: {fileID: 580286157}
+  - component: {fileID: 580286158}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -2845,6 +2846,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashTime: 0.25
+--- !u!114 &580286158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580286150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d68fd4199e8048d38302c7ee7a80898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 1090542096955389211, guid: 950887dd64060476998dc1aee4690052, type: 3}
+  yOffsetMultiplier: 0.45
 --- !u!4 &608586471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1764645925707643029, guid: 4812684db121f46a18ca23a79bdc5f71, type: 3}
@@ -4533,6 +4548,7 @@ GameObject:
   - component: {fileID: 1531861825}
   - component: {fileID: 1531861830}
   - component: {fileID: 1531861831}
+  - component: {fileID: 1531861832}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -4773,6 +4789,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashTime: 0.25
+--- !u!114 &1531861832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531861824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d68fd4199e8048d38302c7ee7a80898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 1090542096955389211, guid: 950887dd64060476998dc1aee4690052, type: 3}
+  yOffsetMultiplier: 0.45
 --- !u!1 &1555087176
 GameObject:
   m_ObjectHideFlags: 0

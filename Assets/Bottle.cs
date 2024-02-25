@@ -249,13 +249,17 @@ public class Bottle : MonoBehaviour
             empty1 = true;
             _player1.drunkMeter.setDrunk(_player1.drunkness + 20f);
             _player1.drunkness += 20f;
+            _player1.TriggerBubbles();
+
         }
         else
         {
             empty2 = true;
             _player2.drunkMeter.setDrunk(_player2.drunkness + 20f);
             _player2.drunkness += 20f;
+            _player2.TriggerBubbles();
         }
         spriteRenderer.sprite = emptyBottle;
+
     }
 }

@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 
     private DamageFlash _damageFlash;
 
+    private BubbleController _bubbleController;
+
     private void Start()
     {
         movementSpeedHorizontal = 13f;
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         _damageFlash = GetComponent<DamageFlash>();
+
+        _bubbleController = GetComponent<BubbleController>();
 
     }
 
@@ -251,8 +255,10 @@ public class Player : MonoBehaviour
 
         rb.velocity = new Vector2((movementSpeedHorizontal + speedBoost) * prevDirX, (movementSpeedVertical + speedBoost) * prevDirY);
 
+    }
 
-
-
+    public void TriggerBubbles()
+    {
+        _bubbleController.TriggerBubbles();
     }
 }

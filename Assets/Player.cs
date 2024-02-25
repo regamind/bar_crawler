@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     private BubbleController _bubbleController;
 
+
     private void Start()
     {
         movementSpeedHorizontal = 13f;
@@ -153,8 +154,10 @@ public class Player : MonoBehaviour
     IEnumerator freezePlayer()
     {       
         rb.velocity = new Vector2(0,0);
+        _animator.SetBool("Throwup", true);
         yield return new WaitForSeconds(2);
         freeze = false;
+        _animator.SetBool("Throwup", false);
     }
 
     private void checkSloshed()

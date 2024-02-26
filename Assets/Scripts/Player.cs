@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     private string _Rvertical;
     private string _Lhorizontal;
     private string _Lvertical;
-    private string _interact;
+    public string _interact;
     private string _drink;
     private string _throw;
 
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(Input.GetButtonDown(_interact));
         // PLAYER MOVEMENT
         
 
@@ -126,6 +126,8 @@ public class Player : MonoBehaviour
                 {
                     myBottle.Throw();
                     RemoveTrajectory(myBottle);
+                    myDrinkObject = null;
+                    myBottle = null;
                 }
             }
         }
@@ -143,7 +145,7 @@ public class Player : MonoBehaviour
             {
                 // then deal with pickup
                 Debug.Log("collided with circle: pickup logic");
-                nearestBottle = collider.gameObject;
+                nearestBottleObject = collider.gameObject;
             }
             else
             {

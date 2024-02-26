@@ -153,7 +153,7 @@ public class Bottle : MonoBehaviour
         pickedUp = true;
         onTable = false;
         holdingPlayer = player;
-        Debug.Log(holdingPlayer.name);
+        Debug.Log($" {holdingPlayer.name}, {holdingPlayer._interact}, {holdingPlayer.gameObject}");
         
     }
 

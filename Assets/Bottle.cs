@@ -79,15 +79,15 @@ public class Bottle : MonoBehaviour
             _rb.bodyType = RigidbodyType2D.Dynamic;
         }
 
-        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2 && !_player1.freeze)
+        if (onTable && Input.GetButtonDown("Interact1") && _distanceToPlayer1 < 2 && !_player1.freeze && !pickedUp1)
             PickUp(_player1);
-        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2 && !_player2.freeze)
+        else if (onTable && Input.GetButtonDown("Interact2") && _distanceToPlayer2 < 2 && !_player2.freeze && !pickedUp2)
             PickUp(_player2);
 
         if (pickedUp1)
         {
-            Debug.Log("Bottle picked up by player1");
-            Debug.Log($"Float of InputX: {_player1.GetComponent<Animator>().GetFloat("XInput")}");
+           // Debug.Log("Bottle picked up by player1");
+          //  Debug.Log($"Float of InputX: {_player1.GetComponent<Animator>().GetFloat("XInput")}");
             if (_player1.GetComponent<Animator>().GetFloat("XInput") >= 0f)
                 transform.position = _player1.transform.position + _player1.transform.right * 1.1f;
             else
@@ -105,6 +105,8 @@ public class Bottle : MonoBehaviour
         {
             Debug.Log("Player1 drank the bottle");
             Drink(_player1);
+
+            //the get button down inputs are not seperating properly amongst the two players
         }
 
         if (pickedUp2 && Input.GetButtonDown("Drink2") && !empty2)
@@ -128,12 +130,12 @@ public class Bottle : MonoBehaviour
         if (Input.GetButtonDown("rBumper1") && pickedUp1 && empty1 && !_player1.freeze)
         {
             RemoveTrajectory();
-            Throw();
+            Throw(_player1);
         }
         else if (Input.GetButtonDown("rBumper2") && pickedUp2 && empty2 && !_player2.freeze)
         {
             RemoveTrajectory();
-            Throw();
+            Throw(_player2);
         }
 
       //  DepleteDrunk();
@@ -165,13 +167,16 @@ public class Bottle : MonoBehaviour
 
     private void PickUp(Player player)
     {
-        transform.parent = player.transform;
-        transform.position = player.transform.right;
 
         if (player.tag == "Player1")
             pickedUp1 = true;
         else if (player.tag == "Player2")
             pickedUp2 = true;
+
+        transform.parent = player.transform;
+        transform.position = player.transform.right;
+
+        
 
         onTable = false;
     }
@@ -208,11 +213,15 @@ public class Bottle : MonoBehaviour
         _throwVector = joystickDir.normalized*_throwPower;
     }   
 
-    private void Throw()
+    private void Throw(Player player)
     {
-        pickedUp1 = false;
-        pickedUp2 = false;
+
+        if (player.tag == "Player1")
+            pickedUp1 = false;
+        else if (player.tag == "Player2")
+            pickedUp2 = false;
         //transform.parent = null;
+
         _rb.AddForce(_throwVector);
     }
 
@@ -247,12 +256,14 @@ public class Bottle : MonoBehaviour
             empty1 = true;
             _player1.drunkMeter.setDrunk(_player1.drunkness + 20f);
             _player1.drunkness += 20f;
+            Debug.Log("player 1 drinks");
         }
-        else
+        else if (player == _player2)
         {
             empty2 = true;
             _player2.drunkMeter.setDrunk(_player2.drunkness + 20f);
             _player2.drunkness += 20f;
+            Debug.Log("player 2 drinks");
         }
         spriteRenderer.sprite = emptyBottle;
     }

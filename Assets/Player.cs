@@ -152,11 +152,11 @@ public class Player : MonoBehaviour
             //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
             if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp2)
             {
-                Debug.Log("bottle trigger Player");
+             //   Debug.Log("bottle trigger Player");
                 TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
                 if (health <= 0)
                 {
-                    Debug.Log("health <= 0");
+                 //   Debug.Log("health <= 0");
 
                     if (gameObject.tag == "Player1")
                     {

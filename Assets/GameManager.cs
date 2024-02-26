@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public Player player1;
     public Player player2;
 
+    public string winner;
+
 
     public static GameManager Instance;
 
@@ -35,18 +37,41 @@ public class GameManager : MonoBehaviour
     public int P2Wins = 0;
 
 
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("StartScene") ||
+            SceneManager.GetActiveScene() == SceneManager.GetSceneByName("GameOverScene"))
+        {
+           
+            if (Input.GetButtonDown("Interact1"))
+            {
+
+
+                SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
+                Debug.Log("nextScene called");
+            }
+
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
+        
     }
 
     private void Start()
     {
         UpdateGameState(GameState.StartGame);
+       
+
+        //SceneManager.LoadScene(1);
+
 
         //fill1A.gameObject.SetActive(false);
-
     }
+
 
     public void UpdateGameState(GameState newState)
     {
@@ -72,6 +97,9 @@ public class GameManager : MonoBehaviour
             case GameState.ResetPositions:
                 HandleResetPositions();
                 break;
+            case GameState.IdleState:
+                HandleIdleState();
+                break;
 
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -79,6 +107,12 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
     }
+
+    private void HandleIdleState()
+    {
+       // Debug.Log("am in IDLE");
+    }
+
 
     private void HandleResetPositions()
     {
@@ -101,20 +135,32 @@ public class GameManager : MonoBehaviour
             Destroy(bottle);
         }
 
-            //reset drunkeness meter when we have it
-            //clear all bottles
+        Instance.UpdateGameState(GameState.IdleState);
 
 
-        }
+        //reset drunkeness meter when we have it
+        //clear all bottles
+        // bug here in reseting bottles after a round, bottles don't always spawn again.
+
+
+    }
 
 private void HandlePlayer2Victory()
     {
-        throw new NotImplementedException();
+        StateNameTracker.victoriousPlayer = "Player 2 wins!";
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
+        Debug.Log("nextScene called");
+        
     }
 
     private void HandlePlayer1Victory()
     {
-        throw new NotImplementedException();
+        StateNameTracker.victoriousPlayer = "Player 1 wins!";
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
+        Debug.Log("nextScene called");
+        
     }
 
     private void HandlePlayer1WinsRound()
@@ -124,7 +170,7 @@ private void HandlePlayer2Victory()
 
         if (P1Wins == 2)
         {
-
+        Instance.UpdateGameState(GameState.Player1Victory);
         }
 
         if (P1Wins == 1)
@@ -142,6 +188,12 @@ private void HandlePlayer2Victory()
     private void HandlePlayer2WinsRound()
     {
         Debug.Log("handle 2 wins round");
+
+        if (P1Wins == 2)
+        {
+            Instance.UpdateGameState(GameState.Player2Victory);
+        }
+
         if (P2Wins == 1)
         {
             fill2B.gameObject.SetActive(true);
@@ -157,7 +209,10 @@ private void HandlePlayer2Victory()
 
     private void HandleStartGame()
     {
-      //  throw new NotImplementedException();
+       // SceneManager.LoadScene(1, LoadSceneMode.Single);
+       // Debug.Log("god please help me");
+       // SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartScene"));
+       // Instance.UpdateGameState(GameState.IdleState);
     }
 
 
@@ -165,6 +220,7 @@ private void HandlePlayer2Victory()
 
 public enum GameState
 {
+    IdleState,
     StartGame,
     Player1WinsRound,
     Player2WinsRound,

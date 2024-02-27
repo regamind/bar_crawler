@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public Player player1;
     public Player player2;
 
-    public string winner;
+    
 
 
     public static GameManager Instance;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
 
                 SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
+               // SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
                 Debug.Log("nextScene called");
             }
 
@@ -149,7 +149,7 @@ private void HandlePlayer2Victory()
     {
         StateNameTracker.victoriousPlayer = "Player 2 wins!";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
+       // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
         Debug.Log("nextScene called");
         
     }
@@ -158,7 +158,7 @@ private void HandlePlayer2Victory()
     {
         StateNameTracker.victoriousPlayer = "Player 1 wins!";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
+       // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
         Debug.Log("nextScene called");
         
     }

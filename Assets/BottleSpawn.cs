@@ -30,22 +30,23 @@ public class BottleSpawn : MonoBehaviour
             // loop through each table and check if it has a bottle
 
             // randomizes list and chooses random amount to spawn to
-            Debug.Log($"Table spawn point number: {tables.Count}");
+           // Debug.Log($"Table spawn point number: {tables.Count}");
             ShuffleTables();
             int numberOfTablesToSpawnOn = Random.Range(1, tables.Count + 1);
-            Debug.Log($"Table random spawn point number: {numberOfTablesToSpawnOn}");
+          //  Debug.Log($"Table random spawn point number: {numberOfTablesToSpawnOn}");
             // loop through a subset of the shuffled list
             int numberSpawned = 0;
             for (int i = 0; i < numberOfTablesToSpawnOn; i++)
             {
                 TableSpawnPoint table = tables[i];
+             //   Debug.Log($"Bottle on Table?: {table.BottleOnTable}");
                 if (!table.BottleOnTable)
                 {
                     numberSpawned += 1;
                     Instantiate(bottlePrefab, table.GetSpawnPoint(), Quaternion.identity);
                 }
             }
-            Debug.Log($"Number spawned: {numberSpawned}");
+          //  Debug.Log($"Number spawned: {numberSpawned}");
          }
      }
 

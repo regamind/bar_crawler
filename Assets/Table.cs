@@ -18,6 +18,14 @@ public class TableSpawnPoint : MonoBehaviour
         CheckBottleOnTable();
     }
 
+    public void ResetTables()
+    {
+        if (_bottleOnTable)
+        {
+            _bottleOnTable = false;
+        }
+    }
+
 
     private void CheckBottleOnTable()
     {

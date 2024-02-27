@@ -32,7 +32,7 @@ public class DrunkMeter : MonoBehaviour
 
     public void setHealth(float Health)
     {
-        Debug.Log("set Health called");
+      //  Debug.Log("set Health called");
         slider.value = Health;
     }
 

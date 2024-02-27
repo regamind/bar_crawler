@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
                 SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
                // SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
-                Debug.Log("nextScene called");
+             //   Debug.Log("nextScene called");
             }
 
         }
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleIdleState()
     {
-       // Debug.Log("am in IDLE");
+      //  Debug.Log("am in IDLE");
     }
 
 
@@ -125,15 +125,26 @@ public class GameManager : MonoBehaviour
         player1.drunkness = player1.MinDrunk;
         player2.drunkness = player2.MinDrunk;
 
-        Debug.Log("handle drunk reset");
+      //  Debug.Log("handle drunk reset");
 
 
         GameObject[] bottles = GameObject.FindGameObjectsWithTag("bottle");
 
         foreach (GameObject bottle in bottles)
         {
+         //   Debug.Log("destroyed bottle");
             Destroy(bottle);
         }
+
+        TableSpawnPoint[] tables = FindObjectsOfType<TableSpawnPoint>();
+
+        foreach (TableSpawnPoint table in tables)
+        {
+            table.ResetTables();
+       //     Debug.Log("reset table");
+            
+        }
+
 
         Instance.UpdateGameState(GameState.IdleState);
 
@@ -147,26 +158,28 @@ public class GameManager : MonoBehaviour
 
 private void HandlePlayer2Victory()
     {
+      //  Debug.Log("state: player 2 victory, next scene called");
         StateNameTracker.victoriousPlayer = "Player 2 wins!";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
-        Debug.Log("nextScene called");
+        
         
     }
 
     private void HandlePlayer1Victory()
     {
+     //   Debug.Log("state: player 2 victory, next scene called");
         StateNameTracker.victoriousPlayer = "Player 1 wins!";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
-        Debug.Log("nextScene called");
+        
         
     }
 
     private void HandlePlayer1WinsRound()
 
     {
-        Debug.Log("handle 1 wins round");
+       // Debug.Log("handle 1 wins round");
 
         if (P1Wins == 2)
         {
@@ -187,7 +200,7 @@ private void HandlePlayer2Victory()
 
     private void HandlePlayer2WinsRound()
     {
-        Debug.Log("handle 2 wins round");
+      //  Debug.Log("handle 2 wins round");
 
         if (P1Wins == 2)
         {
@@ -209,6 +222,7 @@ private void HandlePlayer2Victory()
 
     private void HandleStartGame()
     {
+      //  Debug.Log("state startgame");
        // SceneManager.LoadScene(1, LoadSceneMode.Single);
        // Debug.Log("god please help me");
        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartScene"));

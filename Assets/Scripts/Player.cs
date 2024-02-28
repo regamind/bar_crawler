@@ -231,7 +231,7 @@ public class Player : MonoBehaviour
         }
 
         // DRINK LOGIC
-        if (myDrinkObject != null & Input.GetButton(_drink))
+        if (myDrinkObject != null & Input.GetButtonDown(_drink))
         {
             Drink(myBottle);
         }
@@ -249,6 +249,9 @@ public class Player : MonoBehaviour
                     RemoveTrajectory(myBottle);
                     myDrinkObject = null;
                     myBottle = null;
+                    _myTypeBeer = false;
+                    _myTypeTequila = false;
+                    _myTypeVodka = false;
                 }
             }
         }

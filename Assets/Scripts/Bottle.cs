@@ -35,8 +35,8 @@ public class Bottle : MonoBehaviour
         empty = false;
         onTable = true;
         pickedUp = false;
-        _throwPower = 500f;
-        bottleDamage = 10f;
+        _throwPower = 1000f;
+        bottleDamage = 30f;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
 
@@ -96,17 +96,17 @@ public class Bottle : MonoBehaviour
         _rb.AddForce(_throwVector);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (!pickedUp && !onTable)
-        {
-            if(collider.tag == "Player1" || collider.tag == "Player2") 
-            {
-                Debug.Log("trigger collision");
-                Destroy(this.gameObject);
-            }
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collider)
+    //{
+    //    if (!pickedUp && !onTable)
+    //    {
+    //        if(collider.tag == "Player1" || collider.tag == "Player2") 
+    //        {
+    //            Debug.Log("trigger collision");
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

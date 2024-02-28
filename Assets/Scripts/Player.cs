@@ -129,9 +129,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var dirX = 0f;
-        var dirY = 0f;
-        var rightDirX = 0f;
+        //var dirX = 0f;
+        //var dirY = 0f;
+        //var rightDirX = 0f;
 
         if (!freeze && !slip)
         {
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
             rightDirX = Input.GetAxisRaw(_Rhorizontal);
 
             rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-            rb.velocity = new Vector2();
+            //rb.velocity = new Vector2();
         }
         //dirX = Input.GetAxisRaw(_Lhorizontal);
         //dirY = Input.GetAxisRaw(_Lvertical);
@@ -153,6 +153,55 @@ public class Player : MonoBehaviour
         //    _spriteRenderer.flipX = false;
         //else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
         //    _spriteRenderer.flipX = true;
+
+        if (freeze == true)
+        {
+            StartCoroutine(freezePlayer());
+        }
+
+
+
+        if (freeze == false && slip == true)
+        {
+            HandleSpill(prevDirX, prevDirY, 10f);
+        }
+
+
+        if (!((dirX == 0f) && (dirY == 0f)))
+        {
+            // bring down _horizontal variables
+            _animator.SetFloat("XInput", dirX);
+            _animator.SetFloat("YInput", dirY);
+        }
+
+        if (rb.velocity != Vector2.zero)
+        {
+            _animator.SetBool("Walk", true);
+        }
+        else
+        {
+            _animator.SetBool("Walk", false);
+        }
+
+        if (drunkness > 50f)
+        {
+            _animator.SetBool("Drunk", true);
+        }
+        else
+        {
+            _animator.SetBool("Drunk", false);
+        }
+
+        PlayerSoberUp();
+        checkSloshed();
+        drunkMeter.setDrunk(drunkness);
+
+        if (slip == false)
+        {
+            // same thing -> bring down dirX (make sure dirX and dirY are assigned beforehand)
+            prevDirX = dirX;
+            prevDirY = dirY;
+        }
 
         // PICKUP LOGIC
         if (nearestBottleObject != null && Input.GetButton(_interact))
@@ -204,75 +253,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (freeze == true)
-        {
-            StartCoroutine(freezePlayer());
-        }
-
-        if (freeze == false && slip == false)
-        {
-            
-            if (gameObject.tag == "Player1")
-            {
-                dirX = Input.GetAxisRaw("Horizontal1");
-                dirY = Input.GetAxisRaw("Vertical1");
-                rightDirX = Input.GetAxisRaw("RightHorizontal1");
-            }
-            else if (gameObject.tag == "Player2")
-            {
-                dirX = Input.GetAxisRaw("Horizontal2");
-                // Input.GetAxisRaw(_Lhorizontal)
-                dirY = Input.GetAxisRaw("Vertical2");
-                rightDirX = Input.GetAxisRaw("RightHorizontal2");
-            }
-
-
-            rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-            rb.velocity = new Vector2();
         
-        }
 
-        if (freeze == false && slip == true)
-        {
-            HandleSpill(prevDirX, prevDirY, 10f);
-        }
-
-
-        if (!((dirX == 0f) && (dirY == 0f)))
-        {
-            // bring down _horizontal variables
-            _animator.SetFloat("XInput", dirX);
-            _animator.SetFloat("YInput", dirY);
-        }
-
-        if (rb.velocity != Vector2.zero)
-        {
-            _animator.SetBool("Walk", true);
-        }
-        else
-        {
-            _animator.SetBool("Walk", false);
-        }
-
-        if (drunkness > 50f)
-        {
-            _animator.SetBool("Drunk", true);
-        }
-        else
-        {
-            _animator.SetBool("Drunk", false);
-        }
-
-        PlayerSoberUp();
-        checkSloshed();
-        drunkMeter.setDrunk(drunkness);
-
-        if (slip == false)
-        {
-            // same thing -> bring down dirX (make sure dirX and dirY are assigned beforehand)
-            prevDirX = dirX;
-            prevDirY = dirY;
-        }
+        
 
     }
 
@@ -318,7 +301,7 @@ public class Player : MonoBehaviour
             if (collider.GetType() == typeof(CircleCollider2D))
             {
                 // then deal with pickup
-                Debug.Log("collided with circle: pickup logic");
+                //Debug.Log("collided with circle: pickup logic");
                 nearestBottleObject = collider.gameObject;
             }
             else
@@ -326,7 +309,8 @@ public class Player : MonoBehaviour
                 if (!collider.gameObject.GetComponent<Bottle>().pickedUp)
                 {
              
-                TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
+                    TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
+                    Destroy(collider.gameObject);
                 if (health <= 0)
                 {
                 

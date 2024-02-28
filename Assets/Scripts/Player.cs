@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
         }
 
         // PICKUP LOGIC
-        if (nearestBottleObject != null && Input.GetButton(_interact))
+        if (nearestBottleObject != null && Input.GetButtonDown(_interact))
         {
             nearestBottle = nearestBottleObject.GetComponent<Bottle>();
             if (nearestBottle != null && !nearestBottle.pickedUp)

@@ -245,6 +245,10 @@ public class Player : MonoBehaviour
                 SetTrajectory(myBottle);
                 if (Input.GetButtonDown(_throw))
                 {
+                    if (myBottle._throwVector == new Vector3(0, 0, 0))
+                    {
+                        myBottle.BottleDropped();
+                    }
                     myBottle.Throw();
                     RemoveTrajectory(myBottle);
                     myDrinkObject = null;
@@ -420,6 +424,9 @@ public class Player : MonoBehaviour
         Vector2 joystickDir = new Vector2(Input.GetAxis(_Rhorizontal), -1 * Input.GetAxis(_Rvertical));
         //Vector2 testDir = new Vector2(1, 1);
         bottle._throwVector = joystickDir.normalized * bottle._throwPower;
+
+
+
     }
 
     public void Drink(Bottle bottle)
@@ -445,6 +452,7 @@ public class Player : MonoBehaviour
 
 
     }
+
 
     private void OnDestroy()
     {

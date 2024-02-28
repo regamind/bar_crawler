@@ -19,8 +19,10 @@ public class Bottle : MonoBehaviour
     private Vector3 _spawnPoint;
     public float _throwPower;
 
+
     public Sprite emptyBottle;
     public SpriteRenderer spriteRenderer;
+    public Sprite brokenBottle;
     
 
     public bool empty;
@@ -61,6 +63,12 @@ public class Bottle : MonoBehaviour
             transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
         }
 
+        //if (!pickedUp && empty && _rb.totalForce == new Vector2(0, 0)){
+        //    BottleDropped();
+            
+        //}
+        
+
         
         
     }
@@ -92,9 +100,19 @@ public class Bottle : MonoBehaviour
     public void Throw()
     {
         pickedUp = false;
-        empty = false;
+        empty = true;
         _rb.AddForce(_throwVector);
     }
+
+
+
+    public void BottleDropped()
+    {
+        spriteRenderer.sprite = brokenBottle;
+    }
+    // picked up false
+    // empty false
+
 
     //private void OnTriggerEnter2D(Collider2D collider)
     //{
@@ -119,4 +137,7 @@ public class Bottle : MonoBehaviour
             }
         }
     }
+
+
+
 }

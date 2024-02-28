@@ -276,7 +276,8 @@ public class Player : MonoBehaviour
         if (drunkness >= 99f)
         {
             freeze = true;
-            drunkness = MinDrunk;
+            drunkness = 20f;
+            //drunkness = MinDrunk;
         }
     }
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6900219431761995688}
   - component: {fileID: 5709122880090256373}
   - component: {fileID: 7138066283294822580}
+  - component: {fileID: -5041570655492249729}
   m_Layer: 0
   m_Name: BottlePrefab
   m_TagString: bottle
@@ -313,3 +314,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!114 &-5041570655492249729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899218564291933678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1f1858ef53646d48665f3c78afb9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBuff: {fileID: 11400000, guid: c1aae661360d54d3b8664ed861bfa47e, type: 2}
+  speedBuff: {fileID: 11400000, guid: b740ba27ed31e46dd84ccd8063a58646, type: 2}

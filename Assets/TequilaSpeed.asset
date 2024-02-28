@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eeb7969dadd24a4f8fbd9cbbd45b6d8, type: 3}
-  m_Name: VodkaSpeedBuff
+  m_Name: TequilaSpeed
   m_EditorClassIdentifier: 
-  speedBuff: 0.75
+  speedBuff: 0.5

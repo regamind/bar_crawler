@@ -21,7 +21,7 @@ public class Bottle : MonoBehaviour
 
     public Sprite emptyBottle;
     public SpriteRenderer spriteRenderer;
-    public DamageBuff damageBuff;
+    
 
     public bool empty;
     public bool pickedUp;

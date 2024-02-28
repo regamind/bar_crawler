@@ -5,7 +5,10 @@ using UnityEngine;
 public class BottleSpawn : MonoBehaviour
 {
     public float spawnInterval = 6f; // adjust as needed
-    public GameObject bottlePrefab;
+    public List<GameObject> bottles;
+    public GameObject beerPrefab;
+    public GameObject vodkaPrefab;
+    public GameObject tequilaPrefab;
 
     private List<TableSpawnPoint> tables = new List<TableSpawnPoint>();
 
@@ -14,6 +17,10 @@ public class BottleSpawn : MonoBehaviour
         // find all tables in the scene
         TableSpawnPoint[] tableSpawnPoints = FindObjectsOfType<TableSpawnPoint>();
         tables.AddRange(tableSpawnPoints);
+        bottles.Add(beerPrefab);
+        bottles.Add(vodkaPrefab);
+        bottles.Add(tequilaPrefab);
+
 
 
         // start the spawning routine
@@ -43,7 +50,9 @@ public class BottleSpawn : MonoBehaviour
                 if (!table.BottleOnTable)
                 {
                     numberSpawned += 1;
-                    Instantiate(bottlePrefab, table.GetSpawnPoint(), Quaternion.identity);
+                    int randomIndex = Random.Range(0, bottles.Count);
+                    GameObject bottleToSpawn = bottles[randomIndex];
+                    Instantiate(bottleToSpawn, table.GetSpawnPoint(), Quaternion.identity);
                 }
             }
           //  Debug.Log($"Number spawned: {numberSpawned}");

@@ -587,7 +587,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 2
-  bottlePrefab: {fileID: 1899218564291933678, guid: 1f9f34ae4e7ef48e88406491ec830d4f, type: 3}
+  bottles: []
+  beerPrefab: {fileID: 1899218564291933678, guid: 1f9f34ae4e7ef48e88406491ec830d4f, type: 3}
+  vodkaPrefab: {fileID: 8381716211849271576, guid: 00ae15f259c214efaa5445e78d38701d, type: 3}
+  tequilaPrefab: {fileID: 8381716211849271576, guid: fd875772a7c3b45fea398a42c5904d6f, type: 3}
 --- !u!4 &122826349
 Transform:
   m_ObjectHideFlags: 0
@@ -2646,6 +2649,13 @@ MonoBehaviour:
   drunkMeter: {fileID: 2098107795}
   readyToThrow: 0
   myBottle: {fileID: 0}
+  myDrinkObject: {fileID: 0}
+  nearestBottleObject: {fileID: 0}
+  nearestBottle: {fileID: 0}
+  _interact: 
+  myVodka: {fileID: 0}
+  myTequila: {fileID: 0}
+  myBeer: {fileID: 0}
 --- !u!212 &580286152
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4691,6 +4701,13 @@ MonoBehaviour:
   drunkMeter: {fileID: 884627865}
   readyToThrow: 0
   myBottle: {fileID: 0}
+  myDrinkObject: {fileID: 0}
+  nearestBottleObject: {fileID: 0}
+  nearestBottle: {fileID: 0}
+  _interact: 
+  myVodka: {fileID: 0}
+  myTequila: {fileID: 0}
+  myBeer: {fileID: 0}
 --- !u!212 &1531861828
 SpriteRenderer:
   m_ObjectHideFlags: 0

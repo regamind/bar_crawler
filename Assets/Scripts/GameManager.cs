@@ -183,12 +183,13 @@ private void HandlePlayer2Victory()
 
         if (P1Wins == 2)
         {
-        Instance.UpdateGameState(GameState.Player1Victory);
+       // Instance.UpdateGameState(GameState.Player1Victory);
         }
 
         if (P1Wins == 1)
         {
             fill1B.gameObject.SetActive(true);
+            Instance.UpdateGameState(GameState.Player1Victory);
         }
         else 
         {
@@ -202,14 +203,15 @@ private void HandlePlayer2Victory()
     {
       //  Debug.Log("handle 2 wins round");
 
-        if (P1Wins == 2)
+        if (P2Wins == 2)
         {
-            Instance.UpdateGameState(GameState.Player2Victory);
+        //    Instance.UpdateGameState(GameState.Player2Victory);
         }
 
         if (P2Wins == 1)
         {
             fill2B.gameObject.SetActive(true);
+            Instance.UpdateGameState(GameState.Player2Victory);
         }
         else
         {

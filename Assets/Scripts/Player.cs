@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -37,9 +38,50 @@ public class Player : MonoBehaviour
 
     private BubbleController _bubbleController;
 
+    //my branch starts here
+    float dirX;
+    float dirY;
+    float rightDirX;
+
+    public bool readyToThrow;
+    public Bottle myBottle;
+    public GameObject myDrinkObject;
+
+    public GameObject nearestBottleObject;
+    public Bottle nearestBottle;
+    private string _Rhorizontal;
+    private string _Rvertical;
+    private string _Lhorizontal;
+    private string _Lvertical;
+    public string _interact;
+    private string _drink;
+    private string _throw;
+
+    [SerializeField] Vodka myVodka;
+    [SerializeField] Tequila myTequila;
+    [SerializeField] Beer myBeer;
+
+
+    private bool _myTypeVodka;
+    private bool _myTypeTequila;
+    private bool _myTypeBeer;
+
+
+    void Awake()
+    {
+        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+    }
 
     private void Start()
     {
+        _myTypeBeer = false;
+        _myTypeTequila = false;
+        _myTypeVodka = false;
+
+
+
+        readyToThrow = false;
+        nearestBottle = null;
         movementSpeedHorizontal = 13f;
         movementSpeedVertical = 10f;
 
@@ -56,57 +98,6 @@ public class Player : MonoBehaviour
         _damageFlash = GetComponent<DamageFlash>();
 
         _bubbleController = GetComponent<BubbleController>();
-
-    }
-
-     void Awake()
-    {
-        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
-    }
-
-    private void GameManager_OnGameStateChanged(GameState state)
-    {
-        //fillA.SetActive(state == GameState.StartGame);
-    }
-    public bool alive = true;
-    private SpriteRenderer _spriteRenderer;
-    float dirX;
-    float dirY;
-    float rightDirX;
-
-
-
-    public HealthBar healthBar;
-
-    public bool readyToThrow;
-    public Bottle myBottle;
-    public GameObject myDrinkObject;
-
-    public GameObject nearestBottleObject;
-    public Bottle nearestBottle;
-    private string _Rhorizontal;
-    private string _Rvertical;
-    private string _Lhorizontal;
-    private string _Lvertical;
-    public string _interact;
-    private string _drink;
-    private string _throw;
-
-    private void Start()
-    {
-        readyToThrow = false;
-        movementSpeedHorizontal = 13f;
-        movementSpeedVertical = 10f;
-        health = Maxhealth;
-        healthBar.SetMaxHealth(Maxhealth);
-        nearestBottle = null;
-
-        _spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (gameObject.tag == "Player1")
         {
@@ -131,9 +122,8 @@ public class Player : MonoBehaviour
         }
 
 
-        
-    }
 
+    }
 
 
     // Update is called once per frame
@@ -143,8 +133,76 @@ public class Player : MonoBehaviour
         var dirY = 0f;
         var rightDirX = 0f;
 
-        //Debug.Log($"Previous dirX {prevDirX}");
-        //Debug.Log($"Previous dirY {prevDirY}");
+        if (!freeze && !slip)
+        {
+            dirX = Input.GetAxisRaw(_Lhorizontal);
+            dirY = Input.GetAxisRaw(_Lvertical);
+            rightDirX = Input.GetAxisRaw(_Rhorizontal);
+
+            rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+            rb.velocity = new Vector2();
+        }
+        //dirX = Input.GetAxisRaw(_Lhorizontal);
+        //dirY = Input.GetAxisRaw(_Lvertical);
+        //rightDirX = Input.GetAxisRaw(_Rhorizontal);
+
+
+
+        //rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+        //if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
+        //    _spriteRenderer.flipX = false;
+        //else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
+        //    _spriteRenderer.flipX = true;
+
+        // PICKUP LOGIC
+        if (nearestBottleObject != null && Input.GetButton(_interact))
+        {
+            nearestBottle = nearestBottleObject.GetComponent<Bottle>();
+            if (nearestBottle != null && !nearestBottle.pickedUp)
+            {
+                nearestBottle.PickUp(this);
+                myBottle = nearestBottle;
+                myDrinkObject = nearestBottleObject;
+                string myDrinkType = myDrinkObject.name;
+                if (myDrinkType == "Vodka")
+                {
+                    _myTypeVodka = true;
+
+                }
+                else if (myDrinkType == "Beer")
+                {
+                    _myTypeBeer = true;
+                }
+                else if (myDrinkType == "Tequila")
+                {
+                    _myTypeTequila = true;
+                }
+                /// MORE DRINK TYPES HERE
+            }
+        }
+
+        // DRINK LOGIC
+        if (myDrinkObject != null & Input.GetButton(_drink))
+        {
+            Drink(myBottle);
+        }
+
+        //THROW LOGIC
+        if (myBottle != null)
+        {
+            if (myBottle.pickedUp && myBottle.empty)
+            {
+                CalculateThrowVec(myBottle);
+                SetTrajectory(myBottle);
+                if (Input.GetButtonDown(_throw))
+                {
+                    myBottle.Throw();
+                    RemoveTrajectory(myBottle);
+                    myDrinkObject = null;
+                    myBottle = null;
+                }
+            }
+        }
 
         if (freeze == true)
         {
@@ -153,6 +211,7 @@ public class Player : MonoBehaviour
 
         if (freeze == false && slip == false)
         {
+            
             if (gameObject.tag == "Player1")
             {
                 dirX = Input.GetAxisRaw("Horizontal1");
@@ -162,12 +221,14 @@ public class Player : MonoBehaviour
             else if (gameObject.tag == "Player2")
             {
                 dirX = Input.GetAxisRaw("Horizontal2");
+                // Input.GetAxisRaw(_Lhorizontal)
                 dirY = Input.GetAxisRaw("Vertical2");
                 rightDirX = Input.GetAxisRaw("RightHorizontal2");
             }
 
 
             rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+            rb.velocity = new Vector2();
         
         }
 
@@ -179,6 +240,7 @@ public class Player : MonoBehaviour
 
         if (!((dirX == 0f) && (dirY == 0f)))
         {
+            // bring down _horizontal variables
             _animator.SetFloat("XInput", dirX);
             _animator.SetFloat("YInput", dirY);
         }
@@ -207,6 +269,7 @@ public class Player : MonoBehaviour
 
         if (slip == false)
         {
+            // same thing -> bring down dirX (make sure dirX and dirY are assigned beforehand)
             prevDirX = dirX;
             prevDirY = dirY;
         }
@@ -237,6 +300,7 @@ public class Player : MonoBehaviour
         {
             drunkness -= soberRate * Time.deltaTime;
         }
+    }
 
         /*
         if (health <= 0)
@@ -245,66 +309,7 @@ public class Player : MonoBehaviour
             drunkMeter.setDrunk(drunkness);
         }
         */
-        Debug.Log(Input.GetButtonDown(_interact));
-        // PLAYER MOVEMENT
         
-
-        dirX = Input.GetAxisRaw(_Lhorizontal);
-        dirY = Input.GetAxisRaw(_Lvertical);
-        rightDirX = Input.GetAxisRaw(_Rhorizontal);
-        
-        
-
-        rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-        if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
-            _spriteRenderer.flipX = false;
-        else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
-            _spriteRenderer.flipX = true;
-
-        // PICKUP LOGIC
-        if (nearestBottleObject != null && Input.GetButton(_interact))
-        {
-            nearestBottle = nearestBottleObject.GetComponent<Bottle>();
-            if (nearestBottle != null && !nearestBottle.pickedUp)
-            {
-                nearestBottle.PickUp(this);
-                myBottle = nearestBottle;
-                myDrinkObject = nearestBottleObject;
-                string myDrinkType = myDrinkObject.name;
-                if (myDrinkType == "Vodka")
-                {
-                    Vodka myType = myDrinkObject.GetComponent<Vodka>();
-
-                }
-                /// MORE DRINK TYPES HERE
-            }
-        }
-
-        // DRINK LOGIC
-        if (myDrinkObject != null & Input.GetButton(_drink))
-        {
-            Drink(myBottle);
-        }
-
-        if (myBottle != null)
-        {
-            if (myBottle.pickedUp && myBottle.empty)
-            {
-                CalculateThrowVec(myBottle);
-                SetTrajectory(myBottle);
-                if (Input.GetButtonDown(_throw))
-                {
-                    myBottle.Throw();
-                    RemoveTrajectory(myBottle);
-                    myDrinkObject = null;
-                    myBottle = null;
-                }
-            }
-        }
-        
-
-        // handle death here: didn't add it here since wasn't sure if we wanna implement death once we do rounds
-    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -344,53 +349,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //         if (!collider.gameObject.GetComponent<Bottle>().pickedUp1 && !collider.gameObject.GetComponent<Bottle>().pickedUp2)
-    //         {
-    //          //   Debug.Log("bottle trigger Player");
-    //             TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
-    //             if (health <= 0)
-    //             {
-    //              //   Debug.Log("health <= 0");
-
-    //                 if (gameObject.tag == "Player1")
-    //                 {
-    //                     GameManager.Instance.UpdateGameState(GameState.Player2WinsRound);
-    //                 }
-    //                 else if (gameObject.tag == "Player2")   // will need to change this to reflect second controller
-    //                 {
-    //                     GameManager.Instance.UpdateGameState(GameState.Player1WinsRound);
-    //                 }
-
-    //                 health = Maxhealth; // reset the health of the player
-    //                 alive = false; // where death occurs, likely wanna play death animation as well
-    //             }
-    //         }
-    //         Debug.Log(collider.GetType());
-    //         if (collider.GetType() == typeof(CircleCollider2D))
-    //         {
-    //             // then deal with pickup
-    //             Debug.Log("collided with circle: pickup logic");
-    //             nearestBottleObject = collider.gameObject;
-    //         }
-    //         else
-    //         {
-    //             //if ((gameObject.tag == "Player1" && !collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
-    //             //    (gameObject.tag == "Player2" && !collider.gameObject.GetComponent<Bottle>().pickedUp2))
-    //             //deal with damage
-    //             if (!collider.gameObject.GetComponent<Bottle>().pickedUp)
-    //             {
-    //                 Debug.Log("bottle trigger Player");
-    //                 TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
-    //                 if (health <= 0)
-    //                 {
-    //                     alive = false; // where death occurs, likely wanna play death animation as well
-    //                 }
-    //             }
-    //         }
-            
-            
-    //     }
-    // }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -421,7 +379,7 @@ public class Player : MonoBehaviour
     // makes it so that 
     void HandleSpill(float initialDirX, float initialDirY, float speedBoost)
     {
-        Debug.Log("Handling Spill");
+        //Debug.Log("Handling Spill");
         // make faster, and freeze directional vector
         var dirX = 0f;
         var dirY = 0f;
@@ -438,6 +396,7 @@ public class Player : MonoBehaviour
             dirY = Input.GetAxisRaw("Vertical2");
         }
 
+        // keep dirX and dirY
         prevDirX = ((initialDirX * 0.99f) + (dirX * 0.01f));
         prevDirY = ((initialDirY * 0.99f) + (dirY * 0.01f));
 
@@ -449,11 +408,7 @@ public class Player : MonoBehaviour
     {
         _bubbleController.TriggerBubbles();
     }
-    // public void Drink(Bottle bottle)
-    // {
-    //     bottle.empty = true;
-    //     bottle.spriteRenderer.sprite = bottle.emptyBottle;
-    // }
+    
 
     public void SetTrajectory(Bottle bottle)
     {
@@ -478,6 +433,40 @@ public class Player : MonoBehaviour
         Vector2 joystickDir = new Vector2(Input.GetAxis(_Rhorizontal), -1 * Input.GetAxis(_Rvertical));
         //Vector2 testDir = new Vector2(1, 1);
         bottle._throwVector = joystickDir.normalized * bottle._throwPower;
+    }
+
+    public void Drink(Bottle bottle)
+    {
+        if (_myTypeBeer)
+        {
+            myBeer.Drink(gameObject);
+        }
+        else if (_myTypeTequila)
+        {
+            myTequila.Drink(gameObject);
+        }
+        else if (_myTypeVodka)
+        {
+            myVodka.Drink(gameObject);
+        }
+        bottle.empty = true;
+        drunkMeter.setDrunk(drunkness + 20f);
+        drunkness += 20f;
+        TriggerBubbles();
+        bottle.spriteRenderer.sprite = bottle.emptyBottle;
+
+
+
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+    }
+
+    private void GameManager_OnGameStateChanged(GameState state)
+    {
+        //fillA.SetActive(state == GameState.StartGame);
     }
 
 

@@ -28,6 +28,7 @@ public class Bottle : MonoBehaviour
     public bool empty;
     public bool pickedUp;
     public Player holdingPlayer;
+    public bool toRight;
 
 
     // Start is called before the first frame update
@@ -41,6 +42,8 @@ public class Bottle : MonoBehaviour
         bottleDamage = 30f;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
+        toRight = true;
+        
 
         
     }
@@ -60,13 +63,33 @@ public class Bottle : MonoBehaviour
 
         if (pickedUp)
         {
-            transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
+            if (holdingPlayer.rightDirX < 0)
+            {
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.1f;
+                toRight = false;
+            }
+            else if (holdingPlayer.rightDirX > 0)
+            {
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
+                toRight = true;
+            }
+            else if (toRight)
+            {
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
+            }
+            else
+            {
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.1f;
+            }
+            
         }
 
         //if (!pickedUp && empty && _rb.totalForce == new Vector2(0, 0)){
         //    BottleDropped();
             
         //}
+
+
         
 
         

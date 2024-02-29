@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float prevDirX = 0f;
     public float prevDirY = 0f;
 
+
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] public GameObject fillA;
@@ -39,9 +40,9 @@ public class Player : MonoBehaviour
     private BubbleController _bubbleController;
 
     //my branch starts here
-    float dirX;
-    float dirY;
-    float rightDirX;
+    public float dirX;
+    public float dirY;
+    public float rightDirX;
 
     public bool readyToThrow;
     public Bottle myBottle;

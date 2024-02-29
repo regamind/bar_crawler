@@ -161,105 +161,107 @@ public class Player : MonoBehaviour
 
 
 
-        if (freeze == false && slip == true)
-        {
-            HandleSpill(prevDirX, prevDirY, 10f);
-        }
-
-
-        if (!((dirX == 0f) && (dirY == 0f)))
-        {
-            // bring down _horizontal variables
-            _animator.SetFloat("XInput", dirX);
-            _animator.SetFloat("YInput", dirY);
-        }
-
-        if (rb.velocity != Vector2.zero)
-        {
-            _animator.SetBool("Walk", true);
-        }
         else
         {
-            _animator.SetBool("Walk", false);
-        }
-
-        if (drunkness > 50f)
-        {
-            _animator.SetBool("Drunk", true);
-        }
-        else
-        {
-            _animator.SetBool("Drunk", false);
-        }
-
-        PlayerSoberUp();
-        checkSloshed();
-        drunkMeter.setDrunk(drunkness);
-
-        if (slip == false)
-        {
-            // same thing -> bring down dirX (make sure dirX and dirY are assigned beforehand)
-            prevDirX = dirX;
-            prevDirY = dirY;
-        }
-
-        // PICKUP LOGIC
-        if (nearestBottleObject != null && Input.GetButtonDown(_interact))
-        {
-            nearestBottle = nearestBottleObject.GetComponent<Bottle>();
-            if (nearestBottle != null && !nearestBottle.pickedUp)
+            if (freeze == false && slip == true)
             {
-                nearestBottle.PickUp(this);
-                myBottle = nearestBottle;
-                myDrinkObject = nearestBottleObject;
-                string myDrinkType = myDrinkObject.name;
-                if (myDrinkType == "Vodka")
-                {
-                    _myTypeVodka = true;
-
-                }
-                else if (myDrinkType == "Beer")
-                {
-                    _myTypeBeer = true;
-                }
-                else if (myDrinkType == "Tequila")
-                {
-                    _myTypeTequila = true;
-                }
-                /// MORE DRINK TYPES HERE
+                HandleSpill(prevDirX, prevDirY, 10f);
             }
-        }
 
-        // DRINK LOGIC
-        if (myDrinkObject != null & Input.GetButtonDown(_drink))
-        {
-            Drink(myBottle);
-        }
 
-        //THROW LOGIC
-        if (myBottle != null)
-        {
-            if (myBottle.pickedUp && myBottle.empty)
+            if (!((dirX == 0f) && (dirY == 0f)))
             {
-                CalculateThrowVec(myBottle);
-                SetTrajectory(myBottle);
-                if (Input.GetButtonDown(_throw))
+                // bring down _horizontal variables
+                _animator.SetFloat("XInput", dirX);
+                _animator.SetFloat("YInput", dirY);
+            }
+
+            if (rb.velocity != Vector2.zero)
+            {
+                _animator.SetBool("Walk", true);
+            }
+            else
+            {
+                _animator.SetBool("Walk", false);
+            }
+
+            if (drunkness > 50f)
+            {
+                _animator.SetBool("Drunk", true);
+            }
+            else
+            {
+                _animator.SetBool("Drunk", false);
+            }
+
+            PlayerSoberUp();
+            checkSloshed();
+            drunkMeter.setDrunk(drunkness);
+
+            if (slip == false)
+            {
+                // same thing -> bring down dirX (make sure dirX and dirY are assigned beforehand)
+                prevDirX = dirX;
+                prevDirY = dirY;
+            }
+
+            // PICKUP LOGIC
+            if (nearestBottleObject != null && Input.GetButtonDown(_interact))
+            {
+                nearestBottle = nearestBottleObject.GetComponent<Bottle>();
+                if (nearestBottle != null && !nearestBottle.pickedUp)
                 {
-                    if (myBottle._throwVector == new Vector3(0, 0, 0))
+                    nearestBottle.PickUp(this);
+                    myBottle = nearestBottle;
+                    myDrinkObject = nearestBottleObject;
+                    string myDrinkType = myDrinkObject.name;
+                    if (myDrinkType == "Vodka")
                     {
-                        myBottle.BottleDropped();
+                        _myTypeVodka = true;
+
                     }
-                    myBottle.Throw();
-                    RemoveTrajectory(myBottle);
-                    myDrinkObject = null;
-                    myBottle = null;
-                    _myTypeBeer = false;
-                    _myTypeTequila = false;
-                    _myTypeVodka = false;
+                    else if (myDrinkType == "Beer")
+                    {
+                        _myTypeBeer = true;
+                    }
+                    else if (myDrinkType == "Tequila")
+                    {
+                        _myTypeTequila = true;
+                    }
+                    /// MORE DRINK TYPES HERE
+                }
+            }
+
+            // DRINK LOGIC
+            if (myDrinkObject != null & Input.GetButtonDown(_drink))
+            {
+                Drink(myBottle);
+            }
+
+            //THROW LOGIC
+            if (myBottle != null)
+            {
+                if (myBottle.pickedUp && myBottle.empty)
+                {
+                    CalculateThrowVec(myBottle);
+                    SetTrajectory(myBottle);
+                    if (Input.GetButtonDown(_throw))
+                    {
+                        if (myBottle._throwVector == new Vector3(0, 0, 0))
+                        {
+                            myBottle.BottleDropped();
+                        }
+                        myBottle.Throw();
+                        RemoveTrajectory(myBottle);
+                        myDrinkObject = null;
+                        myBottle = null;
+                        _myTypeBeer = false;
+                        _myTypeTequila = false;
+                        _myTypeVodka = false;
+                    }
                 }
             }
         }
-
         
 
         

@@ -236,7 +236,7 @@ public class Player : MonoBehaviour
             }
 
             // DRINK LOGIC
-            if (myDrinkObject != null & Input.GetButtonDown(_drink))
+            if (myDrinkObject != null & Input.GetButtonDown(_drink) & !myBottle.empty)
             {
                 Drink(myBottle);
             }

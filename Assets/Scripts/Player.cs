@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public bool alive = true;
     public bool freeze = false;
     public bool slip = false;
+    public bool holding = false;
 
     public float prevDirX = 0f;
     public float prevDirY = 0f;
@@ -207,12 +208,13 @@ public class Player : MonoBehaviour
             }
 
             // PICKUP LOGIC
-            if (nearestBottleObject != null && Input.GetButtonDown(_interact))
+            if (nearestBottleObject != null && Input.GetButtonDown(_interact) && !holding)
             {
                 nearestBottle = nearestBottleObject.GetComponent<Bottle>();
                 if (nearestBottle != null && !nearestBottle.pickedUp)
                 {
                     nearestBottle.PickUp(this);
+                    holding = true;
                     myBottle = nearestBottle;
                     myDrinkObject = nearestBottleObject;
                     string myDrinkType = myDrinkObject.name;
@@ -254,8 +256,8 @@ public class Player : MonoBehaviour
                         }
                         myBottle.Throw();
                         RemoveTrajectory(myBottle);
+                        holding = false;
                         myDrinkObject = null;
-                        myBottle = null;
                         _myTypeBeer = false;
                         _myTypeTequila = false;
                         _myTypeVodka = false;

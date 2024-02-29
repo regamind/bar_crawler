@@ -132,6 +132,8 @@ public class Bottle : MonoBehaviour
     public void BottleDropped()
     {
         spriteRenderer.sprite = brokenBottle;
+        bottleDamage = 15f;
+
     }
     // picked up false
     // empty false

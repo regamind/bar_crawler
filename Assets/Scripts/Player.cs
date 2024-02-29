@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
             if (nearestBottleObject != null && Input.GetButtonDown(_interact) && !holding)
             {
                 nearestBottle = nearestBottleObject.GetComponent<Bottle>();
-                if (nearestBottle != null && !nearestBottle.pickedUp)
+                if (nearestBottle != null && !nearestBottle.pickedUp && !nearestBottle.empty)
                 {
                     nearestBottle.PickUp(this);
                     holding = true;
@@ -313,9 +313,16 @@ public class Player : MonoBehaviour
         {
             if (collider.GetType() == typeof(CircleCollider2D))
             {
-                // then deal with pickup
-                //Debug.Log("collided with circle: pickup logic");
                 nearestBottleObject = collider.gameObject;
+                Bottle potentialBottle = nearestBottleObject.GetComponent<Bottle>();
+                if (potentialBottle)
+                {
+                    if (potentialBottle.empty)
+                    {
+
+                        nearestBottleObject = null;
+                    }
+                }
             }
             else
             {

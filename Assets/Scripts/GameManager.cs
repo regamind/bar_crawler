@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
 private void HandlePlayer2Victory()
     {
       //  Debug.Log("state: player 2 victory, next scene called");
-        StateNameTracker.victoriousPlayer = "Player 2 wins!";
+        StateNameTracker.victoriousPlayer = "Player 2 wins";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
         
@@ -169,7 +169,7 @@ private void HandlePlayer2Victory()
     private void HandlePlayer1Victory()
     {
      //   Debug.Log("state: player 2 victory, next scene called");
-        StateNameTracker.victoriousPlayer = "Player 1 wins!";
+        StateNameTracker.victoriousPlayer = "Player 1 wins";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
         

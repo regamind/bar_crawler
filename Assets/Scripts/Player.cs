@@ -314,15 +314,6 @@ public class Player : MonoBehaviour
             if (collider.GetType() == typeof(CircleCollider2D))
             {
                 nearestBottleObject = collider.gameObject;
-                Bottle potentialBottle = nearestBottleObject.GetComponent<Bottle>();
-                if (potentialBottle)
-                {
-                    if (potentialBottle.empty)
-                    {
-
-                        nearestBottleObject = null;
-                    }
-                }
             }
             else
             {

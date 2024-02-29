@@ -238,7 +238,11 @@ public class Player : MonoBehaviour
             // DRINK LOGIC
             if (myDrinkObject != null & Input.GetButtonDown(_drink))
             {
-                Drink(myBottle);
+                if (!myBottle.empty)
+                {
+                    Drink(myBottle);
+                }
+                
             }
 
             //THROW LOGIC

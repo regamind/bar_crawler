@@ -2860,8 +2860,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39606beef1f642d4ac7c68e2641a3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  _lowHealthFlashColor: {r: 0, g: 0, b: 0, a: 1}
   _flashTime: 0.25
+  _lowHealthFlashInterval: 0.5
+  lowHealthThreshold: 30
 --- !u!114 &580286158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3945,7 +3948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09411766, g: 0.5254902, b: 0.15294118, a: 1}
+  m_Color: {r: 0.8901961, g: 0.9137255, b: 0.047058824, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4816,8 +4819,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39606beef1f642d4ac7c68e2641a3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  _lowHealthFlashColor: {r: 0, g: 0, b: 0, a: 1}
   _flashTime: 0.25
+  _lowHealthFlashInterval: 0.5
+  lowHealthThreshold: 30
 --- !u!114 &1531861832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15845,7 +15851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.42745098, b: 0.6666667, a: 1}
+  m_Color: {r: 0.111437805, g: 0.49056602, b: 0.04396581, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -16192,7 +16198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.078431375, g: 0.5254902, b: 0.14509805, a: 1}
+  m_Color: {r: 0.89025426, g: 0.9150943, b: 0.047481313, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

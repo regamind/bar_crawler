@@ -156,6 +156,15 @@ public class Player : MonoBehaviour
         //else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
         //    _spriteRenderer.flipX = true;
 
+        if (health < _damageFlash.lowHealthThreshold)
+        {
+            _damageFlash.StartLowHealthFlash();
+        }
+        else
+        {
+            _damageFlash.StopLowHealthFlash();
+        }
+
         if (freeze == true)
         {
             StartCoroutine(freezePlayer());
@@ -365,6 +374,14 @@ public class Player : MonoBehaviour
                     alive = false; // where death occurs, likely wanna play death animation as well
                 }
             }
+        }
+    }
+
+    void LowHealthFlasher()
+    {
+        if (health < _damageFlash.lowHealthThreshold)
+        {
+            _damageFlash.StartLowHealthFlash();
         }
     }
 

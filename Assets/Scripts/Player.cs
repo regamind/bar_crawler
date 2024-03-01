@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
@@ -131,9 +132,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //var dirX = 0f;
-        //var dirY = 0f;
-        //var rightDirX = 0f;
 
         if (!freeze && !slip)
         {
@@ -141,20 +139,30 @@ public class Player : MonoBehaviour
             dirY = Input.GetAxisRaw(_Lvertical);
             rightDirX = Input.GetAxisRaw(_Rhorizontal);
 
-            rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-            //rb.velocity = new Vector2();
+
+            
+            float drunkness_weight = drunkness * 0.004f;
+            float input_weight = 1f - drunkness_weight;
+
+            // Randomness to movement as character gets drunker
+            float drunkenHorizontalOffset = UnityEngine.Random.Range(-1f, 1f);
+            float drunkenVerticalOffset = UnityEngine.Random.Range(-1f, 1f);
+
+
+            if (!((dirX == 0f) && (dirY == 0f)))
+            {
+                float dirXWithDrunkness = (dirX * input_weight) + (drunkenHorizontalOffset * drunkness_weight);
+                float dirYWithDrunkness = (dirY * input_weight) + (drunkenVerticalOffset * drunkness_weight);
+                rb.velocity = new Vector2(movementSpeedHorizontal * dirXWithDrunkness, movementSpeedVertical * dirYWithDrunkness);
+            }
+            else
+            {
+                rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
+            }
+
+            // previous movement: rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
         }
-        //dirX = Input.GetAxisRaw(_Lhorizontal);
-        //dirY = Input.GetAxisRaw(_Lvertical);
-        //rightDirX = Input.GetAxisRaw(_Rhorizontal);
 
-
-
-        //rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
-        //if (rightDirX > 0 || (rightDirX == 0 && dirX > 0))
-        //    _spriteRenderer.flipX = false;
-        //else if (rightDirX < 0 || (rightDirX == 0 && dirX < 0))
-        //    _spriteRenderer.flipX = true;
 
         if (health < _damageFlash.lowHealthThreshold)
         {
@@ -279,9 +287,15 @@ public class Player : MonoBehaviour
             }
         }
         
-
         
 
+    }
+
+    private void DrunkControlEffects()
+    {
+        // use the slip logic to do this, but on a lower scale w no speed bumps
+        
+        return;
     }
 
     IEnumerator freezePlayer()
@@ -392,25 +406,14 @@ public class Player : MonoBehaviour
         healthBar.setHealth(health);
     }
 
-    // makes it so that 
+    // makes it so that player is slippery (their input takes longer to have an effect and harder to change direction) and faster
     void HandleSpill(float initialDirX, float initialDirY, float speedBoost)
     {
-        //Debug.Log("Handling Spill");
-        // make faster, and freeze directional vector
         var dirX = 0f;
         var dirY = 0f;
-        
 
-        if (gameObject.tag == "Player1")
-        {
-            dirX = Input.GetAxisRaw("Horizontal1");
-            dirY = Input.GetAxisRaw("Vertical1");
-        }
-        else if (gameObject.tag == "Player2")
-        {
-            dirX = Input.GetAxisRaw("Horizontal2");
-            dirY = Input.GetAxisRaw("Vertical2");
-        }
+        dirX = Input.GetAxisRaw(_Lhorizontal);
+        dirY = Input.GetAxisRaw(_Lvertical);
 
         // keep dirX and dirY
         prevDirX = ((initialDirX * 0.99f) + (dirX * 0.01f));

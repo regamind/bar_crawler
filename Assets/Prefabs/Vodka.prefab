@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -733830095, guid: be98b60deb53748b68f461e3bc895ff0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 535099ec790594627ba2d844605c8f72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,12 +134,13 @@ MonoBehaviour:
   _throwVector: {x: 0, y: 0, z: 0}
   bottleDamage: 0
   _throwPower: 0
-  emptyBottle: {fileID: 21300000, guid: f4e270a76a8e549098ec0d1ff97c2109, type: 3}
+  emptyBottle: {fileID: 21300000, guid: 1c41e8701173f4e298bb977ac7ca2400, type: 3}
   spriteRenderer: {fileID: 0}
   brokenBottle: {fileID: 21300000, guid: 605e466e7677f4d13af2d0fc2af6c01e, type: 3}
   empty: 0
   pickedUp: 0
   holdingPlayer: {fileID: 0}
+  toRight: 0
 --- !u!70 &2347946754407538528
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Beer : MonoBehaviour
 
     public virtual void Drink(GameObject playerObject)
     {
+        Debug.Log("beer worked?");
         damageBuff.Effect(playerObject);
         speedBuff.Effect(playerObject);
     }

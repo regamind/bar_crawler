@@ -11,6 +11,7 @@ public class DamageBuff : Drink_Effects
 
     public override void Effect(GameObject target)
     {
+        Debug.Log("Do I ever have a damage buff?");
         Player player = target.GetComponent<Player>();
         Bottle _bottle = player.myBottle;
         _bottle.bottleDamage *= damageBuff;

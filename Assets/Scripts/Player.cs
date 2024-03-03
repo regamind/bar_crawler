@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
 
     private BubbleController _bubbleController;
 
+    private TrailRenderer _trailRenderer;
+
     private AudioSource audioSource;
     public AudioClip soundOof;
     public AudioClip soundDrink1;
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour
         movementSpeedHorizontal = 13f;
         movementSpeedVertical = 10f;
 
+
         health = Maxhealth;
         healthBar.SetMaxHealth(Maxhealth);
 
@@ -110,6 +113,10 @@ public class Player : MonoBehaviour
         _damageFlash = GetComponent<DamageFlash>();
 
         _bubbleController = GetComponent<BubbleController>();
+
+        _trailRenderer = GetComponent<TrailRenderer>();
+
+        _trailRenderer.enabled = false;
 
         if (gameObject.tag == "Player1")
         {
@@ -244,16 +251,17 @@ public class Player : MonoBehaviour
                     myBottle = nearestBottle;
                     myDrinkObject = nearestBottleObject;
                     string myDrinkType = myDrinkObject.name;
-                    if (myDrinkType == "Vodka")
+                    if (myDrinkType == "Vodka(Clone)")
                     {
                         _myTypeVodka = true;
 
+
                     }
-                    else if (myDrinkType == "Beer")
+                    else if (myDrinkType == "BottlePrefab(Clone)")
                     {
                         _myTypeBeer = true;
                     }
-                    else if (myDrinkType == "Tequila")
+                    else if (myDrinkType == "Tequila(Clone)")
                     {
                         _myTypeTequila = true;
                     }
@@ -300,12 +308,17 @@ public class Player : MonoBehaviour
 
     }
 
-    private void DrunkControlEffects()
+    public void EnableTrail()
     {
-        // use the slip logic to do this, but on a lower scale w no speed bumps
-        
-        return;
+        _trailRenderer.enabled = true;
     }
+
+    // Function to disable the trail renderer
+    public void DisableTrail()
+    {
+        _trailRenderer.enabled = false;
+    }
+
 
     IEnumerator freezePlayer()
     {       
@@ -479,14 +492,19 @@ public class Player : MonoBehaviour
         if (_myTypeBeer)
         {
             myBeer.Drink(gameObject);
+            Debug.Log("Does it recognize beer?");
         }
         else if (_myTypeTequila)
         {
+            Debug.Log($"is my tequila an actual game object? {myTequila}");
             myTequila.Drink(gameObject);
+            Debug.Log("Does it recognize tequila?");
         }
         else if (_myTypeVodka)
         {
+            Debug.Log($"is my vodka an actual game object? {myVodka}");
             myVodka.Drink(gameObject);
+            Debug.Log("Does it recognize vodka?");
         }
         bottle.empty = true;
         drunkMeter.setDrunk(drunkness + 20f);
@@ -496,11 +514,18 @@ public class Player : MonoBehaviour
 
         int randy = Random.Range(0, 3);
         if (randy == 0)
+        {
             audioSource.PlayOneShot(soundDrink1, 1.0f);
+        }
         else if (randy == 1)
+        {
+
             audioSource.PlayOneShot(soundDrink2, 1.0f);
+        }
         else
+        {
             audioSource.PlayOneShot(soundDrink3, 1.0f);
+        }
     }
 
 

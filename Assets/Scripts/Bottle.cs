@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine.UI;
-using System;
+// using System;
 
 public class Bottle : MonoBehaviour
 {
@@ -30,6 +30,10 @@ public class Bottle : MonoBehaviour
     public Player holdingPlayer;
     public bool toRight;
 
+    private AudioSource audioSource;
+    public AudioClip soundShatter1;
+    public AudioClip soundShatter2;
+    public AudioClip soundShatter3;
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +47,8 @@ public class Bottle : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
         toRight = true;
-        
 
+        audioSource = GetComponent<AudioSource>();
         
     }
 
@@ -134,6 +138,14 @@ public class Bottle : MonoBehaviour
         spriteRenderer.sprite = brokenBottle;
         bottleDamage = 15f;
 
+        int randy = Random.Range(0, 3);
+        Debug.Log(randy);
+        if (randy == 0)
+            audioSource.PlayOneShot(soundShatter1, 1.0f);
+        else if (randy == 1)
+            audioSource.PlayOneShot(soundShatter2, 1.0f);
+        else
+            audioSource.PlayOneShot(soundShatter3, 1.0f);
     }
     // picked up false
     // empty false

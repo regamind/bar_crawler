@@ -1,4 +1,4 @@
-using System;
+// using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -40,6 +40,15 @@ public class Player : MonoBehaviour
     private DamageFlash _damageFlash;
 
     private BubbleController _bubbleController;
+
+    private AudioSource audioSource;
+    public AudioClip soundOof;
+    public AudioClip soundDrink1;
+    public AudioClip soundDrink2;
+    public AudioClip soundDrink3;
+    public AudioClip soundVomit1;
+    public AudioClip soundVomit2;
+    public AudioClip soundVomit3;
 
     //my branch starts here
     public float dirX;
@@ -125,7 +134,7 @@ public class Player : MonoBehaviour
         }
 
 
-
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -314,6 +323,13 @@ public class Player : MonoBehaviour
             freeze = true;
             drunkness = 20f;
             //drunkness = MinDrunk;
+            int randy = Random.Range(0, 3);
+            if (randy == 0)
+                audioSource.PlayOneShot(soundVomit1, 1.0f);
+            else if (randy == 1)
+                audioSource.PlayOneShot(soundVomit2, 1.0f);
+            else
+                audioSource.PlayOneShot(soundVomit3, 1.0f);
         }
     }
 
@@ -404,6 +420,7 @@ public class Player : MonoBehaviour
         health -= damage;
         _damageFlash.CallDamageFlash();
         healthBar.setHealth(health);
+        audioSource.PlayOneShot(soundOof, 1.0f);
     }
 
     // makes it so that player is slippery (their input takes longer to have an effect and harder to change direction) and faster
@@ -477,8 +494,13 @@ public class Player : MonoBehaviour
         TriggerBubbles();
         bottle.spriteRenderer.sprite = bottle.emptyBottle;
 
-
-
+        int randy = Random.Range(0, 3);
+        if (randy == 0)
+            audioSource.PlayOneShot(soundDrink1, 1.0f);
+        else if (randy == 1)
+            audioSource.PlayOneShot(soundDrink2, 1.0f);
+        else
+            audioSource.PlayOneShot(soundDrink3, 1.0f);
     }
 
 

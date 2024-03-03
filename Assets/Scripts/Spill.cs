@@ -7,6 +7,9 @@ public class Spill : MonoBehaviour
     private Player[] _players;
     private Player _player1;
     private Player _player2;
+
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class Spill : MonoBehaviour
             _player2 = _players[0];
         }
 
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +53,8 @@ public class Spill : MonoBehaviour
                 //_player2.movementSpeedVertical = 17f;
                 _player2.slip = true;
             }
+
+            audioSource.Play();
         }
     }
 

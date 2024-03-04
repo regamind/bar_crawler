@@ -2005,7 +2005,7 @@ GameObject:
   - component: {fileID: 385061020}
   - component: {fileID: 385061022}
   - component: {fileID: 385061021}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PunchCollider
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -2058,7 +2058,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 55
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2339,7 +2339,7 @@ GameObject:
   - component: {fileID: 496817961}
   - component: {fileID: 496817963}
   - component: {fileID: 496817962}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PunchCollider
   m_TagString: Player2
   m_Icon: {fileID: 0}
@@ -2392,7 +2392,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 55
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

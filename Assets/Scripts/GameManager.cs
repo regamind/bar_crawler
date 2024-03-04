@@ -136,6 +136,9 @@ public class GameManager : MonoBehaviour
         HealthBar1.setHealth(100f);
         HealthBar2.setHealth(100f);
 
+        player1.health = player1.Maxhealth;
+        player2.health = player2.Maxhealth;
+
         DrunkMeter1.setDrunk(0f);
         DrunkMeter2.setDrunk(0f);
 
@@ -161,6 +164,9 @@ public class GameManager : MonoBehaviour
        //     Debug.Log("reset table");
             
         }
+
+        player1.holding = false;
+        player2.holding = false;
 
 
         Instance.UpdateGameState(GameState.IdleState);

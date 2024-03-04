@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b7ad55318954b26a0e32a933ff0acc, type: 3}
   m_Name: BeerDamage
   m_EditorClassIdentifier: 
-  damageBuff: 1.2
+  damageBuff: 0.8

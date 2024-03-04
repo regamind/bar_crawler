@@ -183,8 +183,6 @@ public class Player : MonoBehaviour
 
             // previous movement: rb.velocity = new Vector2(movementSpeedHorizontal * dirX, movementSpeedVertical * dirY);
         }
-
-
         if (health < _damageFlash.lowHealthThreshold)
         {
             _damageFlash.StartLowHealthFlash();
@@ -194,16 +192,19 @@ public class Player : MonoBehaviour
             _damageFlash.StopLowHealthFlash();
         }
 
-        if (freeze == true)
-        {
-            StartCoroutine(freezePlayer());
-        }
-
         if (stopBetweenRounds == true)
         {
             StartCoroutine(freezeBetweenRounds());
         }
 
+
+
+        if (freeze == true)
+        {
+            StartCoroutine(freezePlayer());
+        }
+
+        // do not put anything between the above if and below else or players will be able to pick up, drink, and throw while frozen
 
 
         else
@@ -466,7 +467,8 @@ public class Player : MonoBehaviour
 
         if (damage > bottle.baseBottleDamage)
         {
-            CriticalDamageText(damage);
+            // other option is (damage * -1).toString()
+            ShowText("CRIT!", Color.red);
         }
     }
 
@@ -566,11 +568,6 @@ public class Player : MonoBehaviour
     private void GameManager_OnGameStateChanged(GameState state)
     {
         //fillA.SetActive(state == GameState.StartGame);
-    }
-
-    public void CriticalDamageText(float damage)
-    {
-        criticalDamage.TriggerDamageText("CRIT!", Color.red);
     }
 
     public void ShowText(string str, Color color)

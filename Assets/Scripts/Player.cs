@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public bool freeze = false;
     public bool slip = false;
     public bool holding = false;
+    public bool stopBetweenRounds = false;
 
     public float prevDirX = 0f;
     public float prevDirY = 0f;
@@ -194,6 +195,11 @@ public class Player : MonoBehaviour
             StartCoroutine(freezePlayer());
         }
 
+        if (stopBetweenRounds == true)
+        {
+            StartCoroutine(freezeBetweenRounds());
+        }
+
 
 
         else
@@ -308,6 +314,16 @@ public class Player : MonoBehaviour
 
     }
 
+    IEnumerator freezeBetweenRounds()
+    {
+        rb.velocity = new Vector2(0, 0);
+        _animator.SetBool("Throwup", true);
+        yield return new WaitForSeconds(4);
+        _animator.SetBool("Throwup", false);
+        stopBetweenRounds = false;
+        
+    }
+
     public void EnableTrail()
     {
         _trailRenderer.enabled = true;
@@ -327,6 +343,14 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2);
         freeze = false;
         _animator.SetBool("Throwup", false);
+    }
+
+    public void StopBetweenRounds()
+    {
+        stopBetweenRounds = true;
+
+        Debug.Log("Stop in Player");
+       // rb.velocity = new Vector2(0, 0);
     }
 
     private void checkSloshed()

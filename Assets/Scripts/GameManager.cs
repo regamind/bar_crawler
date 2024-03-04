@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +25,8 @@ public class GameManager : MonoBehaviour
     public Player player1;
     public Player player2;
 
-    
+    public TextMeshProUGUI roundWinner;
+
 
 
     public static GameManager Instance;
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateGameState(GameState.StartGame);
+        //roundWinner.gameObject.SetActive(false);
        
 
         //SceneManager.LoadScene(1);
@@ -113,9 +116,23 @@ public class GameManager : MonoBehaviour
       //  Debug.Log("am in IDLE");
     }
 
+    private void freezePlayers()
+    {
+        Debug.Log("freeze in GM");
+        player1.StopBetweenRounds();
+        player2.StopBetweenRounds();
+        //yield return new WaitForSeconds(4);
+
+    }
+
 
     private void HandleResetPositions()
     {
+
+        freezePlayers();
+
+
+
         HealthBar1.setHealth(100f);
         HealthBar2.setHealth(100f);
 
@@ -176,10 +193,30 @@ private void HandlePlayer2Victory()
         
     }
 
+
+    IEnumerator ShowMessage(string message, float delay)
+    {
+        roundWinner.text = message;
+        roundWinner.gameObject.SetActive(true);
+        //debug.Log("showMessage called");
+        yield return new WaitForSeconds(delay);
+        roundWinner.gameObject.SetActive(false);
+
+        roundWinner.text = "Next Round Begins!";
+        roundWinner.gameObject.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        roundWinner.gameObject.SetActive(false);
+
+
+    }
+
+
+    
+
     private void HandlePlayer1WinsRound()
 
     {
-       // Debug.Log("handle 1 wins round");
+        // Debug.Log("handle 1 wins round");
 
         if (P1Wins == 2)
         {
@@ -196,12 +233,20 @@ private void HandlePlayer2Victory()
             fill1A.gameObject.SetActive(true);
         }
         P1Wins += 1;
+
+
+        StartCoroutine(ShowMessage("Player 1 wins round", 2));
+
+       
+
+
         Instance.UpdateGameState(GameState.ResetPositions);
     }
 
     private void HandlePlayer2WinsRound()
+
     {
-      //  Debug.Log("handle 2 wins round");
+        //  Debug.Log("handle 2 wins round");
 
         if (P2Wins == 2)
         {
@@ -219,6 +264,10 @@ private void HandlePlayer2Victory()
         }
 
         P2Wins += 1;
+
+
+        StartCoroutine(ShowMessage("Player 2 wins round", 2));
+
         Instance.UpdateGameState(GameState.ResetPositions);
     }
 

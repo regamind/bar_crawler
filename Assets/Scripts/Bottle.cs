@@ -43,7 +43,7 @@ public class Bottle : MonoBehaviour
         onTable = true;
         pickedUp = false;
         _throwPower = 1000f;
-        bottleDamage = 30f;
+        bottleDamage = 15f;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
         toRight = true;
@@ -136,7 +136,7 @@ public class Bottle : MonoBehaviour
     public void BottleDropped()
     {
         spriteRenderer.sprite = brokenBottle;
-        bottleDamage = 15f;
+        bottleDamage = 10f;
 
         int randy = Random.Range(0, 3);
         Debug.Log(randy);

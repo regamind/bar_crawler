@@ -15,7 +15,7 @@ public class FloatingDamage : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void TriggerDamageText(float damage)
+    public void TriggerDamageText(string textToDisplay, Color color)
     {
 
         // Calculate the offset based on the player's height
@@ -28,9 +28,10 @@ public class FloatingDamage : MonoBehaviour
 
         GameObject floatingText = Instantiate(floatingDamagePrefab, spawnPosition, Quaternion.identity);
         floatingText.transform.parent = transform; // since this script is attached to player, it should set the text's position to a child of player
-        damage *= -1;
+        //damage *= -1;
         // floatingText.GetComponent<TextMesh>().text = damage.ToString();
-        floatingText.GetComponent<TextMesh>().text = "CRIT!";
+        floatingText.GetComponent<TextMesh>().text = textToDisplay;
+        floatingText.GetComponent<TextMesh>().color = color;
 
         floatingText.GetComponent<Animator>().SetTrigger("CriticalHit"); // Trigger the animation
         Destroy(floatingText, floatingText.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); // Destroy the bubble after animation

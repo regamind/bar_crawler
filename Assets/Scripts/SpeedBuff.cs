@@ -30,6 +30,11 @@ public class SpeedBuff : Drink_Effects
             // speed-up effect has trail after it to indicate they're faster
             player.EnableTrail();
         }
+
+        if (speedBuff < 1f)
+        {
+            player.ShowText("Slow!", Color.blue);
+        }
         yield return new WaitForSeconds(4);
         player.movementSpeedHorizontal = player.movementSpeedHorizontal / speedBuff;
         player.movementSpeedVertical = player.movementSpeedVertical / speedBuff;

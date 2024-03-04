@@ -526,19 +526,14 @@ public class Player : MonoBehaviour
         if (_myTypeBeer)
         {
             myBeer.Drink(gameObject);
-            Debug.Log("Does it recognize beer?");
         }
         else if (_myTypeTequila)
         {
-            Debug.Log($"is my tequila an actual game object? {myTequila}");
             myTequila.Drink(gameObject);
-            Debug.Log("Does it recognize tequila?");
         }
         else if (_myTypeVodka)
         {
-            Debug.Log($"is my vodka an actual game object? {myVodka}");
             myVodka.Drink(gameObject);
-            Debug.Log("Does it recognize vodka?");
         }
         bottle.empty = true;
         drunkMeter.setDrunk(drunkness + 20f);
@@ -575,8 +570,12 @@ public class Player : MonoBehaviour
 
     public void CriticalDamageText(float damage)
     {
-        criticalDamage.TriggerDamageText(damage);
+        criticalDamage.TriggerDamageText("CRIT!", Color.red);
     }
 
+    public void ShowText(string str, Color color)
+    {
+        criticalDamage.TriggerDamageText(str, color);
+    }
 
 }

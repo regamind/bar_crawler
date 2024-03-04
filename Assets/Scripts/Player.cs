@@ -22,6 +22,12 @@ public class Player : MonoBehaviour
     public bool slip = false;
     public bool holding = false;
     public bool stopBetweenRounds = false;
+    public bool isPunched = false;
+
+
+    public GameObject nearestEnemyObject;
+    public Player nearestEnemy;
+
 
     public float prevDirX = 0f;
     public float prevDirY = 0f;
@@ -73,6 +79,7 @@ public class Player : MonoBehaviour
     public string _interact;
     private string _drink;
     private string _throw;
+    private string _punch;
 
     [SerializeField] Vodka myVodka;
     [SerializeField] Tequila myTequila;
@@ -132,6 +139,7 @@ public class Player : MonoBehaviour
             _interact = "Interact1";
             _drink = "Drink1";
             _throw = "rBumper1";
+            _punch = "Punch1";
 
         }
         else if (gameObject.tag == "Player2")
@@ -143,6 +151,7 @@ public class Player : MonoBehaviour
             _interact = "Interact2";
             _drink = "Drink2";
             _throw = "rBumper2";
+            _punch = "Punch2";
         }
 
 
@@ -194,15 +203,20 @@ public class Player : MonoBehaviour
 
         if (stopBetweenRounds == true)
         {
-            Debug.Log($"When Player can't pick up, does this repeat? what player {gameObject.tag}");
+           // Debug.Log($"When Player can't pick up, does this repeat? what player {gameObject.tag}");
             StartCoroutine(freezeBetweenRounds());
+        }
+
+        if (isPunched == true)
+        {
+            StartCoroutine(PunchStunned());
         }
 
 
 
         if (freeze == true)
         {
-            Debug.Log($"assuming it's not this, but does this repeat? {gameObject.tag}");
+           // Debug.Log($"assuming it's not this, but does this repeat? {gameObject.tag}");
             StartCoroutine(freezePlayer());
         }
 
@@ -282,6 +296,26 @@ public class Player : MonoBehaviour
                 }
             }
 
+            if (Input.GetButtonDown(_punch))
+            {
+                Debug.Log("Punch input");
+            }
+
+            //PUNCH LOGIC
+            if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding)  
+            {
+
+              //  Debug.Log(nearestEnemyObject);
+                nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
+              //  Debug.Log(nearestEnemy);
+                // might be issues here
+                Debug.Log("punch happened here");
+
+                nearestEnemy.isPunched = true;
+
+
+            }
+
             // DRINK LOGIC
             if (myDrinkObject != null & Input.GetButtonDown(_drink))
             {
@@ -329,6 +363,19 @@ public class Player : MonoBehaviour
         _animator.SetBool("Throwup", false);
         stopBetweenRounds = false;
         
+    }
+
+    IEnumerator PunchStunned()
+    {
+       // string thistag = gameObject.tag;
+       // Debug.Log(thistag);
+       // Debug.Log("punchStun called");
+        rb.velocity = new Vector2(0, 0);
+        //_animator.SetBool("Throwup", true); PUNCH ANIMATION HERE
+        yield return new WaitForSeconds(1.5f);
+        //  _animator.SetBool("Throwup", false);
+        isPunched = false;
+
     }
 
     public void EnableTrail()
@@ -392,7 +439,7 @@ public class Player : MonoBehaviour
         }
         */
         
-
+    
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "bottle")

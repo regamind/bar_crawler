@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             SceneManager.GetActiveScene() == SceneManager.GetSceneByName("GameOverScene"))
         {
            
-            if (Input.GetButtonDown("Interact1"))
+            if (Input.GetButtonDown("Interact1") || (Input.GetButtonDown("Interact2")))
             {
 
 

@@ -194,6 +194,7 @@ public class Player : MonoBehaviour
 
         if (stopBetweenRounds == true)
         {
+            Debug.Log($"When Player can't pick up, does this repeat? what player {gameObject.tag}");
             StartCoroutine(freezeBetweenRounds());
         }
 
@@ -201,6 +202,7 @@ public class Player : MonoBehaviour
 
         if (freeze == true)
         {
+            Debug.Log($"assuming it's not this, but does this repeat? {gameObject.tag}");
             StartCoroutine(freezePlayer());
         }
 
@@ -354,7 +356,6 @@ public class Player : MonoBehaviour
     {
         stopBetweenRounds = true;
 
-        Debug.Log("Stop in Player");
        // rb.velocity = new Vector2(0, 0);
     }
 
@@ -439,7 +440,6 @@ public class Player : MonoBehaviour
             if (!collision.collider.gameObject.GetComponent<Bottle>().pickedUp)
                     
             {
-                Debug.Log("bottle collided in Player");
                 TakeDamage(collision.collider.gameObject.GetComponent<Bottle>());
                 if (health <= 0)
                 {

@@ -2711,6 +2711,7 @@ GameObject:
   - component: {fileID: 580286158}
   - component: {fileID: 580286159}
   - component: {fileID: 580286160}
+  - component: {fileID: 580286161}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -2749,6 +2750,7 @@ MonoBehaviour:
   fillB: {fileID: 971458857}
   healthBar: {fileID: 1368984070}
   drunkMeter: {fileID: 2098107795}
+  criticalDamage: {fileID: 4175642254446513561, guid: 6783b476fd4434cfcbc686e939934641, type: 3}
   soundOof: {fileID: 8300000, guid: 97eeaaea2983a4f76ba369756abca70c, type: 3}
   soundDrink1: {fileID: 8300000, guid: 0a71b059572b14046b77e4c84fe7331e, type: 3}
   soundDrink2: {fileID: 8300000, guid: 58e31d5fc38124149b69bd73d9eefc52, type: 3}
@@ -3124,12 +3126,12 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 999
+  m_SortingOrder: 1
   m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -3143,8 +3145,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.91544116
-        value: 0
+        time: 1
+        value: 0.70690024
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -3156,7 +3158,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.49019608}
+      key0: {r: 0, g: 0.7830189, b: 0.08256722, a: 0.49019608}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -3196,11 +3198,70 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &580286161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580286150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88599a1d81894dfdbb56e3aadd88b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatingDamagePrefab: {fileID: 4175642254446513561, guid: 6783b476fd4434cfcbc686e939934641, type: 3}
+  yOffsetMultiplier: 0.45
+  xOffsetMultiplier: -0.45
 --- !u!4 &608586471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1764645925707643029, guid: 4812684db121f46a18ca23a79bdc5f71, type: 3}
   m_PrefabInstance: {fileID: 4816431373093131970}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639008411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639008413}
+  - component: {fileID: 639008412}
+  m_Layer: 0
+  m_Name: DrinkController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &639008412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639008411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5008ae73a4c4b6a927e7c8521a4206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &639008413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639008411}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.478457, y: 10.130479, z: -10.054386}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &641252998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,6 +5184,7 @@ GameObject:
   - component: {fileID: 1531861832}
   - component: {fileID: 1531861833}
   - component: {fileID: 1531861834}
+  - component: {fileID: 1531861835}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -5263,6 +5325,7 @@ MonoBehaviour:
   fillB: {fileID: 386697836}
   healthBar: {fileID: 694917967}
   drunkMeter: {fileID: 884627865}
+  criticalDamage: {fileID: 4175642254446513561, guid: 6783b476fd4434cfcbc686e939934641, type: 3}
   soundOof: {fileID: 8300000, guid: 97eeaaea2983a4f76ba369756abca70c, type: 3}
   soundDrink1: {fileID: 8300000, guid: 0a71b059572b14046b77e4c84fe7331e, type: 3}
   soundDrink2: {fileID: 8300000, guid: 58e31d5fc38124149b69bd73d9eefc52, type: 3}
@@ -5557,8 +5620,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9301471
-        value: 0
+        time: 0.9816249
+        value: 0.69827896
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -5570,7 +5633,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.49019608}
+      key0: {r: 1, g: 0.6145285, b: 0.13679248, a: 0.49019608}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -5610,6 +5673,21 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1531861835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531861824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88599a1d81894dfdbb56e3aadd88b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatingDamagePrefab: {fileID: 4175642254446513561, guid: 6783b476fd4434cfcbc686e939934641, type: 3}
+  yOffsetMultiplier: 0.45
+  xOffsetMultiplier: -0.45
 --- !u!1 &1555087176
 GameObject:
   m_ObjectHideFlags: 0
@@ -17550,6 +17628,7 @@ SceneRoots:
   - {fileID: 712705154}
   - {fileID: 1892143432}
   - {fileID: 122826349}
+  - {fileID: 639008413}
   - {fileID: 1489864801}
   - {fileID: 641252999}
   - {fileID: 5282690124010862473}

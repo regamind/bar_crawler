@@ -15,6 +15,7 @@ public class Bottle : MonoBehaviour
     public LineRenderer _lr;
     
     public Vector3 _throwVector;
+    public float baseBottleDamage; // for handling situations where we need to know if a bottle has a damage buff
     public float bottleDamage;
     private Vector3 _spawnPoint;
     public float _throwPower;
@@ -43,7 +44,8 @@ public class Bottle : MonoBehaviour
         onTable = true;
         pickedUp = false;
         _throwPower = 1000f;
-        bottleDamage = 15f;
+        baseBottleDamage = 15f;
+        bottleDamage = baseBottleDamage;
         _rb = GetComponent<Rigidbody2D>();
         _lr = GetComponent<LineRenderer>();
         toRight = true;

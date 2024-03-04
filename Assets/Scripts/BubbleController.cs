@@ -30,8 +30,6 @@ public class BubbleController : MonoBehaviour
         Destroy(bubble, bubble.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); // Destroy the bubble after animation
     }
 
-
-
     // this controller takes in a bubble prefab, and when triggerbubbles is called, it should instantiate a bubble animation at that position
     // when the animation does play, then focus on getting the animation to stay
 }

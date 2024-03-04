@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
 
     private BubbleController _bubbleController;
 
+    public FloatingDamage criticalDamage;
+
     private TrailRenderer _trailRenderer;
 
     private AudioSource audioSource;
@@ -116,6 +118,8 @@ public class Player : MonoBehaviour
         _bubbleController = GetComponent<BubbleController>();
 
         _trailRenderer = GetComponent<TrailRenderer>();
+
+        criticalDamage = GetComponent<FloatingDamage>();
 
         _trailRenderer.enabled = false;
 
@@ -400,7 +404,7 @@ public class Player : MonoBehaviour
                 if (!collider.gameObject.GetComponent<Bottle>().pickedUp)
                 {
              
-                    TakeDamage(collider.gameObject.GetComponent<Bottle>().bottleDamage);
+                    TakeDamage(collider.gameObject.GetComponent<Bottle>());
                     Destroy(collider.gameObject);
                 if (health <= 0)
                 {
@@ -435,7 +439,7 @@ public class Player : MonoBehaviour
                     
             {
                 Debug.Log("bottle collided in Player");
-                TakeDamage(collision.collider.gameObject.GetComponent<Bottle>().bottleDamage);
+                TakeDamage(collision.collider.gameObject.GetComponent<Bottle>());
                 if (health <= 0)
                 {
                     alive = false; // where death occurs, likely wanna play death animation as well
@@ -452,12 +456,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    void TakeDamage(float damage)
+    void TakeDamage(Bottle bottle)
     {
+        var damage = bottle.bottleDamage;
         health -= damage;
         _damageFlash.CallDamageFlash();
         healthBar.setHealth(health);
         audioSource.PlayOneShot(soundOof, 1.0f);
+
+        if (damage > bottle.baseBottleDamage)
+        {
+            CriticalDamageText(damage);
+        }
     }
 
     // makes it so that player is slippery (their input takes longer to have an effect and harder to change direction) and faster
@@ -561,6 +571,11 @@ public class Player : MonoBehaviour
     private void GameManager_OnGameStateChanged(GameState state)
     {
         //fillA.SetActive(state == GameState.StartGame);
+    }
+
+    public void CriticalDamageText(float damage)
+    {
+        criticalDamage.TriggerDamageText(damage);
     }
 
 

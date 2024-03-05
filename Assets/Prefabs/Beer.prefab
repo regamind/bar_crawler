@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -5041570655492249729}
   - component: {fileID: 8025205494547951844}
   m_Layer: 0
-  m_Name: BottlePrefab
+  m_Name: Beer
   m_TagString: bottle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

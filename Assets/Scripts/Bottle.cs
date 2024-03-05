@@ -153,29 +153,7 @@ public class Bottle : MonoBehaviour
     // empty false
 
 
-    //private void OnTriggerEnter2D(Collider2D collider)
-    //{
-    //    if (!pickedUp && !onTable)
-    //    {
-    //        if(collider.tag == "Player1" || collider.tag == "Player2") 
-    //        {
-    //            Debug.Log("trigger collision");
-    //            Destroy(this.gameObject);
-    //        }
-    //    }
-    //}
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!pickedUp && !onTable)
-        {
-            if (collision.collider.name == "Player1" || collision.collider.name == "Player2")
-            {
-                Debug.Log("bottle collided in Bottle");
-                Destroy(this.gameObject);
-            }
-        }
-    }
+    
 
 
 

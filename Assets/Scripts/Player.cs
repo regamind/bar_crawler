@@ -300,14 +300,7 @@ public class Player : MonoBehaviour
 
 
 
-            /*
-            if (Input.GetButtonDown(_punch) && (PunchCooldown <= 0f))
-            {
-                Debug.Log("Punch input");
-                PunchCooldown = 5f;
-
-            }
-            */
+            
             
 
             //PUNCH LOGIC
@@ -316,18 +309,9 @@ public class Player : MonoBehaviour
 
             if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
             {
-
-              //  Debug.Log(nearestEnemyObject);
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
-              //  Debug.Log(nearestEnemy);
-               
-                Debug.Log("punch happened here");
-
                 nearestEnemy.isPunched = true;
-
                 PunchCooldown = 3f;  // reset punch cooldown
-
-
             }
 
             // DRINK LOGIC
@@ -491,8 +475,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetType() == typeof(CircleCollider2D))
+        {
+            nearestBottle = null;
+            nearestBottleObject = null;
 
-    
+        }
+    }
+
+
+
 
     void LowHealthFlasher()
     {

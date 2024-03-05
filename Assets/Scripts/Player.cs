@@ -280,17 +280,17 @@ public class Player : MonoBehaviour
                     myBottle = nearestBottle;
                     myDrinkObject = nearestBottleObject;
                     string myDrinkType = myDrinkObject.name;
-                    if (myDrinkType == "Vodka(Clone)")
+                    if (myDrinkType.Contains("Vodka"))
                     {
                         _myTypeVodka = true;
 
 
                     }
-                    else if (myDrinkType == "BottlePrefab(Clone)")
+                    else if (myDrinkType.Contains("Beer"))
                     {
                         _myTypeBeer = true;
                     }
-                    else if (myDrinkType == "Tequila(Clone)")
+                    else if (myDrinkType.Contains("Tequila"))
                     {
                         _myTypeTequila = true;
                     }
@@ -464,7 +464,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                if (!collider.gameObject.GetComponent<Bottle>().pickedUp)
+                if (!collider.gameObject.GetComponent<Bottle>().pickedUp && collider.gameObject != myDrinkObject)
                 {
              
                     TakeDamage(collider.gameObject.GetComponent<Bottle>());
@@ -492,23 +492,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.name == "Bottle")
-        {
-            //if ((gameObject.tag == "Player1" && !collision.collider.gameObject.GetComponent<Bottle>().pickedUp1) ||
-            //    (gameObject.tag == "Player2" && !collision.collider.gameObject.GetComponent<Bottle>().pickedUp2))
-            if (!collision.collider.gameObject.GetComponent<Bottle>().pickedUp)
-                    
-            {
-                TakeDamage(collision.collider.gameObject.GetComponent<Bottle>());
-                if (health <= 0)
-                {
-                    alive = false; // where death occurs, likely wanna play death animation as well
-                }
-            }
-        }
-    }
+    
 
     void LowHealthFlasher()
     {

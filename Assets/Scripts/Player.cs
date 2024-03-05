@@ -331,15 +331,7 @@ public class Player : MonoBehaviour
             {
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
                 _animator.SetTrigger("Punch");
-                nearestEnemy.TriggerStars();
                 
-                // KNOCKBACK
-
-                // Apply knockback force
-
-                nearestEnemy.isPunched = true;
-                nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
-                PunchCooldown = 3f;  // reset punch cooldown
             }
 
             // DRINK LOGIC
@@ -404,6 +396,19 @@ public class Player : MonoBehaviour
         isKnockbackRunning = false;
         rb.isKinematic = false;
 
+    }
+
+    public void OnPunchConnect()
+    {
+        nearestEnemy.TriggerStars();
+
+        // KNOCKBACK
+
+        // Apply knockback force
+
+        nearestEnemy.isPunched = true;
+        nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
+        PunchCooldown = 3f;  // reset punch cooldown
     }
 
     public void EnableTrail()

@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
     public AudioClip soundVomit1;
     public AudioClip soundVomit2;
     public AudioClip soundVomit3;
+    private bool _isPlayingSound = false;
 
     //my branch starts here
     public float dirX;
@@ -205,7 +206,17 @@ public class Player : MonoBehaviour
 
         if (stopBetweenRounds == true)
         {
-           // Debug.Log($"When Player can't pick up, does this repeat? what player {gameObject.tag}");
+            // Debug.Log($"When Player can't pick up, does this repeat? what player {gameObject.tag}");
+            if (!_isPlayingSound)
+            {
+                int randy = Random.Range(0, 3);
+                if (randy == 0)
+                    audioSource.PlayOneShot(soundVomit1, 1.0f);
+                else if (randy == 1)
+                    audioSource.PlayOneShot(soundVomit2, 1.0f);
+                else
+                    audioSource.PlayOneShot(soundVomit3, 1.0f);
+            }
             StartCoroutine(freezeBetweenRounds());
         }
 
@@ -372,11 +383,12 @@ public class Player : MonoBehaviour
     IEnumerator freezeBetweenRounds()
     {
         rb.velocity = new Vector2(0, 0);
+        _isPlayingSound = true;
         _animator.SetBool("Throwup", true);
         yield return new WaitForSeconds(4);
         _animator.SetBool("Throwup", false);
         stopBetweenRounds = false;
-        
+        _isPlayingSound = false;
     }
 
     IEnumerator PunchStunned()

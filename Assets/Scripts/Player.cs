@@ -328,7 +328,7 @@ public class Player : MonoBehaviour
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
               //  Debug.Log(nearestEnemy);
                
-                Debug.Log("punch happened here");
+                //Debug.Log("punch happened here");
                 _animator.SetTrigger("Punch");
                 Debug.Log("did i trigger punch?");
                 nearestEnemy.TriggerStars();

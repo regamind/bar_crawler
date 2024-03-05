@@ -2163,7 +2163,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5106479299402998582, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5124756790312674064, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_Name
@@ -2908,6 +2908,7 @@ MonoBehaviour:
   MinDrunk: 0
   drunkness: 0
   soberRate: 2
+  drinkProof: 0
   PunchCooldown: 1
   alive: 1
   freeze: 0
@@ -5631,6 +5632,7 @@ MonoBehaviour:
   MinDrunk: 0
   drunkness: 0
   soberRate: 2
+  drinkProof: 0
   PunchCooldown: 1
   alive: 1
   freeze: 0

@@ -33,7 +33,7 @@ public class TableSpawnPoint : MonoBehaviour
 
         foreach (GameObject bottle in bottles)
         {
-            float distance = Vector3.Distance(bottle.transform.position, transform.position + new Vector3(0, 0.25f, 0));
+            float distance = Vector3.Distance(bottle.transform.position, transform.position + new Vector3(0, 0.25f, 0)); // new vector value is from bottle spawn
 
             if (distance < positionThreshold)
             {

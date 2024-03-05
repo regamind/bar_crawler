@@ -544,7 +544,12 @@ public class Player : MonoBehaviour
     {
         _bubbleController.TriggerBubbles();
     }
-    
+
+    public void resetPositions(float X,float Y)
+    {
+        rb.position = new Vector2(X, Y);
+    }
+
 
     public void SetTrajectory(Bottle bottle)
     {

@@ -129,6 +129,11 @@ public class GameManager : MonoBehaviour
     private void HandleResetPositions()
     {
 
+        player1.resetPositions(-6f, 0f);
+        player2.resetPositions(6f, 0f);
+
+
+
         freezePlayers();
 
 

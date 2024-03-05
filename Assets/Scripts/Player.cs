@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
 
     private BubbleController _bubbleController;
 
+    private StarsController _starsController;
+
     public FloatingDamage criticalDamage;
 
     private TrailRenderer _trailRenderer;
@@ -127,6 +129,8 @@ public class Player : MonoBehaviour
         _damageFlash = GetComponent<DamageFlash>();
 
         _bubbleController = GetComponent<BubbleController>();
+
+        _starsController = GetComponent<StarsController>();
 
         _trailRenderer = GetComponent<TrailRenderer>();
 
@@ -322,6 +326,12 @@ public class Player : MonoBehaviour
             if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
             {
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
+              //  Debug.Log(nearestEnemy);
+               
+                Debug.Log("punch happened here");
+                _animator.SetTrigger("Punch");
+                Debug.Log("did i trigger punch?");
+                nearestEnemy.TriggerStars();
                 nearestEnemy.isPunched = true;
                 PunchCooldown = 3f;  // reset punch cooldown
             }
@@ -552,6 +562,11 @@ public class Player : MonoBehaviour
         rb.position = new Vector2(X, Y);
     }
 
+    public void TriggerStars()
+    {
+        _starsController.TriggerStars();
+    }
+    
 
     public void SetTrajectory(Bottle bottle)
     {

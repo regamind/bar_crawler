@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float drunkness;
     public float soberRate = .5f;
 
+    public float PunchCooldown = 1f; 
+
     public bool alive = true;
     public bool freeze = false;
     public bool slip = false;
@@ -296,22 +298,34 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonDown(_punch))
+
+
+            /*
+            if (Input.GetButtonDown(_punch) && (PunchCooldown <= 0f))
             {
                 Debug.Log("Punch input");
+                PunchCooldown = 5f;
+
             }
+            */
+            
 
             //PUNCH LOGIC
-            if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding)  
+
+            PunchCooldown -= Time.deltaTime;
+
+            if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
             {
 
               //  Debug.Log(nearestEnemyObject);
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
               //  Debug.Log(nearestEnemy);
-                // might be issues here
+               
                 Debug.Log("punch happened here");
 
                 nearestEnemy.isPunched = true;
+
+                PunchCooldown = 3f;  // reset punch cooldown
 
 
             }

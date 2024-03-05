@@ -6,10 +6,12 @@ public class Beer : MonoBehaviour
 {
     [SerializeField] DamageBuff damageBuff;
     [SerializeField] SpeedBuff speedBuff;
+    public float proof = 15f;
 
     public virtual void Drink(GameObject playerObject)
     {
-        Debug.Log("beer worked?");
+        Player myPlayer = playerObject.GetComponent<Player>();
+        myPlayer.drinkProof = proof;
         damageBuff.Effect(playerObject);
         speedBuff.Effect(playerObject);
     }

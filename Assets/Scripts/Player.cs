@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float MinDrunk = 0f;
     public float drunkness;
     public float soberRate = .5f;
+    public float drinkProof;
 
     public float PunchCooldown = 1f; 
 
@@ -460,7 +461,8 @@ public class Player : MonoBehaviour
             }
             else
             {
-                if (!collider.gameObject.GetComponent<Bottle>().pickedUp && collider.gameObject != myDrinkObject)
+                Bottle colliderBottle = collider.gameObject.GetComponent<Bottle>();
+                if (!colliderBottle.pickedUp && !colliderBottle.onTable)
                 {
              
                     TakeDamage(collider.gameObject.GetComponent<Bottle>());
@@ -589,8 +591,8 @@ public class Player : MonoBehaviour
             myVodka.Drink(gameObject);
         }
         bottle.empty = true;
-        drunkMeter.setDrunk(drunkness + 20f);
-        drunkness += 20f;
+        drunkMeter.setDrunk(drunkness + drinkProof);
+        drunkness += drinkProof;
         TriggerBubbles();
         bottle.spriteRenderer.sprite = bottle.emptyBottle;
 

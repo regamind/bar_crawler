@@ -52,7 +52,7 @@ public class BottleSpawn : MonoBehaviour
                     numberSpawned += 1;
                     int randomIndex = Random.Range(0, bottles.Count);
                     GameObject bottleToSpawn = bottles[randomIndex];
-                    Instantiate(bottleToSpawn, table.GetSpawnPoint(), Quaternion.identity);
+                    Instantiate(bottleToSpawn, table.GetSpawnPoint() + new Vector3(0,0.25f,0), Quaternion.identity);
                 }
             }
           //  Debug.Log($"Number spawned: {numberSpawned}");

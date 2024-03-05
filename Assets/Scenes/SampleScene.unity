@@ -2909,6 +2909,8 @@ MonoBehaviour:
   drunkness: 0
   soberRate: 2
   drinkProof: 0
+  knockbackForce: 5
+  knockbackDelay: 0.15
   PunchCooldown: 1
   alive: 1
   freeze: 0
@@ -5633,6 +5635,8 @@ MonoBehaviour:
   drunkness: 0
   soberRate: 2
   drinkProof: 0
+  knockbackForce: 5
+  knockbackDelay: 0.15
   PunchCooldown: 1
   alive: 1
   freeze: 0

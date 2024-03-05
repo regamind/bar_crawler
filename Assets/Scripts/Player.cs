@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float drunkness;
     public float soberRate = .5f;
     public float drinkProof;
+    public float knockbackForce = 5f;
+    public float knockbackDelay = 0.15f;
 
     public float PunchCooldown = 1f; 
 
@@ -26,6 +28,8 @@ public class Player : MonoBehaviour
     public bool holding = false;
     public bool stopBetweenRounds = false;
     public bool isPunched = false;
+    private bool isKnockbackRunning = false;
+    public Vector2 knockbackDirection = new Vector2(0, 0);
 
 
     public GameObject nearestEnemyObject;
@@ -171,8 +175,9 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (!freeze && !slip)
+        if (!freeze && !slip & !isPunched)
         {
+            
             dirX = Input.GetAxisRaw(_Lhorizontal);
             dirY = Input.GetAxisRaw(_Lvertical);
             rightDirX = Input.GetAxisRaw(_Rhorizontal);
@@ -225,7 +230,7 @@ public class Player : MonoBehaviour
             StartCoroutine(freezeBetweenRounds());
         }
 
-        if (isPunched == true)
+        if (isPunched && !isKnockbackRunning)
         {
             StartCoroutine(PunchStunned());
         }
@@ -322,17 +327,18 @@ public class Player : MonoBehaviour
             //PUNCH LOGIC
 
             PunchCooldown -= Time.deltaTime;
-
             if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
             {
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
-              //  Debug.Log(nearestEnemy);
-               
-                //Debug.Log("punch happened here");
                 _animator.SetTrigger("Punch");
-                Debug.Log("did i trigger punch?");
                 nearestEnemy.TriggerStars();
+                
+                // KNOCKBACK
+
+                // Apply knockback force
+
                 nearestEnemy.isPunched = true;
+                nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
                 PunchCooldown = 3f;  // reset punch cooldown
             }
 
@@ -388,14 +394,15 @@ public class Player : MonoBehaviour
 
     IEnumerator PunchStunned()
     {
-       // string thistag = gameObject.tag;
-       // Debug.Log(thistag);
-       // Debug.Log("punchStun called");
+        isKnockbackRunning = true;
+        rb.isKinematic = true;
+        rb.velocity = (knockbackDirection * knockbackForce);
+        yield return new WaitForSeconds(knockbackDelay);
         rb.velocity = new Vector2(0, 0);
-        //_animator.SetBool("Throwup", true); PUNCH ANIMATION HERE
         yield return new WaitForSeconds(1.5f);
-        //  _animator.SetBool("Throwup", false);
         isPunched = false;
+        isKnockbackRunning = false;
+        rb.isKinematic = false;
 
     }
 
@@ -501,12 +508,16 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetType() == typeof(CircleCollider2D))
+        if (collision.tag == "bottle")
         {
-            nearestBottle = null;
-            nearestBottleObject = null;
+            if (collision.GetType() == typeof(CircleCollider2D))
+            {
+                nearestBottle = null;
+                nearestBottleObject = null;
 
+            }
         }
+        
     }
 
 

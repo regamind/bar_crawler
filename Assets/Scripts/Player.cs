@@ -410,9 +410,27 @@ public class Player : MonoBehaviour
 
         audioSource.PlayOneShot(soundPunch, 1.0f);
 
+        if (nearestEnemy.myBottle != null)
+        {
+            nearestEnemy.ResetBottleVariables();
+        }
+
         nearestEnemy.isPunched = true;
         nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
         PunchCooldown = 3f;  // reset punch cooldown
+    }
+
+    public void ResetBottleVariables()
+    {
+        myBottle._throwVector = new Vector3(0, 0, 0);
+        myBottle.Throw();
+        RemoveTrajectory(myBottle);
+        myBottle.BottleDropped();
+        holding = false;
+        myDrinkObject = null;
+        _myTypeBeer = false;
+        _myTypeTequila = false;
+        _myTypeVodka = false;
     }
 
     public void EnableTrail()

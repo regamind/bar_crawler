@@ -303,7 +303,7 @@ public class Player : MonoBehaviour
             }
 
             // PICKUP LOGIC
-            if (nearestBottleObject != null && Input.GetButtonDown(_interact) && !holding && !stopBetweenRounds)
+            if (nearestBottleObject != null && Input.GetButtonDown(_interact) && !holding && !stopBetweenRounds && !isPunched)
             {
                 nearestBottle = nearestBottleObject.GetComponent<Bottle>();
                 if (nearestBottle != null && !nearestBottle.pickedUp && !nearestBottle.empty)
@@ -339,7 +339,7 @@ public class Player : MonoBehaviour
             //PUNCH LOGIC
 
             PunchCooldown -= Time.deltaTime;
-            if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
+            if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f) && !isPunched)  
             {
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
                 PunchCooldown = 3f;

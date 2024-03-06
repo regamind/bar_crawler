@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SpeedBuff")]
-public class SpeedBuff : Drink_Effects
+public class SpeedBuff : DrinkEffects
 {
     public float speedBuff;
 

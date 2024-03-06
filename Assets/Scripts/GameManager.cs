@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public int P2Wins = 0;
 
     private AudioSource audioSource;
+    public AudioClip soundClick;
 
 
     private void Update()
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
            
             if (Input.GetButtonDown("Interact1") || (Input.GetButtonDown("Interact2")))
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(soundClick, 1.0f);
 
                 SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
                // SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
@@ -188,14 +189,14 @@ public class GameManager : MonoBehaviour
 
     }
 
-private void HandlePlayer2Victory()
+    private void HandlePlayer2Victory()
     {
       //  Debug.Log("state: player 2 victory, next scene called");
         StateNameTracker.victoriousPlayer = "Player 2 wins";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
-       // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
-        
-        
+        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
+
+
     }
 
     private void HandlePlayer1Victory()

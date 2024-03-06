@@ -8,12 +8,12 @@ public class VictoryScene : MonoBehaviour
 
     public TextMeshProUGUI victorious;
 
+    private AudioSource audioSource;
+
 
     private void Awake()
     {
         victorious.text = StateNameTracker.victoriousPlayer;
     }
 
-
-    
 }

@@ -21,7 +21,7 @@ public class DamageFlash : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Init();
     }
-    // Start is called before the first frame update
+
     void Init()
     {
         _material = _spriteRenderer.material;
@@ -35,9 +35,7 @@ public class DamageFlash : MonoBehaviour
     public void StartLowHealthFlash()
     {
         if (_lowHealthFlashCoroutine == null)
-        {
             _lowHealthFlashCoroutine = StartCoroutine(LowHealthFlasher());
-        }
     }
 
     public void StopLowHealthFlash()
@@ -46,16 +44,13 @@ public class DamageFlash : MonoBehaviour
         {
             StopCoroutine(_lowHealthFlashCoroutine);
             _lowHealthFlashCoroutine = null;
-            //_material.SetColor("_FlashColor", Color.white); // Reset to default color
         }
     }
-
 
     private IEnumerator DamageFLasher()
     {
         // set color
         _material.SetColor("_FlashColor", _damageFlashColor);
-
 
         // lerp flash amount
         float currentFlashAmount = 0f;
@@ -69,7 +64,6 @@ public class DamageFlash : MonoBehaviour
             currentFlashAmount = Mathf.Lerp(1f, 0f, (elapsedTime / _flashTime));
             _material.SetFloat("_FlashAmount", currentFlashAmount);
             _material.SetColor("_FlashColor", _damageFlashColor);
-
 
             yield return null;
         }

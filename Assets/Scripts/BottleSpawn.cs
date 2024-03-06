@@ -21,13 +21,9 @@ public class BottleSpawn : MonoBehaviour
         bottles.Add(vodkaPrefab);
         bottles.Add(tequilaPrefab);
 
-
-
         // start the spawning routine
         StartCoroutine(SpawnBottlesRoutine());
     }
-
-
 
     IEnumerator SpawnBottlesRoutine()
     {
@@ -35,7 +31,6 @@ public class BottleSpawn : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
             // loop through each table and check if it has a bottle
-
             // randomizes list and chooses random amount to spawn to
             ShuffleTables();
             int numberOfTablesToSpawnOn = Random.Range(1, tables.Count + 1);
@@ -50,24 +45,18 @@ public class BottleSpawn : MonoBehaviour
                     int randomIndex = Random.Range(0, 10);
                     int chosenIndex;
                     if (randomIndex <= 1)
-                    {
                         chosenIndex = 2;
-                    }
                     else if (randomIndex <= 5)
-                    {
                         chosenIndex = 1;
-                    }
                     else
-                    {
                         chosenIndex = 0;
-                    }
+
                     GameObject bottleToSpawn = bottles[chosenIndex];
                     Instantiate(bottleToSpawn, table.GetSpawnPoint() + new Vector3(0,0.25f,0), Quaternion.identity);
                 }
             }
-          //  Debug.Log($"Number spawned: {numberSpawned}");
-         }
-     }
+        }
+    }
 
     // credit to fisher yates algorithm for shuffling: https://stackoverflow.com/questions/273313/randomize-a-listt
     private void ShuffleTables()
@@ -82,10 +71,4 @@ public class BottleSpawn : MonoBehaviour
             tables[n] = temp;
         }
     }
-
-
 }
-
-
-
-

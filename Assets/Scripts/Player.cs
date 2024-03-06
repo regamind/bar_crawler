@@ -344,7 +344,6 @@ public class Player : MonoBehaviour
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
                 PunchCooldown = 3f;
                 _animator.SetTrigger("Punch");
-                
             }
 
             // DRINK LOGIC

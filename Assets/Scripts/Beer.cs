@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Beer : MonoBehaviour
@@ -15,5 +13,4 @@ public class Beer : MonoBehaviour
         damageBuff.Effect(playerObject);
         speedBuff.Effect(playerObject);
     }
-
 }

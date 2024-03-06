@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tequila : MonoBehaviour
@@ -15,5 +13,4 @@ public class Tequila : MonoBehaviour
         damageBuff.Effect(playerObject);
         speedBuff.Effect(playerObject);
     }
-
 }

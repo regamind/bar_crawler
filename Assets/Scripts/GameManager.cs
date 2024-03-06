@@ -1,16 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-  
-   
-
-
     [SerializeField] public GameObject fill1A;
     [SerializeField] public GameObject fill1B;
     [SerializeField] public GameObject fill2A;
@@ -27,8 +22,6 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI roundWinner;
 
-
-
     public static GameManager Instance;
 
     public GameState state;
@@ -41,7 +34,6 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip soundClick;
 
-
     private void Update()
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("StartScene") ||
@@ -51,40 +43,25 @@ public class GameManager : MonoBehaviour
             if (Input.GetButtonDown("Interact1") || (Input.GetButtonDown("Interact2")))
             {
                 audioSource.PlayOneShot(soundClick, 1.0f);
-
                 SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
-               // SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
-             //   Debug.Log("nextScene called");
             }
-
         }
     }
 
     private void Awake()
     {
         Instance = this;
-        
     }
 
     private void Start()
     {
         UpdateGameState(GameState.StartGame);
-        //roundWinner.gameObject.SetActive(false);
-
-
-        //SceneManager.LoadScene(1);
-
-
-        //fill1A.gameObject.SetActive(false);
-
         audioSource = GetComponent<AudioSource>();
     }
-
 
     public void UpdateGameState(GameState newState)
     {
         state = newState;
-       // Debug.Log("switch state to);
         switch (newState)
         {
             case GameState.StartGame:
@@ -108,7 +85,6 @@ public class GameManager : MonoBehaviour
             case GameState.IdleState:
                 HandleIdleState();
                 break;
-
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -118,30 +94,21 @@ public class GameManager : MonoBehaviour
 
     private void HandleIdleState()
     {
-      //  Debug.Log("am in IDLE");
+        // Do nothing
     }
 
     private void freezePlayers()
     {
-        Debug.Log("freeze in GM");
         player1.StopBetweenRounds();
         player2.StopBetweenRounds();
-        //yield return new WaitForSeconds(4);
-
     }
-
 
     private void HandleResetPositions()
     {
-
         player1.resetPositions(-6f, 0f);
         player2.resetPositions(6f, 0f);
 
-
-
         freezePlayers();
-
-
 
         HealthBar1.setHealth(100f);
         HealthBar2.setHealth(100f);
@@ -155,66 +122,38 @@ public class GameManager : MonoBehaviour
         player1.drunkness = player1.MinDrunk;
         player2.drunkness = player2.MinDrunk;
 
-      //  Debug.Log("handle drunk reset");
-
-
         GameObject[] bottles = GameObject.FindGameObjectsWithTag("bottle");
 
         foreach (GameObject bottle in bottles)
-        {
-         //   Debug.Log("destroyed bottle");
             Destroy(bottle);
-        }
 
         TableSpawnPoint[] tables = FindObjectsOfType<TableSpawnPoint>();
 
         foreach (TableSpawnPoint table in tables)
-        {
             table.ResetTables();
-       //     Debug.Log("reset table");
-            
-        }
 
         player1.holding = false;
         player2.holding = false;
 
-
         Instance.UpdateGameState(GameState.IdleState);
-
-
-        //reset drunkeness meter when we have it
-        //clear all bottles
-        // bug here in reseting bottles after a round, bottles don't always spawn again.
-
-
-    }
-
-    private void HandlePlayer2Victory()
-    {
-      //  Debug.Log("state: player 2 victory, next scene called");
-        StateNameTracker.victoriousPlayer = "Player 2 wins";
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
-        // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
-
-
     }
 
     private void HandlePlayer1Victory()
     {
-     //   Debug.Log("state: player 2 victory, next scene called");
         StateNameTracker.victoriousPlayer = "Player 1 wins";
         SceneManager.LoadScene(2, LoadSceneMode.Single);
-       // SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameOverScene"));
-        
-        
     }
 
+    private void HandlePlayer2Victory()
+    {
+        StateNameTracker.victoriousPlayer = "Player 2 wins";
+        SceneManager.LoadScene(2, LoadSceneMode.Single);
+    }
 
     IEnumerator ShowMessage(string message, float delay)
     {
         roundWinner.text = message;
         roundWinner.gameObject.SetActive(true);
-        //debug.Log("showMessage called");
         yield return new WaitForSeconds(delay);
         roundWinner.gameObject.SetActive(false);
 
@@ -222,65 +161,35 @@ public class GameManager : MonoBehaviour
         roundWinner.gameObject.SetActive(true);
         yield return new WaitForSeconds(delay);
         roundWinner.gameObject.SetActive(false);
-
-
     }
-
-
-    
 
     private void HandlePlayer1WinsRound()
 
     {
-        // Debug.Log("handle 1 wins round");
-
-        if (P1Wins == 2)
-        {
-       // Instance.UpdateGameState(GameState.Player1Victory);
-        }
-
         if (P1Wins == 1)
         {
             fill1B.gameObject.SetActive(true);
             Instance.UpdateGameState(GameState.Player1Victory);
         }
         else 
-        {
             fill1A.gameObject.SetActive(true);
-        }
         P1Wins += 1;
 
-
         StartCoroutine(ShowMessage("Player 1 wins round", 2));
-
-       
-
 
         Instance.UpdateGameState(GameState.ResetPositions);
     }
 
     private void HandlePlayer2WinsRound()
-
     {
-        //  Debug.Log("handle 2 wins round");
-
-        if (P2Wins == 2)
-        {
-        //    Instance.UpdateGameState(GameState.Player2Victory);
-        }
-
         if (P2Wins == 1)
         {
             fill2B.gameObject.SetActive(true);
             Instance.UpdateGameState(GameState.Player2Victory);
         }
         else
-        {
             fill2A.gameObject.SetActive(true);
-        }
-
         P2Wins += 1;
-
 
         StartCoroutine(ShowMessage("Player 2 wins round", 2));
 
@@ -289,14 +198,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleStartGame()
     {
-      //  Debug.Log("state startgame");
-       // SceneManager.LoadScene(1, LoadSceneMode.Single);
-       // Debug.Log("god please help me");
-       // SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartScene"));
-       // Instance.UpdateGameState(GameState.IdleState);
+        // Do nothing
     }
-
-
 }
 
 public enum GameState
@@ -309,4 +212,3 @@ public enum GameState
     Player2Victory,
     ResetPositions
 }
-

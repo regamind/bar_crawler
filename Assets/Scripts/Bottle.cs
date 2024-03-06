@@ -1,11 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager.Requests;
-using UnityEngine.UI;
-// using System;
 
 public class Bottle : MonoBehaviour
 {
@@ -17,14 +10,11 @@ public class Bottle : MonoBehaviour
     public Vector3 _throwVector;
     public float baseBottleDamage; // for handling situations where we need to know if a bottle has a damage buff
     public float bottleDamage;
-    private Vector3 _spawnPoint;
     public float _throwPower;
-
 
     public Sprite emptyBottle;
     public SpriteRenderer spriteRenderer;
     public Sprite brokenBottle;
-    
 
     public bool empty;
     public bool pickedUp;
@@ -51,21 +41,15 @@ public class Bottle : MonoBehaviour
         toRight = true;
 
         audioSource = GetComponent<AudioSource>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (onTable)
-        {
             _rb.bodyType = RigidbodyType2D.Static;
-        }
         else
-        {
             _rb.bodyType = RigidbodyType2D.Dynamic;
-        }
 
         if (pickedUp)
         {
@@ -80,25 +64,16 @@ public class Bottle : MonoBehaviour
                 toRight = true;
             }
             else if (toRight)
-            {
                 transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.05f;
-            }
             else
-            {
                 transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.05f;
-            }
-            
         }
-
- 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.gameObject.name.Equals("Table"))
-        {
             onTable = false;
-        }
     }
 
     public void PickUp(Player player)
@@ -106,15 +81,9 @@ public class Bottle : MonoBehaviour
         transform.parent = player.transform;
         transform.position = player.transform.right;
 
-        //if (player.tag == "Player1")
-        //    pickedUp1 = true;
-        //else if (player.tag == "Player2")
-        //    pickedUp2 = true;
         pickedUp = true;
         onTable = false;
         holdingPlayer = player;
-        
-        
     }
 
     public void Throw()
@@ -124,15 +93,12 @@ public class Bottle : MonoBehaviour
         _rb.AddForce(_throwVector);
     }
 
-
-
     public void BottleDropped()
     {
         spriteRenderer.sprite = brokenBottle;
         bottleDamage = 10f;
 
         int randy = Random.Range(0, 3);
-        Debug.Log(randy);
         if (randy == 0)
             audioSource.PlayOneShot(soundShatter1, 1.0f);
         else if (randy == 1)
@@ -144,10 +110,4 @@ public class Bottle : MonoBehaviour
     }
     // picked up false
     // empty false
-
-
-    
-
-
-
 }

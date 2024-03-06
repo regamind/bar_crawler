@@ -2328,6 +2328,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!1 &496817960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,6 +3007,7 @@ MonoBehaviour:
   soundVomit1: {fileID: 8300000, guid: ad91358521022402db73b06beb758182, type: 3}
   soundVomit2: {fileID: 8300000, guid: 3c12976ffe5ce439c862dd79352b6173, type: 3}
   soundVomit3: {fileID: 8300000, guid: 00d433e3a632d4fc7a42ab06ceb8062b, type: 3}
+  soundPunch: {fileID: 8300000, guid: 7a8f8d64eb3504213a9711c7c98bb9bc, type: 3}
   dirX: 0
   dirY: 0
   rightDirX: 0
@@ -4166,7 +4168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.427451, b: 0.6666667, a: 1}
+  m_Color: {r: 0.1137255, g: 0.48627454, b: 0.04705883, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4794,7 +4796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.427451, b: 0.6666667, a: 1}
+  m_Color: {r: 0.1137255, g: 0.48627454, b: 0.04705883, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5701,6 +5703,7 @@ MonoBehaviour:
   soundVomit1: {fileID: 8300000, guid: ad91358521022402db73b06beb758182, type: 3}
   soundVomit2: {fileID: 8300000, guid: 3c12976ffe5ce439c862dd79352b6173, type: 3}
   soundVomit3: {fileID: 8300000, guid: 00d433e3a632d4fc7a42ab06ceb8062b, type: 3}
+  soundPunch: {fileID: 8300000, guid: 7a8f8d64eb3504213a9711c7c98bb9bc, type: 3}
   dirX: 0
   dirY: 0
   rightDirX: 0
@@ -6257,6 +6260,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!1001 &1694117749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17408,6 +17412,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!4 &1892143432
 Transform:
   m_ObjectHideFlags: 0

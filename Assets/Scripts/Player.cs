@@ -403,10 +403,11 @@ public class Player : MonoBehaviour
         isKnockbackRunning = true;
         rb.isKinematic = true;
         rb.velocity = knockbackDirection * knockbackForce;
-        isPunched = false;
+        
         yield return new WaitForSeconds(knockbackDelay);
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.5f);
+        isPunched = false;
         isKnockbackRunning = false;
         rb.isKinematic = false;
 

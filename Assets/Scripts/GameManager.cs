@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public int P1Wins = 0;
     public int P2Wins = 0;
 
+    private AudioSource audioSource;
+
 
     private void Update()
     {
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
            
             if (Input.GetButtonDown("Interact1") || (Input.GetButtonDown("Interact2")))
             {
-
+                audioSource.Play();
 
                 SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
                // SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
@@ -67,12 +69,14 @@ public class GameManager : MonoBehaviour
     {
         UpdateGameState(GameState.StartGame);
         //roundWinner.gameObject.SetActive(false);
-       
+
 
         //SceneManager.LoadScene(1);
 
 
         //fill1A.gameObject.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 

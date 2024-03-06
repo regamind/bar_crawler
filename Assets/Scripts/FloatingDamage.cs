@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingDamage : MonoBehaviour
@@ -8,7 +6,6 @@ public class FloatingDamage : MonoBehaviour
     private Animator animator;
     public float yOffsetMultiplier = 0.45f;
     public float xOffsetMultiplier = -0.45f;
-
 
     private void Start()
     {
@@ -25,11 +22,9 @@ public class FloatingDamage : MonoBehaviour
         // Calculate the position with the dynamic offset in the y-direction
         Vector3 spawnPosition = transform.position + new Vector3(xOffset, yOffset, 0f);
 
-
         GameObject floatingText = Instantiate(floatingDamagePrefab, spawnPosition, Quaternion.identity);
         floatingText.transform.parent = transform; // since this script is attached to player, it should set the text's position to a child of player
-        //damage *= -1;
-        // floatingText.GetComponent<TextMesh>().text = damage.ToString();
+
         floatingText.GetComponent<TextMesh>().text = textToDisplay;
         floatingText.GetComponent<TextMesh>().color = color;
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TableSpawnPoint : MonoBehaviour
@@ -7,10 +5,9 @@ public class TableSpawnPoint : MonoBehaviour
     private bool _bottleOnTable;
     public float positionThreshold = 1f;
 
-
     public bool BottleOnTable
     {
-        get { return _bottleOnTable;}
+        get {return _bottleOnTable;}
     }
 
     void Update()
@@ -21,11 +18,8 @@ public class TableSpawnPoint : MonoBehaviour
     public void ResetTables()
     {
         if (_bottleOnTable)
-        {
             _bottleOnTable = false;
-        }
     }
-
 
     private void CheckBottleOnTable()
     {
@@ -40,6 +34,7 @@ public class TableSpawnPoint : MonoBehaviour
                 _bottleOnTable = true;
                 return;
             }
+
             _bottleOnTable = false; // reset if no bottle is found on the table
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Vodka : MonoBehaviour
@@ -14,7 +12,5 @@ public class Vodka : MonoBehaviour
         myPlayer.drinkProof = proof;
         damageBuff.Effect(playerObject);
         speedBuff.Effect(playerObject);
-
     }
-
 }

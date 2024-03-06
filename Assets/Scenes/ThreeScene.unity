@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d580a56d67e94429c920ba3be0c612ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 5
+  spawnInterval: 2
   bottles: []
   beerPrefab: {fileID: 1899218564291933678, guid: 1f9f34ae4e7ef48e88406491ec830d4f, type: 3}
   vodkaPrefab: {fileID: 8381716211849271576, guid: 00ae15f259c214efaa5445e78d38701d, type: 3}
@@ -4089,7 +4089,7 @@ MonoBehaviour:
   myDrinkObject: {fileID: 0}
   nearestBottleObject: {fileID: 0}
   nearestBottle: {fileID: 0}
-  interact: 
+  _interact: 
   myVodka: {fileID: 7871394033254121640, guid: 00ae15f259c214efaa5445e78d38701d, type: 3}
   myTequila: {fileID: 6135824951227663496, guid: fd875772a7c3b45fea398a42c5904d6f, type: 3}
   myBeer: {fileID: -5041570655492249729, guid: 1f9f34ae4e7ef48e88406491ec830d4f, type: 3}
@@ -8353,7 +8353,7 @@ MonoBehaviour:
   myDrinkObject: {fileID: 0}
   nearestBottleObject: {fileID: 0}
   nearestBottle: {fileID: 0}
-  interact: 
+  _interact: 
   myVodka: {fileID: 7871394033254121640, guid: 00ae15f259c214efaa5445e78d38701d, type: 3}
   myTequila: {fileID: 6135824951227663496, guid: fd875772a7c3b45fea398a42c5904d6f, type: 3}
   myBeer: {fileID: -5041570655492249729, guid: 1f9f34ae4e7ef48e88406491ec830d4f, type: 3}

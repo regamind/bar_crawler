@@ -188,6 +188,7 @@ public class Player : MonoBehaviour
 
         if (!freeze && !slip & !isPunched)
         {
+
             
             dirX = Input.GetAxisRaw(_Lhorizontal);
             dirY = Input.GetAxisRaw(_Lvertical);
@@ -244,6 +245,8 @@ public class Player : MonoBehaviour
         if (isPunched && !isKnockbackRunning)
         {
             //audioSource.PlayOneShot(soundPunch, 1.0f);
+
+            Debug.Log("ispunched and is knockbackrunning");
             StartCoroutine(PunchStunned());
         }
 
@@ -341,7 +344,11 @@ public class Player : MonoBehaviour
             PunchCooldown -= Time.deltaTime;
             if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
             {
+
+                //Debug.Log("punch input happened here");
+                //StartCoroutine(PunchStunned());
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
+                PunchCooldown = 3f;  // reset punch cooldown
                 _animator.SetTrigger("Punch");
                 
             }
@@ -403,10 +410,11 @@ public class Player : MonoBehaviour
         isKnockbackRunning = true;
         rb.isKinematic = true;
         rb.velocity = knockbackDirection * knockbackForce;
-        isPunched = false;
+        
         yield return new WaitForSeconds(knockbackDelay);
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.5f);
+        isPunched = false;
         isKnockbackRunning = false;
         rb.isKinematic = false;
 
@@ -421,6 +429,10 @@ public class Player : MonoBehaviour
 
     public void OnPunchConnect()
     {
+
+
+       // Debug.Log("OnPunchConnectCalled");
+        
         nearestEnemy.TriggerStars();
 
         // KNOCKBACK
@@ -436,7 +448,7 @@ public class Player : MonoBehaviour
 
         nearestEnemy.isPunched = true;
         nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
-        PunchCooldown = 3f;  // reset punch cooldown
+       
     }
 
     public void ResetBottleVariables()

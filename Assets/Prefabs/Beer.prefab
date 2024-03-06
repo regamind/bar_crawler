@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.5321, y: 2.8019, z: 0}
-  m_LocalScale: {x: 1.1, y: 1, z: 1.1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBuff: {fileID: 11400000, guid: c1aae661360d54d3b8664ed861bfa47e, type: 2}
   speedBuff: {fileID: 11400000, guid: b740ba27ed31e46dd84ccd8063a58646, type: 2}
+  proof: 20
 --- !u!82 &8025205494547951844
 AudioSource:
   m_ObjectHideFlags: 0

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eeb7969dadd24a4f8fbd9cbbd45b6d8, type: 3}
   m_Name: VodkaSpeedBuff
   m_EditorClassIdentifier: 
-  speedBuff: 0.7
+  speedBuff: 0.85

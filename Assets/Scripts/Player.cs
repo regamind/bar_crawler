@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
     public float drinkProof;
     public float knockbackForce = 5f;
     public float knockbackDelay = 0.15f;
+    private float aimingSlow = 0.85f;
+    private float normalSpeedHorizontal;
+    private float normalSpeedVertical;
+    private float aimingSlowHorizontal;
+    private float aimingSlowVertical;
 
     public float PunchCooldown = 1f; 
 
@@ -80,6 +85,7 @@ public class Player : MonoBehaviour
     public bool readyToThrow;
     public Bottle myBottle;
     public GameObject myDrinkObject;
+    private GameObject thrownObject;
 
     public GameObject nearestBottleObject;
     public Bottle nearestBottle;
@@ -119,6 +125,10 @@ public class Player : MonoBehaviour
         nearestBottle = null;
         movementSpeedHorizontal = 13f;
         movementSpeedVertical = 10f;
+        normalSpeedHorizontal = movementSpeedHorizontal;
+        normalSpeedVertical = movementSpeedVertical;
+        aimingSlowHorizontal = movementSpeedHorizontal * aimingSlow;
+        aimingSlowVertical = movementSpeedVertical * aimingSlow;
 
 
         health = Maxhealth;
@@ -351,6 +361,7 @@ public class Player : MonoBehaviour
             {
                 if (myBottle.pickedUp && myBottle.empty)
                 {
+                    
                     CalculateThrowVec(myBottle);
                     SetTrajectory(myBottle);
                     if (Input.GetButtonDown(_throw))
@@ -362,6 +373,7 @@ public class Player : MonoBehaviour
                         myBottle.Throw();
                         RemoveTrajectory(myBottle);
                         holding = false;
+                        thrownObject = myDrinkObject;
                         myDrinkObject = null;
                         _myTypeBeer = false;
                         _myTypeTequila = false;
@@ -397,6 +409,13 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         isKnockbackRunning = false;
         rb.isKinematic = false;
+
+    }
+
+    private void SlowDown()
+    {
+        movementSpeedHorizontal = aimingSlowHorizontal;
+        movementSpeedVertical = aimingSlowVertical;
 
     }
 
@@ -513,6 +532,20 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "bottle")
+        {
+            if (collision.GetType() == typeof(CircleCollider2D))
+            {
+                nearestBottleObject = collision.gameObject;
+            }
+        }
+        
+          
+        
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "bottle")
@@ -607,6 +640,15 @@ public class Player : MonoBehaviour
     private void CalculateThrowVec(Bottle bottle)
     {
         Vector2 joystickDir = new Vector2(Input.GetAxis(_Rhorizontal), -1 * Input.GetAxis(_Rvertical));
+        if (joystickDir != new Vector2(0, 0))
+        {
+            SlowDown();
+        }
+        else
+        {
+            movementSpeedVertical = normalSpeedVertical;
+            movementSpeedHorizontal = normalSpeedHorizontal;
+        }
         //Vector2 testDir = new Vector2(1, 1);
         bottle._throwVector = joystickDir.normalized * bottle._throwPower;
 

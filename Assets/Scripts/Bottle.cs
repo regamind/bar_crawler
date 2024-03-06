@@ -71,35 +71,26 @@ public class Bottle : MonoBehaviour
         {
             if (holdingPlayer.rightDirX < 0)
             {
-                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.1f;
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.05f;
                 toRight = false;
             }
             else if (holdingPlayer.rightDirX > 0)
             {
-                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.05f;
                 toRight = true;
             }
             else if (toRight)
             {
-                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.1f;
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * 1.05f;
             }
             else
             {
-                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.1f;
+                transform.position = holdingPlayer.transform.position + holdingPlayer.transform.right * -1.05f;
             }
             
         }
 
-        //if (!pickedUp && empty && _rb.totalForce == new Vector2(0, 0)){
-        //    BottleDropped();
-            
-        //}
-
-
-        
-
-        
-        
+ 
     }
 
     private void OnCollisionExit2D(Collision2D collision)

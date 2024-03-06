@@ -47,8 +47,21 @@ public class BottleSpawn : MonoBehaviour
                 if (!table.BottleOnTable)
                 {
                     numberSpawned += 1;
-                    int randomIndex = Random.Range(0, bottles.Count);
-                    GameObject bottleToSpawn = bottles[randomIndex];
+                    int randomIndex = Random.Range(0, 10);
+                    int chosenIndex;
+                    if (randomIndex <= 1)
+                    {
+                        chosenIndex = 2;
+                    }
+                    else if (randomIndex <= 5)
+                    {
+                        chosenIndex = 1;
+                    }
+                    else
+                    {
+                        chosenIndex = 0;
+                    }
+                    GameObject bottleToSpawn = bottles[chosenIndex];
                     Instantiate(bottleToSpawn, table.GetSpawnPoint() + new Vector3(0,0.25f,0), Quaternion.identity);
                 }
             }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Drink_Effects : ScriptableObject
+public abstract class DrinkEffects : ScriptableObject
 {
     public abstract void Effect(GameObject target);
 }

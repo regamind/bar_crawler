@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "DamageBuff")] 
-public class DamageBuff : Drink_Effects
+public class DamageBuff : DrinkEffects
 {
     public float damageBuff;
     

@@ -401,14 +401,14 @@ public class Player : MonoBehaviour
     IEnumerator PunchStunned()
     {
         isKnockbackRunning = true;
-        //rb.isKinematic = true;
-        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        rb.isKinematic = true;
+        rb.velocity = knockbackDirection * knockbackForce;
         isPunched = false;
         yield return new WaitForSeconds(knockbackDelay);
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.5f);
         isKnockbackRunning = false;
-        //rb.isKinematic = false;
+        rb.isKinematic = false;
 
     }
 

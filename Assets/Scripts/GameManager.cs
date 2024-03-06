@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             {
 
 
-                SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+                SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
                // SceneManager.SetActiveScene(SceneManager.GetSceneByName("SampleScene"));
              //   Debug.Log("nextScene called");
             }

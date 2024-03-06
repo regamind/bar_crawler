@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    public void NextScene()
+    public void NextScene(string Scene)
     {
+
         Debug.Log("nextScene called");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadSceneAsync(Scene);
         
     }
 }

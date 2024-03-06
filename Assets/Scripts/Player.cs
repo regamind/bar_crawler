@@ -342,6 +342,7 @@ public class Player : MonoBehaviour
             if (nearestEnemyObject != null && Input.GetButtonDown(_punch) && !holding && (PunchCooldown <= 0f))  
             {
                 nearestEnemy = nearestEnemyObject.GetComponent<PunchCollider>().thisPlayer;
+                PunchCooldown = 3f;
                 _animator.SetTrigger("Punch");
                 
             }
@@ -437,7 +438,6 @@ public class Player : MonoBehaviour
 
         nearestEnemy.isPunched = true;
         nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
-        PunchCooldown = 3f;  // reset punch cooldown
     }
 
     public void ResetBottleVariables()

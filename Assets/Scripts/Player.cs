@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
 
         if (isPunched && !isKnockbackRunning)
         {
-            audioSource.PlayOneShot(soundPunch, 1.0f);
+            //audioSource.PlayOneShot(soundPunch, 1.0f);
             StartCoroutine(PunchStunned());
         }
 
@@ -407,6 +407,8 @@ public class Player : MonoBehaviour
         // KNOCKBACK
 
         // Apply knockback force
+
+        audioSource.PlayOneShot(soundPunch, 1.0f);
 
         nearestEnemy.isPunched = true;
         nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;

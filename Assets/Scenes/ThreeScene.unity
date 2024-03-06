@@ -2998,7 +2998,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5106479299402998582, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5124756790312674064, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_Name
@@ -3264,6 +3264,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!1 &496817960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3809,6 +3810,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5106479299402998582, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5124756790312674064, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_Name
       value: Table (8)
@@ -4075,6 +4080,7 @@ MonoBehaviour:
   soundVomit1: {fileID: 8300000, guid: ad91358521022402db73b06beb758182, type: 3}
   soundVomit2: {fileID: 8300000, guid: 3c12976ffe5ce439c862dd79352b6173, type: 3}
   soundVomit3: {fileID: 8300000, guid: 00d433e3a632d4fc7a42ab06ceb8062b, type: 3}
+  soundPunch: {fileID: 0}
   dirX: 0
   dirY: 0
   rightDirX: 0
@@ -8338,6 +8344,7 @@ MonoBehaviour:
   soundVomit1: {fileID: 8300000, guid: ad91358521022402db73b06beb758182, type: 3}
   soundVomit2: {fileID: 8300000, guid: 3c12976ffe5ce439c862dd79352b6173, type: 3}
   soundVomit3: {fileID: 8300000, guid: 00d433e3a632d4fc7a42ab06ceb8062b, type: 3}
+  soundPunch: {fileID: 0}
   dirX: 0
   dirY: 0
   rightDirX: 0
@@ -9091,6 +9098,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!1001 &1692919731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20838,6 +20846,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!4 &1892143432
 Transform:
   m_ObjectHideFlags: 0

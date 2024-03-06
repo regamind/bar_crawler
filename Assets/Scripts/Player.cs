@@ -485,7 +485,7 @@ public class Player : MonoBehaviour
         if (drunkness >= 99f)
         {
             freeze = true;
-            drunkness = 20f;
+            drunkness = 0f;
             //drunkness = MinDrunk;
             int randy = Random.Range(0, 3);
             if (randy == 0)

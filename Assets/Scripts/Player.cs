@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
     public AudioClip soundVomit1;
     public AudioClip soundVomit2;
     public AudioClip soundVomit3;
+    public AudioClip soundPunch;
     private bool _isPlayingSound = false;
 
     //my branch starts here
@@ -232,6 +233,7 @@ public class Player : MonoBehaviour
 
         if (isPunched && !isKnockbackRunning)
         {
+            //audioSource.PlayOneShot(soundPunch, 1.0f);
             StartCoroutine(PunchStunned());
         }
 
@@ -389,10 +391,10 @@ public class Player : MonoBehaviour
         isKnockbackRunning = true;
         rb.isKinematic = true;
         rb.velocity = (knockbackDirection * knockbackForce);
+        isPunched = false;
         yield return new WaitForSeconds(knockbackDelay);
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.5f);
-        isPunched = false;
         isKnockbackRunning = false;
         rb.isKinematic = false;
 
@@ -405,6 +407,8 @@ public class Player : MonoBehaviour
         // KNOCKBACK
 
         // Apply knockback force
+
+        audioSource.PlayOneShot(soundPunch, 1.0f);
 
         nearestEnemy.isPunched = true;
         nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;

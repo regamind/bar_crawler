@@ -2935,6 +2935,7 @@ MonoBehaviour:
   soundVomit1: {fileID: 8300000, guid: ad91358521022402db73b06beb758182, type: 3}
   soundVomit2: {fileID: 8300000, guid: 3c12976ffe5ce439c862dd79352b6173, type: 3}
   soundVomit3: {fileID: 8300000, guid: 00d433e3a632d4fc7a42ab06ceb8062b, type: 3}
+  soundPunch: {fileID: 8300000, guid: 7a8f8d64eb3504213a9711c7c98bb9bc, type: 3}
   dirX: 0
   dirY: 0
   rightDirX: 0
@@ -5559,6 +5560,7 @@ MonoBehaviour:
   soundVomit1: {fileID: 8300000, guid: ad91358521022402db73b06beb758182, type: 3}
   soundVomit2: {fileID: 8300000, guid: 3c12976ffe5ce439c862dd79352b6173, type: 3}
   soundVomit3: {fileID: 8300000, guid: 00d433e3a632d4fc7a42ab06ceb8062b, type: 3}
+  soundPunch: {fileID: 8300000, guid: 7a8f8d64eb3504213a9711c7c98bb9bc, type: 3}
   dirX: 0
   dirY: 0
   rightDirX: 0

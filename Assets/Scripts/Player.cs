@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
 
         if (isPunched && !isKnockbackRunning)
         {
-            audioSource.PlayOneShot(soundPunch, 1.0f);
+            //audioSource.PlayOneShot(soundPunch, 1.0f);
             StartCoroutine(PunchStunned());
         }
 
@@ -401,14 +401,14 @@ public class Player : MonoBehaviour
     IEnumerator PunchStunned()
     {
         isKnockbackRunning = true;
-        rb.isKinematic = true;
-        rb.velocity = (knockbackDirection * knockbackForce);
+        //rb.isKinematic = true;
+        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
         isPunched = false;
         yield return new WaitForSeconds(knockbackDelay);
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1.5f);
         isKnockbackRunning = false;
-        rb.isKinematic = false;
+        //rb.isKinematic = false;
 
     }
 
@@ -427,9 +427,29 @@ public class Player : MonoBehaviour
 
         // Apply knockback force
 
+        audioSource.PlayOneShot(soundPunch, 1.0f);
+
+        if (nearestEnemy.myBottle != null)
+        {
+            nearestEnemy.ResetBottleVariables();
+        }
+
         nearestEnemy.isPunched = true;
         nearestEnemy.knockbackDirection = (nearestEnemy.transform.position - transform.position).normalized;
         PunchCooldown = 3f;  // reset punch cooldown
+    }
+
+    public void ResetBottleVariables()
+    {
+        myBottle._throwVector = new Vector3(0, 0, 0);
+        myBottle.Throw();
+        RemoveTrajectory(myBottle);
+        myBottle.BottleDropped();
+        holding = false;
+        myDrinkObject = null;
+        _myTypeBeer = false;
+        _myTypeTequila = false;
+        _myTypeVodka = false;
     }
 
     public void EnableTrail()

@@ -139,6 +139,8 @@ public class Bottle : MonoBehaviour
             audioSource.PlayOneShot(soundShatter2, 1.0f);
         else
             audioSource.PlayOneShot(soundShatter3, 1.0f);
+
+        GetComponent<CircleCollider2D>().enabled = false;
     }
     // picked up false
     // empty false

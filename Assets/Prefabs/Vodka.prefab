@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 535099ec790594627ba2d844605c8f72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBuff: {fileID: 11400000, guid: adb8408db24ff4c5e8abd7ddec8445fb, type: 2}
   speedBuff: {fileID: 11400000, guid: 60ac5189da438445b97ea62302aaf812, type: 2}
+  proof: 20
 --- !u!58 &-1762729306779428492
 CircleCollider2D:
   m_ObjectHideFlags: 0

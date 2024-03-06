@@ -17776,6 +17776,8 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 8300000, guid: 9c7a69359740745bcae7d75084794c37, type: 3}
+  soundWin: {fileID: 8300000, guid: ae08e91c4912b4dd9a299310db855a7e, type: 3}
 --- !u!4 &1313037236
 Transform:
   m_ObjectHideFlags: 0

@@ -334,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageBuff: {fileID: 11400000, guid: c1aae661360d54d3b8664ed861bfa47e, type: 2}
   speedBuff: {fileID: 11400000, guid: b740ba27ed31e46dd84ccd8063a58646, type: 2}
-  proof: 20
+  proof: 15
 --- !u!82 &8025205494547951844
 AudioSource:
   m_ObjectHideFlags: 0

@@ -2328,6 +2328,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!1 &496817960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2429,10 @@ PrefabInstance:
     - target: {fileID: 3172540019746239091, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106479299402998582, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5124756790312674064, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_Name
@@ -6117,6 +6122,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!1001 &1694117749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6128,6 +6134,10 @@ PrefabInstance:
     - target: {fileID: 3172540019746239091, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106479299402998582, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5124756790312674064, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_Name
@@ -17268,6 +17278,7 @@ MonoBehaviour:
   state: 0
   P1Wins: 0
   P2Wins: 0
+  soundClick: {fileID: 0}
 --- !u!4 &1892143432
 Transform:
   m_ObjectHideFlags: 0
@@ -17501,6 +17512,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 641252999}
     m_Modifications:
+    - target: {fileID: 5106479299402998582, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5124756790312674064, guid: 91a8e4f56ecc14a1f9e83179969a3ac9, type: 3}
       propertyPath: m_Name
       value: Table (2)

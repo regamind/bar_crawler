@@ -14,8 +14,8 @@ THROW - Right Bumper + AIM
 DROP BOTTLE - Right Bumper + NO AIM  
   
 # OBJECTS ON SCREEN:
-PLAYERS: controlled by two seperate xbox gamepads; can pick up, drink, and throw spawned drinks as well as punch other player
-TABLES: where bottles spawn (needed for each player to drink and deal damage by throwing empty bottles)
-HEALTH BAR / DRUNKENNESS METER: each player has a health bar (denoted by color of players' cap) and a drunkenness meter below it
-AIM ASSISTANCE LINE: appears while aiming empty bottle to help with throwing
-SPILLED DRINK DEBRIS: wet floor signs indicate slippery areas where player movement is altered due to spilled drinks
+PLAYERS: controlled by two seperate xbox gamepads; can pick up, drink, and throw spawned drinks as well as punch other player  
+TABLES: where bottles spawn (needed for each player to drink and deal damage by throwing empty bottles)  
+HEALTH BAR / DRUNKENNESS METER: each player has a health bar (denoted by color of players' cap) and a drunkenness meter below it  
+AIM ASSISTANCE LINE: appears while aiming empty bottle to help with throwing  
+SPILLED DRINK DEBRIS: wet floor signs indicate slippery areas where player movement is altered due to spilled drinks  

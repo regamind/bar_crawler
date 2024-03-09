@@ -5,13 +5,13 @@ Bar Crawler is a 2D Local Multiplayer Fighter set in a bar where two bar mates a
 
 # HOW TO PLAY:
 ## XBOX CONTROLLER:
-MOVEMENT - Left Stick
-AIMING (after drinking) - Right Stick
-PICK UP / INTERACT - Button South (A)
-PUNCH - Button West (X)
-DRINK - Button North (Y)
-THROW - Right Bumper + AIM
-DROP BOTTLE - Right Bumper + NO AIM
+MOVEMENT - Left Stick  
+AIMING (after drinking) - Right Stick  
+PICK UP / INTERACT - Button South (A)  
+PUNCH - Button West (X)  
+DRINK - Button North (Y)  
+THROW - Right Bumper + AIM  
+DROP BOTTLE - Right Bumper + NO AIM  
   
 # OBJECTS ON SCREEN:
 PLAYERS: controlled by two seperate xbox gamepads; can pick up, drink, and throw spawned drinks as well as punch other player
